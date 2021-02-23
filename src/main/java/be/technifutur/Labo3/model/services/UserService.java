@@ -1,11 +1,24 @@
 package be.technifutur.Labo3.model.services;
 
+import be.technifutur.Labo3.mapper.Mapper;
 import be.technifutur.Labo3.model.dtos.UserDto;
 import be.technifutur.Labo3.model.entities.User;
+import be.technifutur.Labo3.model.repositories.UserRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-public class UserService implements Crudable<User, UserDto,Integer> {
+@Service
+public class UserService implements Crudable<User, UserDto, Integer> {
+
+    private final UserRepository userRepository;
+    private final Mapper mapper;
+
+    public UserService(UserRepository userRepository, Mapper mapper) {
+        this.userRepository = userRepository;
+        this.mapper = mapper;
+    }
+
     @Override
     public List<UserDto> getAll() {
         return null;
