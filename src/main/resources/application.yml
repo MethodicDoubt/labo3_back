@@ -1,0 +1,14 @@
+spring:
+  mvc:
+    throw-exception-if-no-handler-found: true
+    static-path-pattern: /static
+  datasource:
+    url: jdbc:postgresql://localhost:5432/techni_labo_3
+    username: postgres
+    password: 123456a.
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true

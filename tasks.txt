@@ -1,0 +1,35 @@
+DB
+------------------------------
+Nom de la DB : techni_labo_3
+
+-----------------------------
+
+-------  CODE FIRST  --------
+
+Toujours camel case (ex : variableProduit)
+
+Les IDs : ---> nomTableId
+
+Pour les collections : ------>  listeFournisseur -> fournisseurs
+
+Pour les références uniques : -----> nom de la table (ex : produit)
+
+Pour les services : ------> nomDeLaTableService (ex : fournisseurService)
+	 repos
+	 dtos
+	 controllers
+
+TOUTES LES VARIABLES, METHODES,... EN ANGLAIS
+
+////////////////////////////////////////////////////////////////////////////////
+
+AUBRY : Entities :
+		- Product
+		- Category
+		- Supplier
+
+JONATHAN : Entities :
+		- User
+		- Log
+		- Order
+
