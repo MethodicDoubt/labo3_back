@@ -43,6 +43,7 @@ public class User {
     @OneToMany(mappedBy = "user")
     List<Order> orders;
 
-    //avatar en base64
+    @Column
+    Byte[] avatar;
 
 }
