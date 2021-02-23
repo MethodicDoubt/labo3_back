@@ -24,7 +24,9 @@ public class ProductService implements Crudable<Product, ProductDto, Integer> {
 
     @Override
     public List<ProductDto> getAll() {
-        return null;
+        return this.productRepository.findAll()
+                .stream()
+                .map(p -> mapper.to);
     }
 
     @Override
