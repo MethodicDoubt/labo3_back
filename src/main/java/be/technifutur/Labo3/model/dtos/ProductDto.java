@@ -1,6 +1,7 @@
 package be.technifutur.Labo3.model.dtos;
 
 import be.technifutur.Labo3.model.entities.Category;
+import be.technifutur.Labo3.model.entities.Order;
 import be.technifutur.Labo3.model.entities.Supplier;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -19,13 +20,14 @@ public class ProductDto {
     Integer productId;
     String name;
     String description;
-    List<Category> categories;
+    List<CategoryDto> categoriesDto;
     Instant entryDate;
     Instant updateDate;
     LocalDate expirationDate;
     Double purchasePrice;
     Integer quantity;
-    Supplier supplier;
+    SupplierDto supplierDto;
+    List<OrderDto> ordersDto;
     String productImage;
     Double vat;
 
