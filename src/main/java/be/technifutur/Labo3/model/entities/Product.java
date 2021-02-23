@@ -29,6 +29,7 @@ public class Product {
     String description;
 
     @Column(nullable = false)
+    @ManyToMany
     List<Category> categories;
 
     @Column(nullable = false)
@@ -49,6 +50,7 @@ public class Product {
     Integer quantity;
 
     @Column(nullable = false)
+    @ManyToOne
     Supplier supplier;
 
     @Column
@@ -57,5 +59,8 @@ public class Product {
     @Column(nullable = false)
     @Min(value = 0, message = "The vat must be a positive number")
     Double vat;
+
+    @ManyToMany(mappedBy = "products")
+    List<Order> orders;
 
 }

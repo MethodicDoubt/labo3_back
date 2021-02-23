@@ -6,6 +6,7 @@ import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -36,4 +37,5 @@ public class Order {
 
     @ManyToMany
     List<Product> products;
+
 }
