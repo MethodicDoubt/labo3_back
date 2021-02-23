@@ -110,24 +110,23 @@ public class Mapper {
     }
 
     public Log toLogEntity(LogDto logDto) {
-        return LogDto.builder()
+        return Log.builder()
                 .logId(logDto.getLogId())
                 .price(logDto.getPrice())
                 .creationDate(logDto.getCreationDate())
-                .productDto(toProductEntity(logDto.getProductDto()))
-                .userDto(toUserEntity(logDto.getUserDto()))
+                .product(toProductEntity(logDto.getProductDto()))
+                .user(toUserEntity(logDto.getUserDto()))
                 .build();
     }
 
-}
 
-    public ProductDto toProductDto(Product product){
+    public ProductDto toProductDto(Product product) {
 
         return toProductDto(product, false);
 
     }
 
-    public ProductDto toProductDto(Product product, Boolean withOrder){
+    public ProductDto toProductDto(Product product, Boolean withOrder) {
 
         return ProductDto.builder()
                 .productId(product.getProductId())
@@ -147,7 +146,7 @@ public class Mapper {
 
     }
 
-    public Product toProductEntity(ProductDto productDto){
+    public Product toProductEntity(ProductDto productDto) {
 
         return Product.builder()
                 .productId(productDto.getProductId())
@@ -168,9 +167,7 @@ public class Mapper {
     }
 
 
-
-
-    public CategoryDto toCategoryDto(Category category){
+    public CategoryDto toCategoryDto(Category category) {
 
         return CategoryDto.builder()
                 .categoryId(category.getCategoryId())
@@ -179,7 +176,7 @@ public class Mapper {
 
     }
 
-    public Category toCategoryEntity(CategoryDto categoryDto){
+    public Category toCategoryEntity(CategoryDto categoryDto) {
 
         return Category.builder()
                 .categoryId(categoryDto.getCategoryId())
@@ -189,9 +186,7 @@ public class Mapper {
     }
 
 
-
-
-    public SupplierDto toSupplierDto(Supplier supplier){
+    public SupplierDto toSupplierDto(Supplier supplier) {
 
         return SupplierDto.builder()
                 .supplierId(supplier.getSupplierId())
@@ -204,7 +199,7 @@ public class Mapper {
 
     }
 
-    public Supplier toSupplierEntity(SupplierDto supplierDto){
+    public Supplier toSupplierEntity(SupplierDto supplierDto) {
 
         return Supplier.builder()
                 .supplierId(supplierDto.getSupplierId())
