@@ -1,9 +1,9 @@
 package be.technifutur.Labo3.model.services;
 
+import be.technifutur.Labo3.mapper.Mapper;
 import be.technifutur.Labo3.model.dtos.ProductDto;
 import be.technifutur.Labo3.model.entities.Product;
 import be.technifutur.Labo3.model.repositories.ProductRepository;
-import org.apache.catalina.mapper.Mapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

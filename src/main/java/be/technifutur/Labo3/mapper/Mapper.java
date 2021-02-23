@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.stream.Collectors;
 
 @Service
-public class mapper {
+public class Mapper {
 
     public ProductDto toProductDto(Product product){
 
