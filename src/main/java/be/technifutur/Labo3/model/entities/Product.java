@@ -33,10 +33,10 @@ public class Product {
     List<Category> categories;
 
     @Column(nullable = false)
-    Instant entryDate;
+    Instant entryDate = Instant.now();
 
     @Column(nullable = false)
-    Instant updateDate;
+    Instant updateDate = Instant.now();
 
     @Column
     LocalDate expirationDate;

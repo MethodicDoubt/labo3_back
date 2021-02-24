@@ -33,3 +33,8 @@ JONATHAN : Entities :
 		- Log
 		- Order
 
+--> Sprint de Scénario
+    --> Finir les Services
+    --> DataInit
+    --> Page d'accueil --> Basé sur /product
+    --> Page détail    --> Basé sur /product/{:id}
