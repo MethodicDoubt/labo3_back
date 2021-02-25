@@ -1,1 +1,18 @@
-<h2>{{this.product.name}}</h2>
+<button nbButton status="info" (click)="redirectToHome()">Return to main page</button>
+<nb-card>
+  <nb-card-header>{{product.name}}</nb-card-header>
+  <nb-card-body>
+    <ul class="no-style">
+      <li><span class="bold">Description : </span>{{product.description}}</li>
+      <li> <span class="bold">Category : </span>
+        <span *ngFor="let c of product.categoriesDto">{{c.type}} </span>
+      </li>
+      <li><span class="bold">Purchase price : </span>{{product.purchasePrice | currency:'EUR'}}</li>
+      <li><span class="bold">Quantity : </span>{{product.quantity}}</li>
+      <li><span class="bold">Supplier : </span>{{product.supplierDto.companyName}} </li>
+      <li *ngIf="product.experiationDate != null"><span class="bold">Date d'expiration :
+        </span>{{product.experiationDate | date}}
+      </li>
+    </ul>
+  </nb-card-body>
+</nb-card>
