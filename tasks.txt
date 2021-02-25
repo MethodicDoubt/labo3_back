@@ -38,3 +38,20 @@ JONATHAN : Entities :
     --> DataInit
     --> Page d'accueil --> Basé sur /product
     --> Page détail    --> Basé sur /product/{:id}
+
+    //---------------------------------------------
+
+    AUBRY 25/02/21 :
+    - finir services: - CategoryService
+                      - SupplierService
+
+    DATAINIT
+
+    -> CONTROLLER (product)  ----> Faire quelques requêtes PostMan pour checker que tout va bien
+
+        -> Faire les autres controllers
+    ||
+    ||
+    \\
+     \\
+       => ANGULAR !!
