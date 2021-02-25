@@ -42,14 +42,14 @@ public class OrderService implements Crudable<Order, OrderDto, Integer> {
     public boolean insert(Order order) {
         order.setCreationDate(Instant.now());
         Order newOrder = this.orderRepository.save(order);
-        return this.orderRepository.existsById(newOrder.getOrderID());
+        return this.orderRepository.existsById(newOrder.getOrderId());
     }
 
     @Override
     public boolean update(Order order, Integer integer) {
         Order oldOrder = this.orderRepository.getOne(integer);
         Order newOrder = new Order(
-                oldOrder.getOrderID(),
+                oldOrder.getOrderId(),
                 oldOrder.getReference(),
                 oldOrder.getCreationDate(),
                 oldOrder.getIsPaid(),
@@ -58,7 +58,7 @@ public class OrderService implements Crudable<Order, OrderDto, Integer> {
                 oldOrder.getProducts()
         );
 
-        order.setOrderID(integer);
+        order.setOrderId(integer);
 
         this.orderRepository.save(order);
 

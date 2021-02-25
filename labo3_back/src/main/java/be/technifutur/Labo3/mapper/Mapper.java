@@ -65,7 +65,7 @@ public class Mapper {
 
     public OrderDto toOrderDto(Order order, Boolean withUser, Boolean withProducts) {
         return OrderDto.builder()
-                .orderID(order.getOrderID())
+                .orderId(order.getOrderId())
                 .reference(order.getReference())
                 .creationDate(order.getCreationDate())
                 .isPaid(order.getIsPaid())
@@ -84,7 +84,7 @@ public class Mapper {
 
     public Order toOrderEntity(OrderDto orderDto) {
         return Order.builder()
-                .orderID(orderDto.getOrderID())
+                .orderId(orderDto.getOrderId())
                 .reference(orderDto.getReference())
                 .creationDate(orderDto.getCreationDate())
                 .isPaid(orderDto.getIsPaid())

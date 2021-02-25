@@ -17,7 +17,7 @@ public class LogDto {
 
     Double price;
 
-    Instant creationDate = Instant.now();
+    Instant creationDate;
 
     ProductDto productDto;
 

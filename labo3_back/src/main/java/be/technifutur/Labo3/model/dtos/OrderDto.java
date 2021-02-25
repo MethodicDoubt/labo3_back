@@ -17,11 +17,11 @@ import java.util.List;
 @Builder
 public class OrderDto {
 
-    Integer orderID;
+    Integer orderId;
 
     String reference;
 
-    Instant creationDate = Instant.now();
+    Instant creationDate;
 
     Boolean isPaid;
 

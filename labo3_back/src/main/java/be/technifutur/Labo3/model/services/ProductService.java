@@ -3,10 +3,8 @@ package be.technifutur.Labo3.model.services;
 import be.technifutur.Labo3.mapper.Mapper;
 import be.technifutur.Labo3.model.dtos.ProductDto;
 import be.technifutur.Labo3.model.entities.Product;
-import be.technifutur.Labo3.model.repositories.CategoryRepository;
 import be.technifutur.Labo3.model.repositories.OrderRepository;
 import be.technifutur.Labo3.model.repositories.ProductRepository;
-import be.technifutur.Labo3.model.repositories.SupplierRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -43,7 +41,7 @@ public class ProductService implements Crudable<Product, ProductDto, Integer> {
 
         Product product = this.productRepository.findById(integer).orElseThrow(() -> new NoSuchElementException(("Product not found")));
 
-        product.setOrders(this.orderRepository.findAllByProducts(product));
+        product.setOrders(this.orderRepository.findByProducts(product));
 
         return mapper.toProductDto(product, true);
     }

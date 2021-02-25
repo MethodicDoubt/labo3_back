@@ -1,10 +1,12 @@
 package be.technifutur.Labo3.config;
 
 import be.technifutur.Labo3.model.entities.Category;
+import be.technifutur.Labo3.model.entities.Order;
 import be.technifutur.Labo3.model.entities.Product;
 import be.technifutur.Labo3.model.entities.Supplier;
 import be.technifutur.Labo3.model.services.*;
 import be.technifutur.Labo3.model.types.JuridicalStatus;
+import be.technifutur.Labo3.model.types.PayementMethod;
 import be.technifutur.Labo3.model.types.Sector;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
@@ -95,11 +97,21 @@ public class DataInit implements InitializingBean {
                     .build()
     );
 
+    List<Order> orders = Arrays.asList(
+            Order.builder()
+                    .reference("test0001")
+                    .isPaid(true)
+                    .payementMethod(PayementMethod.CASH)
+                    .products(Arrays.asList(products.get(1)))
+                    .build()
+    );
+
 
     @Override
     public void afterPropertiesSet() throws Exception {
         categories.forEach(this.categoryService::insert);
         suppliers.forEach(this.supplierService::insert);
         products.forEach(this.productService::insert);
+        orders.forEach(this.orderService::insert);
     }
 }

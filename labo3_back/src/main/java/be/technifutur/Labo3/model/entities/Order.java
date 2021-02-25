@@ -19,7 +19,7 @@ import java.util.List;
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer orderID;
+    Integer orderId;
 
     @Column(nullable = false)
     String reference;
