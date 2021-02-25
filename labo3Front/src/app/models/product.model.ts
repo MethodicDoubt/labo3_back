@@ -2,6 +2,7 @@ import { Category } from "./category.model";
 import { Order } from "./order.model";
 import { Supplier } from "./supplier.model";
 
+
 export class Product {
     productId: number;
     name: String;

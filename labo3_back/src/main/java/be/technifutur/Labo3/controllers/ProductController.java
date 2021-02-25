@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("products")
 public class ProductController implements RestControllable<Product, ProductDto, Integer> {
 
@@ -20,7 +21,6 @@ public class ProductController implements RestControllable<Product, ProductDto, 
     }
 
     @GetMapping
-    @CrossOrigin(origins = "http://localhost:8080/")
     public ResponseEntity<List<ProductDto>> getAll() {
         return ResponseEntity.ok(this.productService.getAll());
     }
@@ -32,7 +32,6 @@ public class ProductController implements RestControllable<Product, ProductDto, 
     }
 
     @Override
-    @CrossOrigin(origins = "http://localhost:8080/")
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<Boolean> delete(@PathVariable("id") Integer integer) {
         return ResponseEntity.ok(this.productService.delete(integer));
