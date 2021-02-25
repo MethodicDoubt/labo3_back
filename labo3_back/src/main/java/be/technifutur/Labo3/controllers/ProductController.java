@@ -20,26 +20,22 @@ public class ProductController implements RestControllable<Product, ProductDto, 
     }
 
     @GetMapping
+    @CrossOrigin(origins = "http://localhost:8080/")
     public ResponseEntity<List<ProductDto>> getAll() {
-
         return ResponseEntity.ok(this.productService.getAll());
-
     }
 
     @Override
     @PostMapping
     public ResponseEntity<Boolean> insert(@Valid @RequestBody Product product) {
-
         return ResponseEntity.ok(this.productService.insert(product));
-
     }
 
     @Override
+    @CrossOrigin(origins = "http://localhost:8080/")
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<Boolean> delete(@PathVariable("id") Integer integer) {
-
         return ResponseEntity.ok(this.productService.delete(integer));
-
     }
 
     @Override
@@ -50,8 +46,8 @@ public class ProductController implements RestControllable<Product, ProductDto, 
 
     @Override
     @PutMapping("/{id}")
-    public ResponseEntity<Boolean> update(Product product,@PathVariable("id") Integer integer) {
-        return ResponseEntity.ok(this.productService.update(product,integer));
+    public ResponseEntity<Boolean> update(Product product, @PathVariable("id") Integer integer) {
+        return ResponseEntity.ok(this.productService.update(product, integer));
     }
 
 }
