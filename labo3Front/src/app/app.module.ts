@@ -8,10 +8,14 @@ import { NbThemeModule, NbLayoutModule, NbSidebarModule, NbMenuModule, NbButtonM
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { ProdutByIdComponent } from './components/product/produt-by-id/produt-by-id.component';
+import { AllProductComponent } from './components/product/all-product/all-product.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ProdutByIdComponent,
+    AllProductComponent
   ],
   imports: [
     BrowserModule,
