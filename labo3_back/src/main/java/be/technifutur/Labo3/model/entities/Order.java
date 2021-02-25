@@ -15,6 +15,7 @@ import java.util.List;
 @Builder
 @EqualsAndHashCode
 @Entity
+@Table(name = "command")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
