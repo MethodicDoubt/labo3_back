@@ -1,26 +1,25 @@
-<nb-card *ngFor="let p of products">
+ <div class="row">
+    
+    <nb-card *ngFor="let p of products" size="small" class="card" (click)="redirect(p.productId)">
 
-    <nb-card-header>
-
-        <h3> {{p.name}} </h3>
-
-    </nb-card-header>
-    <nb-card-body>
-
-        <nb-list>
-
-            <nb-list-item>{{p.description}}</nb-list-item>
-            <nb-list-item>{{p.categoriesDto}}</nb-list-item>
-            <nb-list-item>{{p.entryDate}}</nb-list-item>
-            <nb-list-item>{{p.updateDate}}</nb-list-item>
-            <nb-list-item>{{p.experiationDate}}</nb-list-item>
-            <nb-list-item>{{p.purchasePrice}}</nb-list-item>
-            <nb-list-item>{{p.quantity}}</nb-list-item>
-            <nb-list-item>{{p.supplierDto}}</nb-list-item>
-            <nb-list-item>{{p.ordersDto}}</nb-list-item>
-
-        </nb-list>
-
-    </nb-card-body>
-
-</nb-card>
+        <nb-card-header>
+    
+            <h3> {{p.name}} </h3>
+    
+        </nb-card-header>
+        <nb-card-body>
+    
+            <nb-list>
+    
+                <nb-list-item>{{p.description}}</nb-list-item>
+                <nb-list-item *ngFor="let c of p.categoriesDto">{{c.type}}</nb-list-item>
+                <nb-list-item *ngIf="p.experiationDate != null">{{p.experiationDate}}</nb-list-item>
+                <nb-list-item>{{p.purchasePrice | currency:'EUR'}}</nb-list-item>
+    
+            </nb-list>
+    
+        </nb-card-body>
+    
+    </nb-card>
+    
+</div>
