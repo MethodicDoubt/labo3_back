@@ -1,7 +1,9 @@
 import { Category } from "./category.model";
+import { Order } from "./order.model";
+import { Supplier } from "./supplier.model";
 
 export class Product {
-    id: number;
+    productId: number;
     name: String;
     description: String;
     categoriesDto: Category[];
@@ -10,6 +12,6 @@ export class Product {
     experiationDate: String;
     purchasePrice: number;
     quantity: number;
-    // supplierDto:Supplier[];
-    // ordersDto: Order[];
+    supplierDto: Supplier[];
+    ordersDto: Order[];
 }
