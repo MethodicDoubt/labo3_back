@@ -3,10 +3,7 @@ package be.technifutur.Labo3.config;
 import be.technifutur.Labo3.model.entities.Category;
 import be.technifutur.Labo3.model.entities.Product;
 import be.technifutur.Labo3.model.entities.Supplier;
-import be.technifutur.Labo3.model.services.LogService;
-import be.technifutur.Labo3.model.services.OrderService;
-import be.technifutur.Labo3.model.services.ProductService;
-import be.technifutur.Labo3.model.services.UserService;
+import be.technifutur.Labo3.model.services.*;
 import be.technifutur.Labo3.model.types.JuridicalStatus;
 import be.technifutur.Labo3.model.types.Sector;
 import org.springframework.beans.factory.InitializingBean;
@@ -25,11 +22,16 @@ public class DataInit implements InitializingBean {
     private final UserService userService;
     private final SupplierService supplierService;
 
-    public DataInit(LogService logService, OrderService orderService, ProductService productService, UserService userService) {
+    public DataInit(
+            CategoryService categoryService, LogService logService, OrderService orderService,
+            ProductService productService, UserService userService, SupplierService supplierService
+    ) {
+        this.categoryService = categoryService;
         this.logService = logService;
         this.orderService = orderService;
         this.productService = productService;
         this.userService = userService;
+        this.supplierService = supplierService;
     }
 
     private List<Category> categories = Arrays.asList(
@@ -90,11 +92,13 @@ public class DataInit implements InitializingBean {
                     .supplier(suppliers.get(1))
                     .vat(.21)
                     .build()
-            );
+    );
 
 
     @Override
     public void afterPropertiesSet() throws Exception {
-
+        categories.forEach(this.categoryService::insert);
+        suppliers.forEach(this.supplierService::insert);
+        products.forEach(this.productService::insert);
     }
 }
