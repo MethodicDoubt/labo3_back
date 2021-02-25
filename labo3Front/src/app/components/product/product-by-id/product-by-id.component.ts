@@ -16,10 +16,10 @@ export class ProductByIdComponent implements OnInit {
     private _activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.gamerById();
+    this.produtById();
   }
 
-  gamerById() {
+  produtById() {
     this.product = this._activatedRoute.snapshot.data['resultat']
     console.log(this.product);
   }
