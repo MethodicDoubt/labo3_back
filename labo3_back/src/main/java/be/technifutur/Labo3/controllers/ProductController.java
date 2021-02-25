@@ -20,6 +20,7 @@ public class ProductController implements RestControllable<Product, ProductDto, 
         this.productService = productService;
     }
 
+    @Override
     @GetMapping
     public ResponseEntity<List<ProductDto>> getAll() {
         return ResponseEntity.ok(this.productService.getAll());

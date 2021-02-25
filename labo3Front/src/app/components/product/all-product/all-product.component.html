@@ -1,1 +1,26 @@
-<p>all-product works!</p>
+<nb-card *ngFor="let p of products">
+
+    <nb-card-header>
+
+        <h3> {{p.name}} </h3>
+
+    </nb-card-header>
+    <nb-card-body>
+
+        <nb-list>
+
+            <nb-list-item>{{p.description}}</nb-list-item>
+            <nb-list-item>{{p.categoriesDto}}</nb-list-item>
+            <nb-list-item>{{p.entryDate}}</nb-list-item>
+            <nb-list-item>{{p.updateDate}}</nb-list-item>
+            <nb-list-item>{{p.experiationDate}}</nb-list-item>
+            <nb-list-item>{{p.purchasePrice}}</nb-list-item>
+            <nb-list-item>{{p.quantity}}</nb-list-item>
+            <nb-list-item>{{p.supplierDto}}</nb-list-item>
+            <nb-list-item>{{p.ordersDto}}</nb-list-item>
+
+        </nb-list>
+
+    </nb-card-body>
+
+</nb-card>
