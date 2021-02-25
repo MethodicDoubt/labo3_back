@@ -43,19 +43,9 @@ public class ProductController implements RestControllable<Product, ProductDto, 
     }
 
     @Override
-    public ResponseEntity<List<ProductDto>> getAll() {
-        return null;
-    }
-
-    @Override
     @GetMapping("/{id}")
     public ResponseEntity<ProductDto> getOne(@PathVariable("id") Integer integer) {
         return ResponseEntity.ok(this.productService.getById(integer));
-    }
-
-    @Override
-    public ResponseEntity<Boolean> insert(Product product) {
-        return null;
     }
 
     @Override
@@ -64,8 +54,4 @@ public class ProductController implements RestControllable<Product, ProductDto, 
         return ResponseEntity.ok(this.productService.update(product,integer));
     }
 
-    @Override
-    public ResponseEntity<Boolean> delete(Integer integer) {
-        return null;
-    }
 }
