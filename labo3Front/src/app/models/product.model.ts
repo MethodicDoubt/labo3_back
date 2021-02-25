@@ -13,6 +13,6 @@ export class Product {
     experiationDate: String;
     purchasePrice: number;
     quantity: number;
-    supplierDto: Supplier[];
+    supplierDto: Supplier;
     ordersDto: Order[];
 }
