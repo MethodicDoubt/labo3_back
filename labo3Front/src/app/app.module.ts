@@ -15,7 +15,8 @@ import { ProductByIdComponent } from './components/product/product-by-id/product
   declarations: [
     AppComponent,
     AllProductComponent,
-    ProductByIdComponent
+    ProductByIdComponent,
+    AllProductComponent
   ],
   imports: [
     BrowserModule,
