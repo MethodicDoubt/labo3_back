@@ -7,7 +7,7 @@ import { ProductResolverService } from './utils/product-resolver.service';
 const routes: Routes = [
   { path: 'product', component: AllProductComponent },
   { path: 'product/:id', resolve: { resultat: ProductResolverService }, component: ProductByIdComponent },
-  { path: '**', redirectTo: '' }
+  { path: '**', redirectTo: 'product/2' } //TOCHANGE REMOVE /2
 ];
 
 @NgModule({
