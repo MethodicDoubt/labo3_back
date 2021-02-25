@@ -42,7 +42,7 @@ public class ProductService implements Crudable<Product, ProductDto, Integer> {
 
         Product product = this.productRepository.findById(integer).orElseThrow(() -> new NoSuchElementException(("Product not found")));
 
-        product.setOrders(this.orderRepository.findAllByProduct(product));
+        product.setOrders(this.orderRepository.findAllByProducts(product));
 
         return mapper.toProductDto(product, true);
     }

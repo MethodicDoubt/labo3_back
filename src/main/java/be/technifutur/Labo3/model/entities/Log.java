@@ -23,9 +23,8 @@ public class Log {
     Double price;
 
     @Column
-    Instant creationDate = Instant.now();
+    Instant creationDate;
 
-    @Column
     @ManyToOne()
     Product product;
 

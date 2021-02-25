@@ -24,7 +24,7 @@ public class Order {
     String reference;
 
     @Column(nullable = false)
-    Instant creationDate = Instant.now();
+    Instant creationDate;
 
     @Column(nullable = false)
     Boolean isPaid;

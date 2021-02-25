@@ -33,9 +33,9 @@ public class Supplier {
     Sector sector;
 
     @Column
-    Instant insertionDate = Instant.now();
+    Instant insertionDate;
 
     @Column
-    Instant updateDate = Instant.now();
+    Instant updateDate;
 
 }

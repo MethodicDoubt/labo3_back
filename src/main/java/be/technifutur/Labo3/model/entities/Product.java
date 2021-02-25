@@ -33,10 +33,10 @@ public class Product {
     List<Category> categories;
 
     @Column(nullable = false)
-    Instant entryDate = Instant.now();
+    Instant entryDate;
 
     @Column(nullable = false)
-    Instant updateDate = Instant.now();
+    Instant updateDate;
 
     @Column
     LocalDate expirationDate;
@@ -49,14 +49,12 @@ public class Product {
     @Min(value = 0, message = "The quantity must be a positive number")
     Integer quantity;
 
-    @Column(nullable = false)
     @ManyToOne
     Supplier supplier;
 
     @Column
     String productImage;
 
-    @Column(nullable = false)
     @Min(value = 0, message = "The vat must be a positive number")
     Double vat;
 
