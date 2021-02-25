@@ -1,8 +1,13 @@
 package be.technifutur.Labo3.controllers;
 
+import be.technifutur.Labo3.model.dtos.ProductDto;
+import be.technifutur.Labo3.model.entities.Product;
 import be.technifutur.Labo3.model.services.ProductService;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("products")
@@ -14,5 +19,27 @@ public class ProductController {
         this.productService = productService;
     }
 
+    @GetMapping
+    public ResponseEntity<List<ProductDto>> getAll() {
+
+        return ResponseEntity.ok(this.productService.getAll());
+
+    }
+
+    @Override
+    @PostMapping
+    public ResponseEntity<Boolean> insert(@Valid @RequestBody Product product) {
+
+        return ResponseEntity.ok(this.productService.insert(product));
+
+    }
+
+    @Override
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<Boolean> delete(@PathVariable("id") Integer integer) {
+
+        return ResponseEntity.ok(this.productService.delete(integer));
+
+    }
 
 }
