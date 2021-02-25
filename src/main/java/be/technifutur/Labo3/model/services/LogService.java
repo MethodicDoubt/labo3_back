@@ -6,6 +6,7 @@ import be.technifutur.Labo3.model.entities.Log;
 import be.technifutur.Labo3.model.repositories.LogRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
@@ -38,6 +39,7 @@ public class LogService implements Crudable<Log, LogDto, Integer> {
 
     @Override
     public boolean insert(Log log) {
+        log.setCreationDate(Instant.now());
         Log newLog = this.logRepository.save(log);
         return this.logRepository.existsById(newLog.getLogId());
     }

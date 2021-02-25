@@ -7,6 +7,7 @@ import be.technifutur.Labo3.model.entities.Supplier;
 import be.technifutur.Labo3.model.repositories.SupplierRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
@@ -43,7 +44,8 @@ public class SupplierService implements Crudable<Supplier, SupplierDto, Integer>
 
     @Override
     public boolean insert(Supplier supplier) {
-
+        supplier.setInsertionDate(Instant.now());
+        supplier.setUpdateDate(Instant.now());
         Supplier newSupplier = this.supplierRepository.save(supplier);
 
         return this.supplierRepository.findById(newSupplier.getSupplierId()).isPresent();
@@ -62,6 +64,7 @@ public class SupplierService implements Crudable<Supplier, SupplierDto, Integer>
                 oldSupplier.getInsertionDate(),
                 oldSupplier.getUpdateDate());
 
+        supplier.setUpdateDate(Instant.now());
         supplier.setSupplierId(integer);
 
         this.supplierRepository.save(supplier);

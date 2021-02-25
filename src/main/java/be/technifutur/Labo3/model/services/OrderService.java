@@ -6,6 +6,7 @@ import be.technifutur.Labo3.model.entities.Order;
 import be.technifutur.Labo3.model.repositories.OrderRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
@@ -39,6 +40,7 @@ public class OrderService implements Crudable<Order, OrderDto, Integer> {
 
     @Override
     public boolean insert(Order order) {
+        order.setCreationDate(Instant.now());
         Order newOrder = this.orderRepository.save(order);
         return this.orderRepository.existsById(newOrder.getOrderID());
     }

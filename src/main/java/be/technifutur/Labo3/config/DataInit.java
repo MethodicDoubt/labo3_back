@@ -65,8 +65,6 @@ public class DataInit implements InitializingBean {
                     .quantity(42)
                     .supplier(suppliers.get(0))
                     .vat(.21)
-                    .entryDate(Instant.now())
-                    .updateDate(Instant.now())
                     .build(),
             Product.builder()
                     .name("Jeans")
@@ -76,8 +74,6 @@ public class DataInit implements InitializingBean {
                     .quantity(22)
                     .supplier(suppliers.get(0))
                     .vat(.21)
-                    .entryDate(Instant.now())
-                    .updateDate(Instant.now())
                     .build(),
             Product.builder()
                     .name("Kleppstad")
@@ -87,8 +83,6 @@ public class DataInit implements InitializingBean {
                     .quantity(12)
                     .supplier(suppliers.get(1))
                     .vat(.21)
-                    .entryDate(Instant.now())
-                    .updateDate(Instant.now())
                     .build(),
             Product.builder()
                     .name("Brimnes")
@@ -98,8 +92,6 @@ public class DataInit implements InitializingBean {
                     .quantity(5)
                     .supplier(suppliers.get(1))
                     .vat(.21)
-                    .entryDate(Instant.now())
-                    .updateDate(Instant.now())
                     .build()
     );
 

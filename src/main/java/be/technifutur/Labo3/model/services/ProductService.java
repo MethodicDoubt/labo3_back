@@ -9,6 +9,7 @@ import be.technifutur.Labo3.model.repositories.ProductRepository;
 import be.technifutur.Labo3.model.repositories.SupplierRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
@@ -50,6 +51,8 @@ public class ProductService implements Crudable<Product, ProductDto, Integer> {
     @Override
     public boolean insert(Product product) {
 
+        product.setEntryDate(Instant.now());
+        product.setUpdateDate(Instant.now());
         Product newProduct = this.productRepository.save(product);
 
         return this.productRepository.findById(newProduct.getProductId()).isPresent();
@@ -76,6 +79,7 @@ public class ProductService implements Crudable<Product, ProductDto, Integer> {
                 oldProduct.getOrders());
 
         product.setProductId(integer);
+        product.setUpdateDate(Instant.now());
 
         this.productRepository.save(product);
 
