@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("products")
-public class ProductController {
+public class ProductController implements RestControllable<Product, ProductDto, Integer> {
 
     private final ProductService productService;
 
@@ -42,4 +42,30 @@ public class ProductController {
 
     }
 
+    @Override
+    public ResponseEntity<List<ProductDto>> getAll() {
+        return null;
+    }
+
+    @Override
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductDto> getOne(@PathVariable("id") Integer integer) {
+        return ResponseEntity.ok(this.productService.getById(integer));
+    }
+
+    @Override
+    public ResponseEntity<Boolean> insert(Product product) {
+        return null;
+    }
+
+    @Override
+    @PutMapping("/{id}")
+    public ResponseEntity<Boolean> update(Product product,@PathVariable("id") Integer integer) {
+        return ResponseEntity.ok(this.productService.update(product,integer));
+    }
+
+    @Override
+    public ResponseEntity<Boolean> delete(Integer integer) {
+        return null;
+    }
 }
