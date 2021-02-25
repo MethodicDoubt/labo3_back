@@ -5,7 +5,7 @@ import { ProductByIdComponent } from './components/product/product-by-id/product
 import { ProductResolverService } from './utils/product-resolver.service';
 
 const routes: Routes = [
-  { path: '', component: AllProductComponent },
+  { path: 'product', component: AllProductComponent },
   { path: 'product/:id', resolve: { resultat: ProductResolverService }, component: ProductByIdComponent },
   { path: '**', redirectTo: '' }
 ];

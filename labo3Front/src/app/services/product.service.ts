@@ -8,9 +8,9 @@ import { Product } from '../models/product.model';
 })
 export class ProductService {
 
-  private BASE_URL = "http://localhost:8080"
+  private BASE_URL = "http://localhost:8080/products"
 
-  constructor(private _httpClient : HttpClient) { }
+  constructor(private _httpClient: HttpClient) { }
 
   getAll(): Observable<Product[]> {
 
@@ -19,7 +19,7 @@ export class ProductService {
   }
 
   getById(id: number): Observable<Product> {
-    return this._httpClient.get<Product>(this.BASE_URL + "/products/" + id);
+    return this._httpClient.get<Product>(this.BASE_URL + "/" + id);
   }
 
 
