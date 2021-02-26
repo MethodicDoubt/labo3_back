@@ -9,17 +9,27 @@
                 <h3> {{p.name}} </h3>
         
             </nb-card-header>
-            <nb-card-body>
+            <nb-card-body class="row">
         
-                <nb-list>
+                <div class="col-4">
+
+                    <nb-list>
         
-                    <nb-list-item>{{p.description}}</nb-list-item>
-                    <nb-list-item *ngFor="let c of p.categoriesDto">{{c.type}}</nb-list-item>
-                    <nb-list-item *ngIf="p.experiationDate != null">{{p.experiationDate}}</nb-list-item>
-                    <nb-list-item>{{p.purchasePrice | currency:'EUR'}}</nb-list-item>
-                    <nb-list-item>{{p.productImage}}</nb-list-item>
-        
-                </nb-list>
+                        <nb-list-item>{{p.description}}</nb-list-item>
+                        <nb-list-item *ngFor="let c of p.categoriesDto">{{c.type}}</nb-list-item>
+                        <nb-list-item *ngIf="p.experiationDate != null">{{p.experiationDate}}</nb-list-item>
+                        <nb-list-item>{{p.purchasePrice | currency:'EUR'}}</nb-list-item>
+                        
+            
+                    </nb-list>
+
+                </div>
+
+                <div class="col-8">
+
+                    <img src={{p.productImage}} id="img-selectAll">
+
+                </div>
         
             </nb-card-body>
         

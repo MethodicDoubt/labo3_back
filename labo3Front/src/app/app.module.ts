@@ -10,13 +10,15 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AllProductComponent } from './components/product/all-product/all-product.component';
 import { ProductByIdComponent } from './components/product/product-by-id/product-by-id.component';
+import { NavComponent } from './components/navigation-bar/nav/nav.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AllProductComponent,
     ProductByIdComponent,
-    AllProductComponent
+    AllProductComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,
