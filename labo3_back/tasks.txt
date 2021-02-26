@@ -62,11 +62,11 @@ JONATHAN : Entities :
 
        - ADD SWAGGER TO BACK END --> OK
 
-       - ADD NAVIGATION BAR TO FRONT END -->
+       - ADD NAVIGATION BAR TO FRONT END --> OK
 
-       - SEARCH BY CRITERIA (string) -->
+       - SEARCH BY CRITERIA (string) --> 3/4
 
-       - ADVANCED SEARCH -->
+       - ADVANCED SEARCH --> 3/4
 
        - ACCOUNT / SESSION -->
 

@@ -1,7 +1,9 @@
 package be.technifutur.Labo3.controllers;
 
 import be.technifutur.Labo3.model.dtos.ProductDto;
+import be.technifutur.Labo3.model.entities.Category;
 import be.technifutur.Labo3.model.entities.Product;
+import be.technifutur.Labo3.model.entities.Supplier;
 import be.technifutur.Labo3.model.services.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -48,6 +50,11 @@ public class ProductController implements RestControllable<Product, ProductDto, 
     @PutMapping("/{id}")
     public ResponseEntity<Boolean> update(Product product, @PathVariable("id") Integer integer) {
         return ResponseEntity.ok(this.productService.update(product, integer));
+    }
+
+    @PostMapping("/search")
+    public ResponseEntity<List<ProductDto>> search(@RequestBody Product product) {
+        return ResponseEntity.ok(this.productService.findByNameOrCategoryOrSupplier(product.getName()));
     }
 
 }

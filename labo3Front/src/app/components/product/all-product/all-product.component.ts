@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from 'src/app/models/product.model';
 import { ProductService } from 'src/app/services/product.service';
 
@@ -10,19 +10,34 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class AllProductComponent implements OnInit {
 
-  products : Product[];
+  products: Product[];
 
-  constructor(private _productService : ProductService, private _router : Router) { }
-
-  ngOnInit(): void {
-
-    this._productService.getAll().subscribe(data => this.products = data)
-
+  constructor(private _productService: ProductService,
+    private _router: Router,
+    private _activatedRoute: ActivatedRoute) {
+    this._activatedRoute.queryParams.subscribe(
+      data => {
+        this.sortProducts(data['searchByString'])
+      }
+    )
   }
 
-  redirect(id : number) {
+  ngOnInit(): void {
+    this._productService.getAll().subscribe(data => this.products = data)
+  }
 
+  redirect(id: number) {
     this._router.navigate(['product', id]).then();
+  }
+
+  sortProducts(searchByString: String) {
+    if (searchByString = "") {
+      this._productService.getAll().subscribe(data => this.products = data)
+    } else {
+      this._productService.searchByString(searchByString).subscribe(
+        data => this.products = data
+      );
+    }
 
   }
 
