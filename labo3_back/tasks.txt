@@ -55,3 +55,19 @@ JONATHAN : Entities :
     \\
      \\
        => ANGULAR !!
+
+       //---------------------------------------------------------------------
+
+       TASKS 26/02/21
+
+       - ADD SWAGGER TO BACK END --> OK
+
+       - ADD NAVIGATION BAR TO FRONT END -->
+
+       - SEARCH BY CRITERIA (string) -->
+
+       - ADVANCED SEARCH -->
+
+       - ACCOUNT / SESSION -->
+
+       - BASKET MANAGER (ADD TO BASKET, REMOVE FROM BASKET, CHOOSE PAYEMENT OPTION, PAY) --> 
