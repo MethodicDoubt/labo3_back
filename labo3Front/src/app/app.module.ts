@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AllProductComponent } from './components/product/all-product/all-product.component';
 import { ProductByIdComponent } from './components/product/product-by-id/product-by-id.component';
 import { NavComponent } from './components/navigation-bar/nav/nav.component';
+import { SearchBarComponent } from './components/search-bar/search-bar/search-bar.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { NavComponent } from './components/navigation-bar/nav/nav.component';
     AllProductComponent,
     ProductByIdComponent,
     AllProductComponent,
-    NavComponent
+    NavComponent,
+    SearchBarComponent
   ],
   imports: [
     BrowserModule,
