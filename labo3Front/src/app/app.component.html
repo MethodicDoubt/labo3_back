@@ -1,8 +1,16 @@
 <nb-layout>
 
   <nb-layout-header fixed>
-
-    <p>Amaz-Ace</p>
+    <div style="display: flex; justify-content: space-between; width: 100%;">
+      <p>Amaz-Ace</p>
+      <form (submit)="onSubmit()">
+        <input type="text" nbInput>
+        <button type="submit" nbButton>
+          <nb-icon icon="search-outline"></nb-icon>
+        </button>
+      </form>
+      <p>LA CONNEXION</p>
+    </div>
 
   </nb-layout-header>
 
