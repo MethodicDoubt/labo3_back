@@ -64,10 +64,10 @@ JONATHAN : Entities :
 
        - ADD NAVIGATION BAR TO FRONT END --> OK
 
-       - SEARCH BY CRITERIA (string) --> 3/4
+       - SEARCH BY CRITERIA (string) --> OK
 
        - ADVANCED SEARCH --> 3/4
 
-       - ACCOUNT / SESSION -->
+       - ACCOUNT / SESSION --> (27/02 --> J'ai du réglé un soucis dans User, faut qu'on en parle :o !!!!)
 
        - BASKET MANAGER (ADD TO BASKET, REMOVE FROM BASKET, CHOOSE PAYEMENT OPTION, PAY) --> 

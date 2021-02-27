@@ -1,10 +1,8 @@
 package be.technifutur.Labo3.config;
 
-import be.technifutur.Labo3.model.entities.Category;
-import be.technifutur.Labo3.model.entities.Order;
-import be.technifutur.Labo3.model.entities.Product;
-import be.technifutur.Labo3.model.entities.Supplier;
+import be.technifutur.Labo3.model.entities.*;
 import be.technifutur.Labo3.model.services.*;
+import be.technifutur.Labo3.model.types.AccessLevel;
 import be.technifutur.Labo3.model.types.JuridicalStatus;
 import be.technifutur.Labo3.model.types.PayementMethod;
 import be.technifutur.Labo3.model.types.Sector;
@@ -110,6 +108,41 @@ public class DataInit implements InitializingBean {
                     .build()
     );
 
+    List<User> users = Arrays.asList(
+            User.builder()
+                    .lastName("Arabia")
+                    .firstName("Jonathan")
+                    .accessLevel(AccessLevel.ADMINISTRATOR)
+                    .surname("Wizounet")
+                    .password("password")
+                    .address(
+                            Address.builder()
+                                    .city("Tilleur")
+                                    .zip("4420")
+                                    .country("Belgique")
+                                    .street("Rue Vinave")
+                                    .number(19)
+                                    .build()
+                    )
+                    .build(),
+            User.builder()
+                    .lastName("Del Piero")
+                    .firstName("Alessandro")
+                    .accessLevel(AccessLevel.CUSTOMER)
+                    .surname("BestPlayerInTheWorld")
+                    .password("password")
+                    .address(
+                            Address.builder()
+                                    .city("Torino")
+                                    .country("Italia")
+                                    .zip("10151")
+                                    .street("Corso Gateano Scirea")
+                                    .number(50)
+                                    .build()
+                    )
+                    .build()
+    );
+
 
     @Override
     public void afterPropertiesSet() throws Exception {
@@ -117,5 +150,6 @@ public class DataInit implements InitializingBean {
         suppliers.forEach(this.supplierService::insert);
         products.forEach(this.productService::insert);
         orders.forEach(this.orderService::insert);
+        users.forEach(this.userService::insert);
     }
 }

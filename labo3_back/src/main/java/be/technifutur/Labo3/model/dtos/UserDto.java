@@ -1,6 +1,7 @@
 package be.technifutur.Labo3.model.dtos;
 
 import be.technifutur.Labo3.model.entities.Address;
+import be.technifutur.Labo3.model.types.AccessLevel;
 import lombok.*;
 
 import java.util.List;
