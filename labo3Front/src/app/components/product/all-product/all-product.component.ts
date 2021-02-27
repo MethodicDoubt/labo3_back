@@ -17,25 +17,34 @@ export class AllProductComponent implements OnInit {
     private _activatedRoute: ActivatedRoute) {
     this._activatedRoute.queryParams.subscribe(
       data => {
-        this.sortProducts(data['searchByString'])
+        if (data['searchByString'] == undefined) {
+          this.initTab()
+        } else {
+          this.sortProducts(data['searchByString'])
+        }
       }
     )
   }
 
   ngOnInit(): void {
-    this._productService.getAll().subscribe(data => this.products = data)
   }
 
   redirect(id: number) {
     this._router.navigate(['product', id]).then();
   }
 
+  initTab() {
+    this._productService.getAll().subscribe(data => this.products = data)
+  }
+
   sortProducts(searchByString: String) {
-    if (searchByString = "") {
-      this._productService.getAll().subscribe(data => this.products = data)
+    if (searchByString == "") {
+      this._productService.getAll().subscribe(
+        data => { this.products = data, console.log(data) }
+      )
     } else {
       this._productService.searchByString(searchByString).subscribe(
-        data => this.products = data
+        data => { this.products = data, console.log(data) }
       );
     }
 

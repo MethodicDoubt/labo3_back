@@ -26,21 +26,14 @@ export class SearchBarComponent implements OnInit {
   }
 
   onSubmit() {
-
-    this._router.navigate(['/home'], { queryParams: { searchByString: this.fg.value['name'], skipLocationChange: true } })
+    this._router.navigate(['/home'], { queryParams: { searchByString: this.fg.value['name']} })
     this.initFg();
-    // this._router.navigateByUrl('home', { skipLocationChange: true }).then(() => {
-    //   this._router.navigate([ProductByIdComponent]);
-    // });
-
-
   }
 
   initFg() {
     this.fg = this._formBuilder.group({
       name: ['', Validators.required]
-    }
-    )
+    })
   }
 
 }
