@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbThemeModule, NbLayoutModule, NbSidebarModule, NbMenuModule, NbButtonModule, NbIconModule, NbInputModule, NbListModule, NbCardModule, NbDialogModule } from '@nebular/theme';
+import { NbThemeModule, NbLayoutModule, NbSidebarModule, NbMenuModule, NbButtonModule, NbIconModule, NbInputModule, NbListModule, NbCardModule, NbDialogModule, NbPopoverModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -12,6 +12,7 @@ import { AllProductComponent } from './components/product/all-product/all-produc
 import { ProductByIdComponent } from './components/product/product-by-id/product-by-id.component';
 import { NavComponent } from './components/navigation-bar/nav/nav.component';
 import { SearchBarComponent } from './components/search-bar/search-bar/search-bar.component';
+import { AdvSearchComponent } from './components/advanced-search/adv-search/adv-search.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { SearchBarComponent } from './components/search-bar/search-bar/search-ba
     ProductByIdComponent,
     AllProductComponent,
     NavComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    AdvSearchComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +41,8 @@ import { SearchBarComponent } from './components/search-bar/search-bar/search-ba
     ReactiveFormsModule,
     NbDialogModule.forRoot(),
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NbPopoverModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

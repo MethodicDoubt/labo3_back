@@ -1,0 +1,70 @@
+<nb-card>
+
+    <nb-card-header>
+
+        <h3>Advanced Search</h3>
+
+    </nb-card-header>
+
+    <nb-card-body>
+
+        <form [formGroup]="fg" (ngSubmit)="onSubmit()" id="advancedSearchForm">
+
+            <fieldset>
+
+                <legend>Product name</legend>
+                <input nbInput fullWidth fieldSize="large" placeholder="Name" type="text" formControlName="name">
+
+            </fieldset>
+
+            <fieldset>
+
+                <legend>Category</legend>
+                <input nbInput fullWidth fieldSize="large" placeholder="Category" type="text" formControlName="categoriesDto">
+
+            </fieldset>
+
+            <fieldset>
+
+                <legend>Product brand</legend>
+                <input nbInput fullWidth fieldSize="large" placeholder="Brand" type="text" formControlName="supplierDto">
+
+            </fieldset>
+            
+            <fieldset>
+
+                <legend>Minimum Price</legend>
+                <input type="range" min="0" max="100" value="50" class="slider"
+                 id="range1" formControlName="minimumPrice" 
+                 (input)="sliderMinChange($event)">
+                 <label>{{minimumPrice.toString()}}€</label>
+
+            </fieldset>
+
+            <fieldset>
+
+                <legend>Maximum Price</legend>
+                <input type="range" min="{{minimumPrice}}" max="100" value="50" class="slider" id="range2" formControlName="maximumPrice" 
+                (input)="sliderMaxChange($event)">
+                <label>{{maximumPrice.toString()}}€</label>
+
+            </fieldset>
+            
+            <fieldset>
+
+                <legend>In stock</legend>
+                <input type="checkbox" formControlName="quantity">
+
+            </fieldset>
+            
+        </form>
+
+    </nb-card-body>
+
+    <nb-card-footer>
+
+        <button nbButton status="primary" form="advancedSearchForm" type="submit"><nb-icon icon="search-outline"></nb-icon>Search</button>
+
+    </nb-card-footer>
+
+</nb-card>

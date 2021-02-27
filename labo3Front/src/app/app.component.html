@@ -2,9 +2,18 @@
 
   <nb-layout-header fixed>
     <div style="display: flex; justify-content: space-between; width: 100%;">
+
       <p>Amaz-Ace</p>
-      <app-search-bar></app-search-bar>
+
+      <div style="display: flex;">
+
+        <app-search-bar></app-search-bar>
+        <button type="button" nbButton status="primary" size="medium" (click)="advancedSearch()">Advanced Search</button>
+
+      </div>
+
       <p>LA CONNEXION</p>
+
     </div>
 
   </nb-layout-header>
