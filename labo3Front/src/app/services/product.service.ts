@@ -8,7 +8,7 @@ import { Product } from '../models/product.model';
 })
 export class ProductService {
 
-  private BASE_URL = "http://localhost:8080/products"
+  private BASE_URL = "http://localhost:8080/products";
 
   constructor(private _httpClient: HttpClient) { }
 
@@ -26,7 +26,4 @@ export class ProductService {
     let json = { "name": name };
     return this._httpClient.post<Product[]>(this.BASE_URL + "/search", json);
   }
-
-
-
 }

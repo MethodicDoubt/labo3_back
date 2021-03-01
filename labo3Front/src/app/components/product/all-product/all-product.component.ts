@@ -40,17 +40,14 @@ export class AllProductComponent implements OnInit {
   sortProducts(searchByString: String) {
     if (searchByString == "") {
       this._productService.getAll().subscribe(
-        data => { this.products = data, console.log(data) }
+        data => { this.products = data }
       )
     } else {
       this._productService.searchByString(searchByString).subscribe(
         data => {
-          console.log(data)
           if (data.length == 0) {
-            console.log("then") // que faire si erreur de la personne ? Retourner getAll ou laisser sur la liste d'avant + poput ? 
             this.initTab();
           } else {
-            console.log("else")
             this.products = data
           }
         }

@@ -7,12 +7,15 @@
 
       <div style="display: flex;">
 
-        <app-search-bar></app-search-bar>
-        <button type="button" nbButton status="primary" size="medium" (click)="advancedSearch()">Advanced Search</button>
+        <app-search-bar class=" mr-2"></app-search-bar>
+        <button type="button" nbButton status="primary" size="medium" (click)="advancedSearch()">Advanced
+          Search</button>
 
       </div>
 
-      <p>LA CONNEXION</p>
+      <div>
+        <app-auth-manager></app-auth-manager>
+      </div>
 
     </div>
 

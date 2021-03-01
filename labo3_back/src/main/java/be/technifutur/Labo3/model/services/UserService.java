@@ -4,6 +4,7 @@ import be.technifutur.Labo3.mapper.Mapper;
 import be.technifutur.Labo3.model.dtos.UserDto;
 import be.technifutur.Labo3.model.entities.User;
 import be.technifutur.Labo3.model.repositories.UserRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -58,5 +59,14 @@ public class UserService implements Crudable<User, UserDto, Integer> {
     public boolean delete(Integer integer) {
         this.userRepository.deleteById(integer);
         return this.userRepository.existsById(integer);
+    }
+
+    public UserDto getBySurname(String surname) {
+        return this.mapper.toUserDto(this.userRepository.findBySurnameEquals(surname));
+    }
+
+    public boolean login(String surname, String password) {
+        User userToTest = this.userRepository.findBySurnameEquals(surname);
+        return userToTest != null && userToTest.getPassword().equals(password);
     }
 }

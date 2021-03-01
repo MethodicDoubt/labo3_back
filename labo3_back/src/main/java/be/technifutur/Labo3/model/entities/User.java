@@ -21,20 +21,20 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer userId;
 
-    @Column(nullable = false,length = 50)
+    @Column(nullable = false, length = 50)
     String lastName;
 
-    @Column(nullable = false,length = 50)
+    @Column(nullable = false, length = 50)
     String firstName;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     be.technifutur.Labo3.model.types.AccessLevel accessLevel;
 
-    @Column(nullable = false,length = 50)
+    @Column(nullable = false, unique = true, length = 50)
     String surname;
 
-    @Column(nullable = false,length = 50)
+    @Column(nullable = false, length = 50)
     String password;
 
     @Embedded
