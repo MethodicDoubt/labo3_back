@@ -62,7 +62,7 @@ JONATHAN : Entities :
 
        - ADD SWAGGER TO BACK END --> OK
 
-       - ADD NAVIGATION BAR TO FRONT END --> OK
+       - ADD NAVIGATION BAR TO FRONT END --> OK //TODO --> LIKE au lieu d'un strict
 
        - SEARCH BY CRITERIA (string) --> OK
 
@@ -71,8 +71,10 @@ JONATHAN : Entities :
 
      TASKS 01/03/21
 
-       - ADVANCED SEARCH --> 3/4
+       - ADVANCED SEARCH --> ok
 
-       - ACCOUNT / SESSION --> (27/02 --> !!!!)
+       - Connexion --> ok
+
+       - create account -->
 
        - BASKET MANAGER (ADD TO BASKET, REMOVE FROM BASKET, CHOOSE PAYEMENT OPTION, PAY) --> 
