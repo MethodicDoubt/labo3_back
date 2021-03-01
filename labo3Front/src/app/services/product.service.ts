@@ -29,6 +29,7 @@ export class ProductService {
   }
 
   search(advSearch : AdvancedSearch) : Observable<Product[]> {	
+    
     console.log(advSearch)
 
     return this._httpClient.post<Product[]>(this.BASE_URL + "/search", advSearch);
