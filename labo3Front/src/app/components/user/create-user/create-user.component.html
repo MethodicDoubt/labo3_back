@@ -1,4 +1,49 @@
 <nb-card>
-  <nb-card-header></nb-card-header>
-  <nb-card-body></nb-card-body>
+  <nb-card-header>Creating a new Account</nb-card-header>
+  <nb-card-body>
+    <form [formGroup]="fgCreateUser" (submit)="onSubmit()">
+      <p class=" form-build">
+        <label for="surname">Surname</label>
+        <input nbInput type="text" id="surname" formControlName="surname">
+      </p>
+      <p class=" form-build">
+        <label for="password">Password</label>
+        <input nbInput type="password" id="password" formControlName="password">
+      </p>
+      <p class=" form-build">
+        <label for="firstname">Firstname</label>
+        <input nbInput type="text" id="firstname" formControlName="firstname">
+      </p>
+      <p class=" form-build">
+        <label for="lastname">Lastname</label>
+        <input nbInput type="text" id="lastname" formControlName="lastname">
+      </p>
+      <div formGroupName="address">
+        <p class=" form-build">
+          <label for="street">Street</label>
+          <input nbInput type="text" id="street" formControlName="street">
+        </p>
+        <p class=" form-build">
+          <label for="number">Number</label>
+          <input nbInput type="number" id="number" formControlName="number" min="0">
+        </p>
+        <p class=" form-build">
+          <label for="city">City</label>
+          <input nbInput type="text" id="city" formControlName="city">
+        </p>
+        <p class=" form-build">
+          <label for="zip">Zip Code</label>
+          <input nbInput type="text" id="zip" formControlName="zip">
+        </p>
+        <p class=" form-build">
+          <label for="country">Country</label>
+          <input nbInput type="text" id="country" formControlName="country">
+        </p>
+      </div>
+      <div class="fr">
+        <button status="primary" type="submit" nbButton [disabled]="fgCreateUser.invalid">Create</button>
+        <button status="primary" class=" ml-2" type="reset" nbButton>Reset</button>
+      </div>
+    </form>
+  </nb-card-body>
 </nb-card>

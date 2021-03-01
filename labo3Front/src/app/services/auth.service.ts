@@ -25,7 +25,6 @@ export class AuthService {
       surname: surname,
       password: password
     };
-    console.log(this.BASE_URL)
     this._httpClient.post<boolean>(this.BASE_URL + '/login', userInfo).subscribe(
       data => {
         if (data) {

@@ -11,14 +11,12 @@ export class ProductService {
 
   private BASE_URL = "http://localhost:8080/products";
 
-  public searchObject : AdvancedSearch
+  public searchObject: AdvancedSearch
 
   constructor(private _httpClient: HttpClient) { }
 
   getAll(): Observable<Product[]> {
-
     return this._httpClient.get<Product[]>(this.BASE_URL);
-
   }
 
   getById(id: number): Observable<Product> {
@@ -30,10 +28,8 @@ export class ProductService {
     return this._httpClient.post<Product[]>(this.BASE_URL + "/search", json);
   }
 
-  search(advSearch : AdvancedSearch) : Observable<Product[]> {	
-
+  search(advSearch: AdvancedSearch): Observable<Product[]> {
     return this._httpClient.post<Product[]>(this.BASE_URL + "/advsearch", advSearch);
-
   }
 
 }
