@@ -13,7 +13,7 @@ export class AppComponent {
   constructor(private _dialogBox : NbDialogService) {
 
 
-
+    
   }
 
   advancedSearch() {
@@ -23,7 +23,7 @@ export class AppComponent {
     })
 
     ref.onClose.subscribe((data) => {
-      console.log(data)
+
     })
   } 
   
