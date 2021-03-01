@@ -1,5 +1,6 @@
 package be.technifutur.Labo3.controllers;
 
+import be.technifutur.Labo3.model.dtos.AdvancedSearchDto;
 import be.technifutur.Labo3.model.dtos.ProductDto;
 import be.technifutur.Labo3.model.entities.Category;
 import be.technifutur.Labo3.model.entities.Product;
@@ -54,7 +55,14 @@ public class ProductController implements RestControllable<Product, ProductDto, 
 
     @PostMapping("/search")
     public ResponseEntity<List<ProductDto>> search(@RequestBody Product product) {
-        return ResponseEntity.ok(this.productService.findByNameOrCategoryOrSupplier(product.getName()));
+        return ResponseEntity.ok(this.productService.findByNameOrCategoryOrSupplier(product.getName()));   
+    }
+    
+    @PostMapping(path = "/search")
+    public ResponseEntity<List<ProductDto>> search(@RequestBody AdvancedSearchDto advancedSearchDto) {
+
+        return ResponseEntity.ok(this.productService.search(advancedSearchDto));
+
     }
 
 }

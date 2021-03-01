@@ -1,18 +1,22 @@
 package be.technifutur.Labo3.model.services;
 
 import be.technifutur.Labo3.mapper.Mapper;
+import be.technifutur.Labo3.model.dtos.AdvancedSearchDto;
 import be.technifutur.Labo3.model.dtos.ProductDto;
 import be.technifutur.Labo3.model.entities.Category;
 import be.technifutur.Labo3.model.entities.Product;
 import be.technifutur.Labo3.model.entities.Supplier;
+import be.technifutur.Labo3.model.entities.QProduct;
 import be.technifutur.Labo3.model.repositories.OrderRepository;
 import be.technifutur.Labo3.model.repositories.ProductRepository;
+import com.querydsl.core.BooleanBuilder;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 public class ProductService implements Crudable<Product, ProductDto, Integer> {
@@ -102,6 +106,54 @@ public class ProductService implements Crudable<Product, ProductDto, Integer> {
                 .map(this.mapper::toProductDto)
                 .collect(Collectors.toList())
                 ;
+    }
+    
+    public List<ProductDto> search(AdvancedSearchDto advancedSearchDto) {
+
+        System.out.println(advancedSearchDto);
+
+        BooleanBuilder predicate = new BooleanBuilder();
+
+        QProduct qProduct = QProduct.product;
+
+        if (advancedSearchDto.getName() != null && !advancedSearchDto.getName().equals("")) {
+
+            predicate.and(qProduct.name.containsIgnoreCase(advancedSearchDto.getName()));
+
+        }
+
+        if (advancedSearchDto.getCategoriesDto() != null) {
+
+            advancedSearchDto.getCategoriesDto()
+                    .forEach(categoryDto -> {predicate.and(qProduct.categories
+                            .contains(mapper.toCategoryEntity(categoryDto)));});
+
+        }
+
+        if (advancedSearchDto.getMinimumPrice() != null && advancedSearchDto.getMaximumPrice() != null) {
+
+            predicate.and(qProduct.purchasePrice.between(advancedSearchDto.getMinimumPrice(), advancedSearchDto.getMaximumPrice()));
+
+        }
+
+        if (advancedSearchDto.getQuantity()) {
+
+            predicate.and(qProduct.quantity.gt(0));
+
+        }
+
+        if (advancedSearchDto.getSupplierDto() != null) {
+
+            predicate.and(qProduct.supplier.eq(mapper.toSupplierEntity(advancedSearchDto.getSupplierDto())));
+
+        }
+
+        Iterable<Product> result = this.productRepository.findAll(predicate);
+
+        return StreamSupport.stream(result.spliterator(), false)
+                .map(mapper::toProductDto)
+                .collect(Collectors.toList());
+
     }
 
 }

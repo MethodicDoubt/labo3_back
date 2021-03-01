@@ -34,7 +34,7 @@
             <fieldset>
 
                 <legend>Minimum Price</legend>
-                <input type="range" min="0" max="100" value="50" class="slider"
+                <input type="range" min="0" max="1000" value="50" class="slider"
                  id="range1" formControlName="minimumPrice" 
                  (input)="sliderMinChange($event)">
                  <label>{{minimumPrice.toString()}}€</label>
@@ -44,7 +44,7 @@
             <fieldset>
 
                 <legend>Maximum Price</legend>
-                <input type="range" min="{{minimumPrice}}" max="100" value="50" class="slider" id="range2" formControlName="maximumPrice" 
+                <input type="range" min="{{minimumPrice}}" max="1000" value="50" class="slider" id="range2" formControlName="maximumPrice" 
                 (input)="sliderMaxChange($event)">
                 <label>{{maximumPrice.toString()}}€</label>
 
