@@ -58,8 +58,8 @@ public class ProductController implements RestControllable<Product, ProductDto, 
         return ResponseEntity.ok(this.productService.findByNameOrCategoryOrSupplier(product.getName()));   
     }
     
-    @PostMapping(path = "/search")
-    public ResponseEntity<List<ProductDto>> search(@RequestBody AdvancedSearchDto advancedSearchDto) {
+    @PostMapping(path = "/advsearch")
+    public ResponseEntity<List<ProductDto>> advSearch(@RequestBody AdvancedSearchDto advancedSearchDto) {
 
         return ResponseEntity.ok(this.productService.search(advancedSearchDto));
 

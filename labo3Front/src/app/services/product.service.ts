@@ -32,7 +32,7 @@ export class ProductService {
     
     console.log(advSearch)
 
-    return this._httpClient.post<Product[]>(this.BASE_URL + "/search", advSearch);
+    return this._httpClient.post<Product[]>(this.BASE_URL + "/advsearch", advSearch);
 
   }
 
