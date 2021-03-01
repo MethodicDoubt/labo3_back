@@ -3,7 +3,9 @@ package be.technifutur.Labo3.model.services;
 import be.technifutur.Labo3.mapper.Mapper;
 import be.technifutur.Labo3.model.dtos.AdvancedSearchDto;
 import be.technifutur.Labo3.model.dtos.ProductDto;
+import be.technifutur.Labo3.model.entities.Category;
 import be.technifutur.Labo3.model.entities.Product;
+import be.technifutur.Labo3.model.entities.Supplier;
 import be.technifutur.Labo3.model.entities.QProduct;
 import be.technifutur.Labo3.model.repositories.OrderRepository;
 import be.technifutur.Labo3.model.repositories.ProductRepository;
@@ -98,6 +100,14 @@ public class ProductService implements Crudable<Product, ProductDto, Integer> {
 
     }
 
+    public List<ProductDto> findByNameOrCategoryOrSupplier(String string) {
+        return this.productRepository.findDistinctByCategoriesTypeIgnoreCaseOrSupplierCompanyNameIgnoreCaseOrNameIgnoreCase(string, string,string)
+                .stream()
+                .map(this.mapper::toProductDto)
+                .collect(Collectors.toList())
+                ;
+    }
+    
     public List<ProductDto> search(AdvancedSearchDto advancedSearchDto) {
 
         System.out.println(advancedSearchDto);

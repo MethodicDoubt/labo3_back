@@ -13,6 +13,7 @@ import { ProductByIdComponent } from './components/product/product-by-id/product
 import { NavComponent } from './components/navigation-bar/nav/nav.component';
 import { SearchBarComponent } from './components/search-bar/search-bar/search-bar.component';
 import { AdvSearchComponent } from './components/advanced-search/adv-search/adv-search.component';
+import { TestComponent } from './components/search-bar/test/test.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { AdvSearchComponent } from './components/advanced-search/adv-search/adv-
     AllProductComponent,
     NavComponent,
     SearchBarComponent,
-    AdvSearchComponent
+    AdvSearchComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule,

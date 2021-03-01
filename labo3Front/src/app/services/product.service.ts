@@ -23,8 +23,12 @@ export class ProductService {
     return this._httpClient.get<Product>(this.BASE_URL + "/" + id);
   }
 
-  search(advSearch : AdvancedSearch) : Observable<Product[]> {
+  searchByString(name: String): Observable<Product[]> {
+    let json = { "name": name };
+    return this._httpClient.post<Product[]>(this.BASE_URL + "/search", json);
+  }
 
+  search(advSearch : AdvancedSearch) : Observable<Product[]> {	
     console.log(advSearch)
 
     return this._httpClient.post<Product[]>(this.BASE_URL + "/search", advSearch);

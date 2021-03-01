@@ -29,7 +29,7 @@ public class User {
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    AccessLevel accessLevel;
+    be.technifutur.Labo3.model.types.AccessLevel accessLevel;
 
     @Column(nullable = false,length = 50)
     String surname;

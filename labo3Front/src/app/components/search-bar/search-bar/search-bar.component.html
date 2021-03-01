@@ -1,6 +1,6 @@
-<form (submit)="onSubmit()">
-  <input type="text" nbInput>
-  <button type="submit" nbButton>
+<form [formGroup]="fg" (submit)="onSubmit()">
+  <input type="text" nbInput formControlName="name">
+  <button type="submit" nbButton status="primary">
     <nb-icon icon="search-outline"></nb-icon>
   </button>
 </form>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from 'src/app/models/product.model';
 import { ProductService } from 'src/app/services/product.service';
 
@@ -10,19 +10,52 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class AllProductComponent implements OnInit {
 
-  products : Product[];
+  products: Product[];
 
-  constructor(private _productService : ProductService, private _router : Router) { }
-
-  ngOnInit(): void {
-
-    this._productService.getAll().subscribe(data => this.products = data)
-
+  constructor(private _productService: ProductService,
+    private _router: Router,
+    private _activatedRoute: ActivatedRoute) {
+    this._activatedRoute.queryParams.subscribe(
+      data => {
+        if (data['searchByString'] == undefined) {
+          this.initTab()
+        } else {
+          this.sortProducts(data['searchByString'])
+        }
+      }
+    )
   }
 
-  redirect(id : number) {
+  ngOnInit(): void {
+  }
 
+  redirect(id: number) {
     this._router.navigate(['product', id]).then();
+  }
+
+  initTab() {
+    this._productService.getAll().subscribe(data => this.products = data)
+  }
+
+  sortProducts(searchByString: String) {
+    if (searchByString == "") {
+      this._productService.getAll().subscribe(
+        data => { this.products = data, console.log(data) }
+      )
+    } else {
+      this._productService.searchByString(searchByString).subscribe(
+        data => {
+          console.log(data)
+          if (data.length == 0) {
+            console.log("then") // que faire si erreur de la personne ? Retourner getAll ou laisser sur la liste d'avant + poput ? 
+            this.initTab();
+          } else {
+            console.log("else")
+            this.products = data
+          }
+        }
+      );
+    }
 
   }
 
