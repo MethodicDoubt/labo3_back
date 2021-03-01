@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { AdvancedSearch } from '../models/advanced-search.model';
 import { Product } from '../models/product.model';
 
 @Injectable({
@@ -22,6 +23,12 @@ export class ProductService {
     return this._httpClient.get<Product>(this.BASE_URL + "/" + id);
   }
 
+  search(advSearch : AdvancedSearch) : Observable<Product[]> {
 
+    console.log(advSearch)
+
+    return this._httpClient.post<Product[]>(this.BASE_URL + "/search", advSearch);
+
+  }
 
 }

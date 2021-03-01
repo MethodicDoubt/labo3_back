@@ -1,5 +1,6 @@
 package be.technifutur.Labo3.controllers;
 
+import be.technifutur.Labo3.model.dtos.AdvancedSearchDto;
 import be.technifutur.Labo3.model.dtos.ProductDto;
 import be.technifutur.Labo3.model.entities.Product;
 import be.technifutur.Labo3.model.services.ProductService;
@@ -48,6 +49,13 @@ public class ProductController implements RestControllable<Product, ProductDto, 
     @PutMapping("/{id}")
     public ResponseEntity<Boolean> update(Product product, @PathVariable("id") Integer integer) {
         return ResponseEntity.ok(this.productService.update(product, integer));
+    }
+
+    @PostMapping(path = "/search")
+    public ResponseEntity<List<ProductDto>> search(@RequestBody AdvancedSearchDto advancedSearchDto) {
+
+        return ResponseEntity.ok(this.productService.search(advancedSearchDto));
+
     }
 
 }
