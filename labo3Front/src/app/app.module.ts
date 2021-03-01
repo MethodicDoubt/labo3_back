@@ -13,6 +13,9 @@ import { ProductByIdComponent } from './components/product/product-by-id/product
 import { NavComponent } from './components/navigation-bar/nav/nav.component';
 import { SearchBarComponent } from './components/search-bar/search-bar/search-bar.component';
 import { AdvSearchComponent } from './components/advanced-search/adv-search/adv-search.component';
+import { CreateUserComponent } from './components/user/create-user/create-user.component';
+import { LoginComponent } from './components/user/login/login.component';
+import { AuthManagerComponent } from './components/user/auth-manager/auth-manager.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +26,9 @@ import { AdvSearchComponent } from './components/advanced-search/adv-search/adv-
     NavComponent,
     SearchBarComponent,
     AdvSearchComponent,
+    CreateUserComponent,
+    LoginComponent,
+    AuthManagerComponent
   ],
   imports: [
     BrowserModule,

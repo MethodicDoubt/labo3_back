@@ -30,7 +30,6 @@ public class Mapper {
                 .firstName(user.getFirstName())
                 .accessLevel(user.getAccessLevel())
                 .surname(user.getSurname())
-                .password(user.getPassword())
                 .address(user.getAddress())
                 .ordersDto(withOrders ?
                         user.getOrders()

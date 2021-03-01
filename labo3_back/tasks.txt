@@ -66,8 +66,13 @@ JONATHAN : Entities :
 
        - SEARCH BY CRITERIA (string) --> OK
 
+
+     //---------------------------------------------------------------------
+
+     TASKS 01/03/21
+
        - ADVANCED SEARCH --> 3/4
 
-       - ACCOUNT / SESSION --> (27/02 --> J'ai du réglé un soucis dans User, faut qu'on en parle :o !!!!)
+       - ACCOUNT / SESSION --> (27/02 --> !!!!)
 
        - BASKET MANAGER (ADD TO BASKET, REMOVE FROM BASKET, CHOOSE PAYEMENT OPTION, PAY) --> 
