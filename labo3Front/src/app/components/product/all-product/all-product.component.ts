@@ -44,7 +44,16 @@ export class AllProductComponent implements OnInit {
       )
     } else {
       this._productService.searchByString(searchByString).subscribe(
-        data => { this.products = data, console.log(data) }
+        data => {
+          console.log(data)
+          if (data.length == 0) {
+            console.log("then") // que faire si erreur de la personne ? Retourner getAll ou laisser sur la liste d'avant + poput ? 
+            this.initTab();
+          } else {
+            console.log("else")
+            this.products = data
+          }
+        }
       );
     }
 
