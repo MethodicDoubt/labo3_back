@@ -11,6 +11,8 @@ export class ProductService {
 
   private BASE_URL = "http://localhost:8080/products";
 
+  public searchObject : AdvancedSearch
+
   constructor(private _httpClient: HttpClient) { }
 
   getAll(): Observable<Product[]> {
@@ -29,8 +31,6 @@ export class ProductService {
   }
 
   search(advSearch : AdvancedSearch) : Observable<Product[]> {	
-    
-    console.log(advSearch)
 
     return this._httpClient.post<Product[]>(this.BASE_URL + "/advsearch", advSearch);
 

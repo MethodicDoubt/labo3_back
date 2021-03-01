@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { NbDialogRef } from '@nebular/theme';
 import { AdvancedSearch } from 'src/app/models/advanced-search.model';
 import { ProductService } from 'src/app/services/product.service';
 
@@ -15,7 +17,12 @@ export class AdvSearchComponent implements OnInit {
   minimumPrice : number = 0;
   maximumPrice : number = 0;
 
-  constructor(private _builder : FormBuilder, private _productService : ProductService) { }
+  constructor(
+    private _builder : FormBuilder,
+    private _productService : ProductService,
+    private _router : Router,
+    private _nbDiagRef: NbDialogRef<AdvancedSearch>
+    ) { }
 
   ngOnInit(): void {
 
@@ -29,14 +36,18 @@ export class AdvSearchComponent implements OnInit {
       categoriesDto : [''],
       minimumPrice : [''],
       maximumPrice : [''],
-      quantity : ['', Validators.required],
+      quantity : [false, Validators.required],
       supplierDto : ['']
     })
   }
 
   onSubmit() {
 
-    this._productService.search(this.transformFgIntoAdvSrch());
+    let searchObject = this.transformFgIntoAdvSrch();
+
+        this._router.navigate(['/home'], {queryParams: {searchObject: searchObject}});
+
+        this._nbDiagRef.close();
 
   }
 
@@ -50,6 +61,8 @@ export class AdvSearchComponent implements OnInit {
     searchObject.maximumPrice = this.fg.get('maximumPrice').value;
     searchObject.quantity = this.fg.get('quantity').value;
     searchObject.supplierDto = searchObject.supplierDto != null ? this.fg.get('supplierDto').value : null;
+
+    this._productService.searchObject = searchObject;
 
     return searchObject;
 

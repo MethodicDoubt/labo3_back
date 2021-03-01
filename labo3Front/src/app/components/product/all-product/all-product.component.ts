@@ -15,15 +15,28 @@ export class AllProductComponent implements OnInit {
   constructor(private _productService: ProductService,
     private _router: Router,
     private _activatedRoute: ActivatedRoute) {
-    this._activatedRoute.queryParams.subscribe(
+
+    this._activatedRoute.queryParamMap.subscribe(
+
       data => {
-        if (data['searchByString'] == undefined) {
+        if (data.get('searchByString') == undefined && data.get('searchObject') == undefined || data.get('searchByString') == "") {
+
           this.initTab()
-        } else {
-          this.sortProducts(data['searchByString'])
+
+        } else if(data.get('searchByString') != "" && data.get('searchObject') == undefined) {
+
+          this.sortProducts(data.get('searchByString'))
+
+        }else{
+
+          this._productService.search(this._productService.searchObject).subscribe(data => this.products = data);
+
         }
+
       }
+
     )
+
   }
 
   ngOnInit(): void {
