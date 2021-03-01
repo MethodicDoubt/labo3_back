@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NbDialogService } from '@nebular/theme';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { AuthService } from 'src/app/services/auth.service';
+import { CreateUserComponent } from '../create-user/create-user.component';
 import { LoginComponent } from '../login/login.component';
 
 @Component({
@@ -33,6 +34,13 @@ export class AuthManagerComponent implements OnInit {
 
   popupLogout() {
     this._authService.logout();
+  }
+
+  popupCreate() {
+    let ref = this._dialogBox.open(
+      CreateUserComponent
+    );
+    ref.onClose.subscribe();
   }
 
 }
