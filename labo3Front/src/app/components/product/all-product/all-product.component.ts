@@ -23,16 +23,12 @@ export class AllProductComponent implements OnInit {
 
           this.initTab()
 
-        } else if(data.get('searchByString') != "" && data.get('searchObject') == undefined) {
+        } else if (data.get('searchByString') != "" && data.get('searchObject') == undefined) {
 
           this.sortProducts(data.get('searchByString'))
 
-        }else{
-
-          console.log(this._productService.searchObject)
-
+        } else {
           this._productService.search(this._productService.searchObject).subscribe(data => this.products = data);
-
         }
 
       }
