@@ -14,14 +14,15 @@ import { ProductService } from './services/product.service';
 export class AppComponent {
   title = 'labo3Front';
 
+  productNumber: number;
+  basketStatus: Subscription;
+
   constructor(private _dialogBox: NbDialogService,
     private _authService: AuthService,
-    private _productService : ProductService,
- 	private _router : Router) {
+    private _productService: ProductService,
+    private _router: Router) {
     this._authService.login("Wizounet", "password");//TODO --> A REMOVE POUR LA PRODUCTION
-	productNumber : number;
-	basketStatus : Subscription;
-    this.basketStatus = this._productService.basketStatus.subscribe(data => this.productNumber = data);    
+    this.basketStatus = this._productService.basketStatus.subscribe(data => this.productNumber = data);
   }
 
   advancedSearch() {
@@ -31,8 +32,10 @@ export class AppComponent {
     ref.onClose.subscribe()
 
 
-  } redirect() {
+  }
+
+  redirect() {
     this._router.navigate(['basket']).then();
   }
-  
+
 }

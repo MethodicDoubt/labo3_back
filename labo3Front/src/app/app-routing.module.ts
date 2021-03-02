@@ -17,7 +17,6 @@ const routes: Routes = [
   { path: 'home', component: AllProductComponent },
   { path: 'product/:id', resolve: { resultat: ProductResolverService }, component: ProductByIdComponent },
   { path: 'basket', component: BasketComponent },
-  { path: '**', redirectTo: 'home' }
   {
     path: 'admin', canActivate: [AuthGuardService], component: AdminPanelComponent, children: [
       {

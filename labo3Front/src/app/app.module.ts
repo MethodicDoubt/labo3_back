@@ -41,7 +41,7 @@ import { BasketComponent } from './components/basket/basket/basket.component';
     AdminProductsComponent,
     AdminCategoriesComponent,
     AdminOrdersComponent,
-    AdminSuppliersComponent
+    AdminSuppliersComponent,
     BasketComponent
   ],
   imports: [
