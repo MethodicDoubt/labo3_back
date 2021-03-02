@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NbDialogService } from '@nebular/theme';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { AuthService } from 'src/app/services/auth.service';
@@ -18,7 +19,8 @@ export class AuthManagerComponent implements OnInit {
   statusAdmin: Subscription;
 
   constructor(private _authService: AuthService,
-    private _dialogBox: NbDialogService) { }
+    private _dialogBox: NbDialogService,
+    private _router: Router) { }
 
   ngOnInit(): void {
     this.statusConnexion = this._authService.statusConnexion.subscribe(
@@ -46,6 +48,10 @@ export class AuthManagerComponent implements OnInit {
       CreateUserComponent
     );
     ref.onClose.subscribe();
+  }
+
+  redirectToPanelAdmin() {
+    this._router.navigate(['admin']).then();
   }
 
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from 'src/app/models/product.model';
+import { AuthService } from 'src/app/services/auth.service';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -14,7 +15,8 @@ export class AllProductComponent implements OnInit {
 
   constructor(private _productService: ProductService,
     private _router: Router,
-    private _activatedRoute: ActivatedRoute) {
+    private _activatedRoute: ActivatedRoute,
+    private _authService: AuthService) {
 
     this._activatedRoute.queryParamMap.subscribe(
 
