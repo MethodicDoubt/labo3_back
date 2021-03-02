@@ -12,12 +12,17 @@ export class AuthService {
   currentUser: User;
   isConnected: boolean = false;
   statusConnexion: Subject<boolean> = new Subject<boolean>();
+  isAdmin: boolean = false;
+  statusAdmin: Subject<boolean> = new Subject<boolean>();
 
   constructor(private _httpClient: HttpClient,
     private _router: Router) { }
 
   emitStatusConnexion() {
     this.statusConnexion.next(this.isConnected);
+  }
+  emitStatusAdmin() {
+    this.statusAdmin.next(this.isAdmin);
   }
 
   login(surname: String, password: String) {
@@ -33,7 +38,9 @@ export class AuthService {
               this.currentUser = data;
               localStorage.setItem('role', this.currentUser.accessLevel)
               this.isConnected = true;
+              this.currentUser.accessLevel == "ADMINISTRATOR" ? this.isAdmin = true : '';
               this.emitStatusConnexion();
+              this.emitStatusAdmin();
             }
           )
         } else {
@@ -47,7 +54,9 @@ export class AuthService {
   logout() {
     this.currentUser = null;
     this.isConnected = false;
+    this.isAdmin = false;
     this.emitStatusConnexion();
+    this.emitStatusAdmin();
     localStorage.clear();
     this._router.navigate(['']);
   }

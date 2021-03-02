@@ -101,7 +101,7 @@ public class ProductService implements Crudable<Product, ProductDto, Integer> {
     }
 
     public List<ProductDto> findByNameOrCategoryOrSupplier(String string) {
-        return this.productRepository.findDistinctByCategoriesTypeIgnoreCaseOrSupplierCompanyNameIgnoreCaseOrNameIgnoreCase(string, string,string)
+        return this.productRepository.findDistinctByCategoriesTypeContainingIgnoreCaseOrSupplierCompanyNameContainingIgnoreCaseOrNameContainingIgnoreCase(string, string,string)
                 .stream()
                 .map(this.mapper::toProductDto)
                 .collect(Collectors.toList())

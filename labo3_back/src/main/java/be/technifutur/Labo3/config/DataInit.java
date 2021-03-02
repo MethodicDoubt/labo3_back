@@ -112,9 +112,9 @@ public class DataInit implements InitializingBean {
             User.builder()
                     .lastName("Arabia")
                     .firstName("Jonathan")
-                    .accessLevel(AccessLevel.ADMINISTRATOR)
                     .surname("Wizounet")
                     .password("password")
+                    .accessLevel(AccessLevel.ADMINISTRATOR)
                     .address(
                             Address.builder()
                                     .city("Tilleur")
@@ -128,7 +128,6 @@ public class DataInit implements InitializingBean {
             User.builder()
                     .lastName("Del Piero")
                     .firstName("Alessandro")
-                    .accessLevel(AccessLevel.CUSTOMER)
                     .surname("BestPlayerInTheWorld")
                     .password("password")
                     .address(

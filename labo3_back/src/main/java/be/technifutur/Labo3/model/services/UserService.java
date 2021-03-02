@@ -40,7 +40,8 @@ public class UserService implements Crudable<User, UserDto, Integer> {
 
     @Override
     public boolean insert(User user) {
-        user.setAccessLevel(AccessLevel.CUSTOMER);
+        if (user.getAccessLevel() == null)
+            user.setAccessLevel(AccessLevel.CUSTOMER);
         User newUser = this.userRepository.save(user);
         return this.userRepository.existsById(newUser.getUserId());
     }

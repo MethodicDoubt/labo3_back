@@ -12,15 +12,20 @@ import { LoginComponent } from '../login/login.component';
 })
 export class AuthManagerComponent implements OnInit {
 
-  isConnected: Boolean;
+  isConnected: boolean;
   statusConnexion: Subscription;
+  isAdmin: boolean;
+  statusAdmin: Subscription;
 
   constructor(private _authService: AuthService,
     private _dialogBox: NbDialogService) { }
 
   ngOnInit(): void {
     this.statusConnexion = this._authService.statusConnexion.subscribe(
-      dataConnexion => { this.isConnected = dataConnexion }
+      dataConnexion => this.isConnected = dataConnexion
+    )
+    this.statusAdmin = this._authService.statusAdmin.subscribe(
+      dataAdmin => this.isAdmin = dataAdmin
     )
     localStorage.getItem('role') == null ? this.isConnected = false : this.isConnected = true;
   }
