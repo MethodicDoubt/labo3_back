@@ -41,8 +41,8 @@ export class AdvSearchComponent implements OnInit {
     this.fg = this._builder.group({
       name : [''],
       categories : [''],
-      minimumPrice : [''],
-      maximumPrice : [''],
+      minimumPrice : [0],
+      maximumPrice : [1000],
       quantity : [false, Validators.required],
       supplier : ['']
     })
@@ -65,11 +65,11 @@ export class AdvSearchComponent implements OnInit {
     let searchObject = new AdvancedSearch();
 
     searchObject.name = this.fg.get('name').value;
-    searchObject.categories = this.fg.get('categories').value.size != 0 ? this.fg.get('categories').value : null;
+    searchObject.categoriesType = this.fg.get('categories').value.size != 0 ? this.fg.get('categories').value : null;
     searchObject.minimumPrice = this.fg.get('minimumPrice').value;
     searchObject.maximumPrice = this.fg.get('maximumPrice').value;
     searchObject.quantity = this.fg.get('quantity').value;
-    searchObject.supplier = this.fg.get('supplier').value != "" ? this.fg.get('supplier').value : null;
+    searchObject.supplierName = this.fg.get('supplier').value != "" ? this.fg.get('supplier').value : null;
 
     console.log(searchObject)
 

@@ -105,13 +105,13 @@ public class ProductService implements Crudable<Product, ProductDto, Integer> {
     }
 
     public List<ProductDto> findByNameOrCategoryOrSupplier(String string) {
-        return this.productRepository.findDistinctByCategoriesTypeContainingIgnoreCaseOrSupplierCompanyNameContainingIgnoreCaseOrNameContainingIgnoreCase(string, string,string)
+        return this.productRepository.findDistinctByCategoriesTypeContainingIgnoreCaseOrSupplierCompanyNameContainingIgnoreCaseOrNameContainingIgnoreCase(string, string, string)
                 .stream()
                 .map(this.mapper::toProductDto)
                 .collect(Collectors.toList())
                 ;
     }
-    
+
     public List<ProductDto> search(AdvancedSearchDto advancedSearchDto) {
 
         System.out.println(advancedSearchDto);
@@ -132,7 +132,8 @@ public class ProductService implements Crudable<Product, ProductDto, Integer> {
                     .forEach(categoryType -> {
 
                         predicate.and(qProduct.categories
-                            .contains(this.categoryRepository.findByType(categoryType)));});
+                                .contains(this.categoryRepository.findByType(categoryType)));
+                    });
 
         }
 
@@ -158,7 +159,8 @@ public class ProductService implements Crudable<Product, ProductDto, Integer> {
 
         return StreamSupport.stream(result.spliterator(), false)
                 .map(mapper::toProductDto)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList())
+                ;
 
     }
 
