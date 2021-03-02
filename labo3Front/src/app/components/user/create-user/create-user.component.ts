@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NbDialogRef } from '@nebular/theme';
 import { User } from 'src/app/models/user.model';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-create-user',
@@ -12,7 +14,9 @@ export class CreateUserComponent implements OnInit {
   newUser: User = new User();
   fgCreateUser: FormGroup
 
-  constructor(private _formBuilder: FormBuilder) { }
+  constructor(private _formBuilder: FormBuilder,
+    private _userService: UserService,
+    private _nBDiagRef: NbDialogRef<CreateUserComponent>) { }
 
   ngOnInit(): void {
     this.initFgCreateUser()
@@ -41,7 +45,12 @@ export class CreateUserComponent implements OnInit {
     this.newUser.surname = this.fgCreateUser.value['surname'];
     this.newUser.address = this.fgCreateUser.value['address'];
 
-    
+    this._userService.createNewUser(this.newUser).subscribe(
+      data => {
+        data ? alert("Account create") : alert("Account not create, try again");
+        this._nBDiagRef.close();
+      }
+    )
   }
 
 

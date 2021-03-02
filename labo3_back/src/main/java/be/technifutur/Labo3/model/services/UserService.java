@@ -4,6 +4,7 @@ import be.technifutur.Labo3.mapper.Mapper;
 import be.technifutur.Labo3.model.dtos.UserDto;
 import be.technifutur.Labo3.model.entities.User;
 import be.technifutur.Labo3.model.repositories.UserRepository;
+import be.technifutur.Labo3.model.types.AccessLevel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -39,6 +40,7 @@ public class UserService implements Crudable<User, UserDto, Integer> {
 
     @Override
     public boolean insert(User user) {
+        user.setAccessLevel(AccessLevel.CUSTOMER);
         User newUser = this.userRepository.save(user);
         return this.userRepository.existsById(newUser.getUserId());
     }
