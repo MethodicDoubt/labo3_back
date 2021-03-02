@@ -13,17 +13,14 @@ export class AppComponent {
 
   constructor(private _dialogBox: NbDialogService,
     private _authService: AuthService) {
-    // this._authService.login("Wizounet", "password");//TODO --> A REMOVE POUR LA PRODUCTION
+    this._authService.login("Wizounet", "password");//TODO --> A REMOVE POUR LA PRODUCTION
   }
 
   advancedSearch() {
     let ref = this._dialogBox.open(AdvSearchComponent, {
       closeOnBackdropClick: true
     })
-
-    ref.onClose.subscribe((data) => {
-
-    })
+    ref.onClose.subscribe()
   }
 
 }

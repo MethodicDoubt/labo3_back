@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminPanelComponent } from './components/admin-panel/admin-panel/admin-panel.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found/page-not-found.component';
 import { AllProductComponent } from './components/product/all-product/all-product.component';
 import { ProductByIdComponent } from './components/product/product-by-id/product-by-id.component';
 import { AuthGuardService } from './services/auth-guard.service';
@@ -10,8 +11,8 @@ const routes: Routes = [
   { path: 'home', component: AllProductComponent },
   { path: 'product/:id', resolve: { resultat: ProductResolverService }, component: ProductByIdComponent },
   { path: 'admin', canActivate: [AuthGuardService], component: AdminPanelComponent },
-  {},
-  { path: '**', redirectTo: 'home' }
+  { path: '404', component: PageNotFoundComponent },
+  { path: '**', redirectTo: '/404' }
 ];
 
 @NgModule({

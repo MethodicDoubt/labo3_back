@@ -17,6 +17,7 @@ import { CreateUserComponent } from './components/user/create-user/create-user.c
 import { LoginComponent } from './components/user/login/login.component';
 import { AuthManagerComponent } from './components/user/auth-manager/auth-manager.component';
 import { AdminPanelComponent } from './components/admin-panel/admin-panel/admin-panel.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { AdminPanelComponent } from './components/admin-panel/admin-panel/admin-
     CreateUserComponent,
     LoginComponent,
     AuthManagerComponent,
-    AdminPanelComponent
+    AdminPanelComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
