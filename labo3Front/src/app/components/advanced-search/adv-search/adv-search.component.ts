@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NbDialogRef } from '@nebular/theme';
 import { AdvancedSearch } from 'src/app/models/advanced-search.model';
+import { Category } from 'src/app/models/category.model';
+import { CategoryService } from 'src/app/services/category.service';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -14,12 +16,15 @@ export class AdvSearchComponent implements OnInit {
 
   fg : FormGroup;
 
+  categories : String[];
+
   minimumPrice : number = 0;
   maximumPrice : number = 0;
 
   constructor(
     private _builder : FormBuilder,
     private _productService : ProductService,
+    private _categoryService : CategoryService,
     private _router : Router,
     private _nbDiagRef: NbDialogRef<AdvancedSearch>
     ) { }
@@ -28,20 +33,24 @@ export class AdvSearchComponent implements OnInit {
 
     this.initForm();
 
+    this._categoryService.getAllType().subscribe(data => this.categories = data);
+
   }
 
   private initForm() {
     this.fg = this._builder.group({
       name : [''],
-      categoriesDto : [''],
+      categories : [''],
       minimumPrice : [''],
       maximumPrice : [''],
       quantity : [false, Validators.required],
-      supplierDto : ['']
+      supplier : ['']
     })
   }
 
   onSubmit() {
+
+    console.log(this.fg.value)
 
     let searchObject = this.transformFgIntoAdvSrch();
 
@@ -56,11 +65,13 @@ export class AdvSearchComponent implements OnInit {
     let searchObject = new AdvancedSearch();
 
     searchObject.name = this.fg.get('name').value;
-    searchObject.categoriesDto = searchObject.categoriesDto != null ? this.fg.get('categoriesDto').value : null;
+    searchObject.categories = this.fg.get('categories').value.size != 0 ? this.fg.get('categories').value : null;
     searchObject.minimumPrice = this.fg.get('minimumPrice').value;
     searchObject.maximumPrice = this.fg.get('maximumPrice').value;
     searchObject.quantity = this.fg.get('quantity').value;
-    searchObject.supplierDto = searchObject.supplierDto != null ? this.fg.get('supplierDto').value : null;
+    searchObject.supplier = this.fg.get('supplier').value != "" ? this.fg.get('supplier').value : null;
+
+    console.log(searchObject)
 
     this._productService.searchObject = searchObject;
 

@@ -6,6 +6,7 @@ import be.technifutur.Labo3.model.entities.Category;
 import be.technifutur.Labo3.model.repositories.CategoryRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
@@ -13,8 +14,8 @@ import java.util.stream.Collectors;
 @Service
 public class CategoryService implements Crudable<Category, CategoryDto, Integer> {
 
-    private CategoryRepository categoryRepository;
-    private Mapper mapper;
+    private final CategoryRepository categoryRepository;
+    private final Mapper mapper;
 
     public CategoryService(CategoryRepository categoryRepository, Mapper mapper) {
         this.categoryRepository = categoryRepository;
@@ -28,6 +29,12 @@ public class CategoryService implements Crudable<Category, CategoryDto, Integer>
                 .stream()
                 .map(category -> mapper.toCategoryDto(category))
                 .collect(Collectors.toList());
+
+    }
+
+    public List<String> getAllType() {
+
+        return new ArrayList<>(this.categoryRepository.findAllType());
 
     }
 

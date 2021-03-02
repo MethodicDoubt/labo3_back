@@ -4,9 +4,9 @@ import { Supplier } from "./supplier.model";
 
 export class AdvancedSearch {
     name: String;
-    categoriesDto: Category[];
+    categories: String[];
     minimumPrice: number;
     maximumPrice: number;
     quantity: boolean;
-    supplierDto: Supplier;
+    supplier: String;
 }

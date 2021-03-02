@@ -3,12 +3,12 @@ package be.technifutur.Labo3.model.services;
 import be.technifutur.Labo3.mapper.Mapper;
 import be.technifutur.Labo3.model.dtos.AdvancedSearchDto;
 import be.technifutur.Labo3.model.dtos.ProductDto;
-import be.technifutur.Labo3.model.entities.Category;
 import be.technifutur.Labo3.model.entities.Product;
-import be.technifutur.Labo3.model.entities.Supplier;
 import be.technifutur.Labo3.model.entities.QProduct;
+import be.technifutur.Labo3.model.repositories.CategoryRepository;
 import be.technifutur.Labo3.model.repositories.OrderRepository;
 import be.technifutur.Labo3.model.repositories.ProductRepository;
+import be.technifutur.Labo3.model.repositories.SupplierRepository;
 import com.querydsl.core.BooleanBuilder;
 import org.springframework.stereotype.Service;
 
@@ -22,13 +22,17 @@ import java.util.stream.StreamSupport;
 public class ProductService implements Crudable<Product, ProductDto, Integer> {
 
     private final ProductRepository productRepository;
+    private final CategoryRepository categoryRepository;
+    private final SupplierRepository supplierRepository;
     private final OrderRepository orderRepository;
 
     private final Mapper mapper;
 
 
-    public ProductService(ProductRepository productRepository, OrderRepository orderRepository, Mapper mapper) {
+    public ProductService(ProductRepository productRepository, CategoryRepository categoryRepository, SupplierRepository supplierRepository, OrderRepository orderRepository, Mapper mapper) {
         this.productRepository = productRepository;
+        this.categoryRepository = categoryRepository;
+        this.supplierRepository = supplierRepository;
         this.orderRepository = orderRepository;
         this.mapper = mapper;
     }
@@ -122,11 +126,13 @@ public class ProductService implements Crudable<Product, ProductDto, Integer> {
 
         }
 
-        if (advancedSearchDto.getCategoriesDto() != null) {
+        if (advancedSearchDto.getCategoriesType() != null) {
 
-            advancedSearchDto.getCategoriesDto()
-                    .forEach(categoryDto -> {predicate.and(qProduct.categories
-                            .contains(mapper.toCategoryEntity(categoryDto)));});
+            advancedSearchDto.getCategoriesType()
+                    .forEach(categoryType -> {
+
+                        predicate.and(qProduct.categories
+                            .contains(this.categoryRepository.findByType(categoryType)));});
 
         }
 
@@ -142,9 +148,9 @@ public class ProductService implements Crudable<Product, ProductDto, Integer> {
 
         }
 
-        if (advancedSearchDto.getSupplierDto() != null) {
+        if (advancedSearchDto.getSupplierName() != null) {
 
-            predicate.and(qProduct.supplier.eq(mapper.toSupplierEntity(advancedSearchDto.getSupplierDto())));
+            predicate.and(qProduct.supplier.eq(this.supplierRepository.findByCompanyName(advancedSearchDto.getSupplierName())));
 
         }
 

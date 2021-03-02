@@ -20,14 +20,21 @@
             <fieldset>
 
                 <legend>Category</legend>
-                <input nbInput fullWidth fieldSize="large" placeholder="Category" type="text" formControlName="categoriesDto">
+
+                <nb-select multiple formControlName="categories">
+
+                    <nb-option *ngFor="let c of categories" value="{{c}}">
+                        {{c}}
+                    </nb-option>
+
+                </nb-select>
 
             </fieldset>
 
             <fieldset>
 
                 <legend>Product brand</legend>
-                <input nbInput fullWidth fieldSize="large" placeholder="Brand" type="text" formControlName="supplierDto">
+                <input nbInput fullWidth fieldSize="large" placeholder="Brand" type="text" formControlName="supplier">
 
             </fieldset>
             
@@ -53,7 +60,7 @@
             <fieldset>
 
                 <legend>In stock</legend>
-                <input type="checkbox" formControlName="quantity">
+                <nb-checkbox formControlName="quantity"> </nb-checkbox>
 
             </fieldset>
             

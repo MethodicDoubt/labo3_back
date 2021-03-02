@@ -29,6 +29,8 @@ export class AllProductComponent implements OnInit {
 
         }else{
 
+          console.log(this._productService.searchObject)
+
           this._productService.search(this._productService.searchObject).subscribe(data => this.products = data);
 
         }

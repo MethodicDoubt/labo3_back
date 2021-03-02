@@ -13,10 +13,10 @@ import java.util.List;
 public class AdvancedSearchDto {
 
     String name;
-    List<CategoryDto> categoriesDto;
+    List<String> categoriesType;
     Double minimumPrice;
     Double maximumPrice;
     Boolean quantity;
-    SupplierDto supplierDto;
+    String supplierName;
 
 }
