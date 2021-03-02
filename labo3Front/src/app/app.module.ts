@@ -18,6 +18,11 @@ import { LoginComponent } from './components/user/login/login.component';
 import { AuthManagerComponent } from './components/user/auth-manager/auth-manager.component';
 import { AdminPanelComponent } from './components/admin-panel/admin-panel/admin-panel.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found/page-not-found.component';
+import { AdminProductsComponent } from './components/admin-panel/admin-panel/admin-products/admin-products.component';
+import { AdminCategoriesComponent } from './components/admin-panel/admin-panel/admin-categories/admin-categories.component';
+import { AdminOrdersComponent } from './components/admin-panel/admin-panel/admin-orders/admin-orders.component';
+import { AdminUsersComponent } from './components/admin-panel/admin-panel/admin-products/admin-users/admin-users.component';
+import { AdminSuppliersComponent } from './components/admin-panel/admin-panel/admin-suppliers/admin-suppliers.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +37,12 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     LoginComponent,
     AuthManagerComponent,
     AdminPanelComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    AdminProductsComponent,
+    AdminCategoriesComponent,
+    AdminOrdersComponent,
+    AdminUsersComponent,
+    AdminSuppliersComponent
   ],
   imports: [
     BrowserModule,
