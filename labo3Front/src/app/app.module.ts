@@ -21,7 +21,6 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { AdminProductsComponent } from './components/admin-panel/admin-panel/admin-products/admin-products.component';
 import { AdminCategoriesComponent } from './components/admin-panel/admin-panel/admin-categories/admin-categories.component';
 import { AdminOrdersComponent } from './components/admin-panel/admin-panel/admin-orders/admin-orders.component';
-import { AdminUsersComponent } from './components/admin-panel/admin-panel/admin-products/admin-users/admin-users.component';
 import { AdminSuppliersComponent } from './components/admin-panel/admin-panel/admin-suppliers/admin-suppliers.component';
 
 @NgModule({
@@ -41,7 +40,6 @@ import { AdminSuppliersComponent } from './components/admin-panel/admin-panel/ad
     AdminProductsComponent,
     AdminCategoriesComponent,
     AdminOrdersComponent,
-    AdminUsersComponent,
     AdminSuppliersComponent
   ],
   imports: [
