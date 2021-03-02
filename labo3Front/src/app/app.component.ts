@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { NbDialogService } from '@nebular/theme';
+import { Subscription } from 'rxjs';
 import { AdvSearchComponent } from './components/advanced-search/adv-search/adv-search.component';
 import { AuthService } from './services/auth.service';
+import { ProductService } from './services/product.service';
 
 @Component({
   selector: 'app-root',
@@ -12,8 +15,13 @@ export class AppComponent {
   title = 'labo3Front';
 
   constructor(private _dialogBox: NbDialogService,
-    private _authService: AuthService) {
+    private _authService: AuthService,
+    private _productService : ProductService,
+ 	private _router : Router) {
     this._authService.login("Wizounet", "password");//TODO --> A REMOVE POUR LA PRODUCTION
+	productNumber : number;
+	basketStatus : Subscription;
+    this.basketStatus = this._productService.basketStatus.subscribe(data => this.productNumber = data);    
   }
 
   advancedSearch() {
@@ -21,6 +29,10 @@ export class AppComponent {
       closeOnBackdropClick: true
     })
     ref.onClose.subscribe()
-  }
 
+
+  } redirect() {
+    this._router.navigate(['basket']).then();
+  }
+  
 }

@@ -69,4 +69,14 @@ export class AllProductComponent implements OnInit {
 
   }
 
+  addToBasket(p : Product) {
+
+    this._productService.basket.push(p);
+    this._productService.emitBasketLengthStatus();
+
+    this._productService.calculTotalPrice(p.purchasePrice);
+    this._productService.emitTotalPriceStatus();
+
+  }
+
 }

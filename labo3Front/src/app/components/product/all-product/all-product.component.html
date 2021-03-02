@@ -2,14 +2,29 @@
     <div class="row">
 
     
-        <nb-card *ngFor="let p of products" size="small" class="card col-4" (click)="redirect(p.productId)">
+        <nb-card *ngFor="let p of products" size="small" class="card col-4">
     
-            <nb-card-header>
+            <nb-card-header style="display: flex; justify-content: space-between;">
         
-                <h3> {{p.name}} </h3>
+                <div>
+
+                    <h3> {{p.name}} </h3>
+
+                </div>
+
+                <div>
+
+                    <button nbButton type="button" status="primary" (click)="addToBasket(p)">
+
+                        <nb-icon icon="plus-outline"></nb-icon>
+                        <nb-icon icon="shopping-bag-outline"></nb-icon>
+    
+                    </button>
+
+                </div>
         
             </nb-card-header>
-            <nb-card-body class="row">
+            <nb-card-body class="row" (click)="redirect(p.productId)">
         
                 <div class="col-4">
 

@@ -1,0 +1,67 @@
+<div class="row">
+
+    <nb-card *ngFor="let p of products; let i = index" size="small" class="card col-4">
+
+        <nb-card-header style="display: flex; justify-content: space-between;">
+    
+            <div>
+
+                <h3> {{p.name}} </h3>
+
+            </div>
+
+            <div>
+
+                <button nbButton type="button" status="danger" (click)="removeFromBasket(i, p)">
+
+                    <nb-icon icon="minus-outline"></nb-icon>
+
+                </button>
+
+            </div>
+    
+        </nb-card-header>
+        <nb-card-body class="row" (click)="redirect(p.productId)">
+    
+            <div class="col-4">
+
+                <nb-list>
+    
+                    <nb-list-item>{{p.description}}</nb-list-item>
+                    <nb-list-item *ngFor="let c of p.categoriesDto">{{c.type}}</nb-list-item>
+                    <nb-list-item *ngIf="p.experiationDate != null">{{p.experiationDate}}</nb-list-item>
+                    <nb-list-item>{{p.purchasePrice | currency:'EUR'}}</nb-list-item>
+                    
+        
+                </nb-list>
+
+            </div>
+
+            <div class="col-8">
+
+                <img src={{p.productImage}} id="img-selectAll">
+
+            </div>
+    
+        </nb-card-body>
+    
+    </nb-card>
+    
+</div>
+
+<div style="display: flex; background-color: #13132b; padding: 1%; justify-content: flex-end;">
+
+    <div>
+
+        <h3 style="border: 2px white solid; border-radius: 10px; margin: 0;">Total price : {{productService.totalPrice | number:"0.2-2"}}</h3>
+
+    </div>
+
+    <div style="margin-left: 2%;">
+
+        <button nbButton size="large" status="info"> Pay </button>
+
+    </div>
+
+</div>
+

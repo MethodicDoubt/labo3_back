@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { BasketComponent } from './components/basket/basket/basket.component';
 import { AdminCategoriesComponent } from './components/admin-panel/admin-panel/admin-categories/admin-categories.component';
 import { AdminOrdersComponent } from './components/admin-panel/admin-panel/admin-orders/admin-orders.component';
 import { AdminPanelComponent } from './components/admin-panel/admin-panel/admin-panel.component';
@@ -15,6 +16,8 @@ import { ProductResolverService } from './utils/product-resolver.service';
 const routes: Routes = [
   { path: 'home', component: AllProductComponent },
   { path: 'product/:id', resolve: { resultat: ProductResolverService }, component: ProductByIdComponent },
+  { path: 'basket', component: BasketComponent },
+  { path: '**', redirectTo: 'home' }
   {
     path: 'admin', canActivate: [AuthGuardService], component: AdminPanelComponent, children: [
       {

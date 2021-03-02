@@ -22,6 +22,7 @@ import { AdminProductsComponent } from './components/admin-panel/admin-panel/adm
 import { AdminCategoriesComponent } from './components/admin-panel/admin-panel/admin-categories/admin-categories.component';
 import { AdminOrdersComponent } from './components/admin-panel/admin-panel/admin-orders/admin-orders.component';
 import { AdminSuppliersComponent } from './components/admin-panel/admin-panel/admin-suppliers/admin-suppliers.component';
+import { BasketComponent } from './components/basket/basket/basket.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { AdminSuppliersComponent } from './components/admin-panel/admin-panel/ad
     AdminCategoriesComponent,
     AdminOrdersComponent,
     AdminSuppliersComponent
+    BasketComponent
   ],
   imports: [
     BrowserModule,

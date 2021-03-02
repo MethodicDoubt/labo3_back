@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { AdvancedSearch } from '../models/advanced-search.model';
 import { Product } from '../models/product.model';
 
@@ -9,11 +9,27 @@ import { Product } from '../models/product.model';
 })
 export class ProductService {
 
+  //-------------------------------------------------------PROPERTIES
+
   private BASE_URL = "http://localhost:8080/products";
 
   public searchObject: AdvancedSearch
 
+  public basket : Product[] = [];
+
+  public totalPrice : number = 0;
+
+  public basketStatus : Subject<number> = new Subject<number>();
+
+  public totalPriceStatus : Subject<number> = new Subject<number>();
+
+
+//-------------------------------------------------------CONSTRUCTOR
+
+
   constructor(private _httpClient: HttpClient) { }
+
+  //-----------------------------------------------------SERVICES
 
   getAll(): Observable<Product[]> {
     return this._httpClient.get<Product[]>(this.BASE_URL);
@@ -30,6 +46,26 @@ export class ProductService {
 
   search(advSearch: AdvancedSearch): Observable<Product[]> {
     return this._httpClient.post<Product[]>(this.BASE_URL + "/advsearch", advSearch);
+  }
+
+  //--------------------------------------------------------METHODES
+
+  emitBasketLengthStatus() {
+
+    this.basketStatus.next(this.basket.length);
+
+  }
+
+  emitTotalPriceStatus() {
+
+    this.totalPriceStatus.next(this.totalPrice);
+
+  }
+
+  calculTotalPrice(n : number) {
+
+    this.totalPrice += n;
+
   }
 
 }
