@@ -31,8 +31,9 @@ public class UserController implements RestControllable<User, UserDto, Integer> 
     }
 
     @Override
-    public ResponseEntity<Boolean> insert(User user) {
-        return null;
+    @PostMapping
+    public ResponseEntity<Boolean> insert(@RequestBody User user) {
+        return ResponseEntity.ok(this.userService.insert(user));
     }
 
     @Override

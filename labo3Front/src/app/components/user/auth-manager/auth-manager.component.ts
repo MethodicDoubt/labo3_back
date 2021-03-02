@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NbDialogService } from '@nebular/theme';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { AuthService } from 'src/app/services/auth.service';
+import { CreateUserComponent } from '../create-user/create-user.component';
 import { LoginComponent } from '../login/login.component';
 
 @Component({
@@ -11,15 +12,20 @@ import { LoginComponent } from '../login/login.component';
 })
 export class AuthManagerComponent implements OnInit {
 
-  isConnected: Boolean;
+  isConnected: boolean;
   statusConnexion: Subscription;
+  isAdmin: boolean;
+  statusAdmin: Subscription;
 
   constructor(private _authService: AuthService,
     private _dialogBox: NbDialogService) { }
 
   ngOnInit(): void {
     this.statusConnexion = this._authService.statusConnexion.subscribe(
-      dataConnexion => { this.isConnected = dataConnexion }
+      dataConnexion => this.isConnected = dataConnexion
+    )
+    this.statusAdmin = this._authService.statusAdmin.subscribe(
+      dataAdmin => this.isAdmin = dataAdmin
     )
     localStorage.getItem('role') == null ? this.isConnected = false : this.isConnected = true;
   }
@@ -33,6 +39,13 @@ export class AuthManagerComponent implements OnInit {
 
   popupLogout() {
     this._authService.logout();
+  }
+
+  popupCreate() {
+    let ref = this._dialogBox.open(
+      CreateUserComponent
+    );
+    ref.onClose.subscribe();
   }
 
 }

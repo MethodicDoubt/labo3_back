@@ -1,8 +1,10 @@
 <ng-container *ngIf="!isConnected">
-  <span class=" mr-2">futur create account</span>
+  <button nbButton type="button" status="primary" (click)="popupCreate()" class=" mr-2">Create Account</button>
   <button nbButton type="button" status="primary" (click)="popupLogin()">Login</button>
 </ng-container>
 <ng-container *ngIf="isConnected">
-  <span class=" mr-2">futur panneau admin</span>
+  <ng-container *ngIf="isAdmin">
+    <span class=" mr-2">futur panneau admin</span>
+  </ng-container>
   <button nbButton type="button" status="danger" (click)="popupLogout()">Logout</button>
 </ng-container>
