@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { NbDialogService } from '@nebular/theme';
+import { Subscription } from 'rxjs';
 import { AdvSearchComponent } from './components/advanced-search/adv-search/adv-search.component';
+import { ProductService } from './services/product.service';
 
 @Component({
   selector: 'app-root',
@@ -10,9 +13,13 @@ import { AdvSearchComponent } from './components/advanced-search/adv-search/adv-
 export class AppComponent {
   title = 'labo3Front';
 
-  constructor(private _dialogBox : NbDialogService) {
+  productNumber : number;
 
+  basketStatus : Subscription;
 
+  constructor(private _dialogBox : NbDialogService, private _productService : ProductService, private _router : Router) {
+
+    this.basketStatus = this._productService.basketStatus.subscribe(data => this.productNumber = data);
     
   }
 
@@ -25,6 +32,10 @@ export class AppComponent {
     ref.onClose.subscribe((data) => {
 
     })
-  } 
+  }
+
+  redirect() {
+    this._router.navigate(['basket']).then();
+  }
   
 }

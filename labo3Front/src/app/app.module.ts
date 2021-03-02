@@ -16,6 +16,7 @@ import { AdvSearchComponent } from './components/advanced-search/adv-search/adv-
 import { CreateUserComponent } from './components/user/create-user/create-user.component';
 import { LoginComponent } from './components/user/login/login.component';
 import { AuthManagerComponent } from './components/user/auth-manager/auth-manager.component';
+import { BasketComponent } from './components/basket/basket/basket.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { AuthManagerComponent } from './components/user/auth-manager/auth-manage
     AdvSearchComponent,
     CreateUserComponent,
     LoginComponent,
-    AuthManagerComponent
+    AuthManagerComponent,
+    BasketComponent
   ],
   imports: [
     BrowserModule,
