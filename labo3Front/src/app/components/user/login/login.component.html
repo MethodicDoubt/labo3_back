@@ -1,15 +1,15 @@
 <nb-card>
   <nb-card-body>
     <form [formGroup]="fgLogin" (submit)="login()">
-      <p>
-        <label for="surname">Surname : </label>
+      <p class=" form-build">
+        <label for="surname">Surname </label>
         <input type="text" nbInput formControlName="surname" id="surname">
       </p>
-      <p>
-        <label for="password">Password : </label>
+      <p class=" form-build">
+        <label for="password">Password </label>
         <input type="password" nbInput formControlName="password" id="password">
       </p>
-      <p>
+      <p class="fr">
         <button nbButton type="submit" status="primary">Login</button>
       </p>
     </form>
