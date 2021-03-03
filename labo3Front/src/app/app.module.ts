@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbThemeModule, NbLayoutModule, NbSidebarModule, NbMenuModule, NbButtonModule, NbIconModule, NbInputModule, NbListModule, NbCardModule, NbDialogModule, NbPopoverModule, NbSelectModule, NbCheckboxModule } from '@nebular/theme';
+import { NbThemeModule, NbLayoutModule, NbSidebarModule, NbMenuModule, NbButtonModule, NbIconModule, NbInputModule, NbListModule, NbCardModule, NbDialogModule, NbPopoverModule, NbSelectModule, NbCheckboxModule, NbDatepickerModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -23,6 +23,7 @@ import { AdminCategoriesComponent } from './components/admin-panel/admin-panel/a
 import { AdminOrdersComponent } from './components/admin-panel/admin-panel/admin-orders/admin-orders.component';
 import { AdminSuppliersComponent } from './components/admin-panel/admin-panel/admin-suppliers/admin-suppliers.component';
 import { BasketComponent } from './components/basket/basket/basket.component';
+import { AddProductComponent } from './components/admin-panel/admin-panel/admin-products/add-product/add-product.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { BasketComponent } from './components/basket/basket/basket.component';
     AdminCategoriesComponent,
     AdminOrdersComponent,
     AdminSuppliersComponent,
-    BasketComponent
+    BasketComponent,
+    AddProductComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +66,8 @@ import { BasketComponent } from './components/basket/basket/basket.component';
     FormsModule,
     NbPopoverModule,
     NbSelectModule,
-    NbCheckboxModule
+    NbCheckboxModule,
+    NbDatepickerModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

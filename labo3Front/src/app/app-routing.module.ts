@@ -12,6 +12,7 @@ import { AllProductComponent } from './components/product/all-product/all-produc
 import { ProductByIdComponent } from './components/product/product-by-id/product-by-id.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { ProductResolverService } from './utils/product-resolver.service';
+import { AddProductComponent } from './components/admin-panel/admin-panel/admin-products/add-product/add-product.component';
 
 const routes: Routes = [
   { path: 'home', component: AllProductComponent },

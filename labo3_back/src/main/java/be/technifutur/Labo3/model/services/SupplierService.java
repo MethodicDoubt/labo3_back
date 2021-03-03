@@ -2,7 +2,6 @@ package be.technifutur.Labo3.model.services;
 
 import be.technifutur.Labo3.mapper.Mapper;
 import be.technifutur.Labo3.model.dtos.SupplierDto;
-import be.technifutur.Labo3.model.entities.Category;
 import be.technifutur.Labo3.model.entities.Supplier;
 import be.technifutur.Labo3.model.repositories.SupplierRepository;
 import org.springframework.stereotype.Service;
@@ -31,6 +30,10 @@ public class SupplierService implements Crudable<Supplier, SupplierDto, Integer>
                 .map(supplier -> mapper.toSupplierDto(supplier))
                 .collect(Collectors.toList());
 
+    }
+
+    public List<String> getAllCompanyName() {
+        return this.supplierRepository.findAllByCompanyName();
     }
 
     @Override
