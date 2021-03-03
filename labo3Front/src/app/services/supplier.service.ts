@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Supplier } from '../models/supplier.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,12 @@ export class SupplierService {
 
   constructor(private _httpClient: HttpClient) { }
 
+  getAll(): Observable<Supplier[]> {
+    return this._httpClient.get<Supplier[]>(this.BASE_URL);
+  }
 
-  getAllCompanyName():Observable<string[]>{
+
+  getAllCompanyName(): Observable<string[]> {
     return this._httpClient.get<string[]>(this.BASE_URL + "/companyName");
   }
 }

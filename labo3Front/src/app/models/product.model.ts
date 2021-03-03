@@ -8,12 +8,15 @@ export class Product {
     name: String;
     description: String;
     categoriesDto: Category[];
+    categories: Category[];
     entryDate: String;
     updateDate: String;
     experiationDate: String;
     purchasePrice: number;
     quantity: number;
-    productImage:String;
+    productImage: String;
     supplierDto: Supplier;
+    supplier: Supplier;
     ordersDto: Order[];
+    orders: Order[];
 }

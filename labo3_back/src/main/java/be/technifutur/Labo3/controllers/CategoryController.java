@@ -32,7 +32,7 @@ public class CategoryController implements RestControllable<Category, CategoryDt
 
     @Override
     public ResponseEntity<List<CategoryDto>> getAll() {
-        return null;
+        return ResponseEntity.ok(this.categoryService.getAll());
     }
 
     @Override

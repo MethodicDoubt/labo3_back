@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NbDialogRef } from '@nebular/theme';
 import { Category } from 'src/app/models/category.model';
 import { Product } from 'src/app/models/product.model';
+import { Supplier } from 'src/app/models/supplier.model';
 import { CategoryService } from 'src/app/services/category.service';
 import { ProductService } from 'src/app/services/product.service';
 import { SupplierService } from 'src/app/services/supplier.service';
@@ -13,11 +14,9 @@ import { SupplierService } from 'src/app/services/supplier.service';
   styleUrls: ['./add-product.component.scss']
 })
 export class AddProductComponent implements OnInit {
-
-  newProduct: Product = new Product();
   fgAddProduct: FormGroup;
-  categoriesType: String[];
-  companyName: String[];
+  categories: Category[];
+  suppliers: Supplier[];
 
   constructor(private _formBuilder: FormBuilder,
     private _productService: ProductService,
@@ -48,8 +47,21 @@ export class AddProductComponent implements OnInit {
     })
   }
 
-  onSubmit(){
-    
+  onSubmit() {
+    let newProduct = this.transformingProduct();
+
+    console.log(newProduct);
   }
 
+  transformingProduct() {
+    let newProduct = new Product();
+    console.log(this.fgAddProduct.value);
+    newProduct.name = this.fgAddProduct.value['name'];
+    newProduct.description = this.fgAddProduct.value['description'];
+    newProduct.productImage = this.fgAddProduct.value['productImage'];
+    newProduct.quantity = this.fgAddProduct.value['quantity'];
+
+
+    return newProduct;
+  }
 }

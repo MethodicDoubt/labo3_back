@@ -4,10 +4,7 @@ import be.technifutur.Labo3.model.dtos.SupplierDto;
 import be.technifutur.Labo3.model.entities.Supplier;
 import be.technifutur.Labo3.model.services.SupplierService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,7 +21,7 @@ public class SupplierController implements RestControllable<Supplier, SupplierDt
 
     @Override
     public ResponseEntity<List<SupplierDto>> getAll() {
-        return null;
+        return ResponseEntity.ok(this.supplierService.getAll());
     }
 
     @GetMapping("/companyName")
@@ -38,9 +35,11 @@ public class SupplierController implements RestControllable<Supplier, SupplierDt
     }
 
     @Override
-    public ResponseEntity<Boolean> insert(Supplier supplier) {
+    @PostMapping
+    public ResponseEntity<Boolean> insert(@RequestBody Supplier supplier) {
         return null;
     }
+
 
     @Override
     public ResponseEntity<Boolean> update(Supplier supplier, Integer integer) {
