@@ -53,7 +53,7 @@ registerLocaleData(localeFr, 'fr');
     BasketComponent,
     AddProductComponent,
     MyAccountComponent,
-    PipeAddressPipe
+    PipeAddressPipe,
     PaymentComponent
   ],
   imports: [
