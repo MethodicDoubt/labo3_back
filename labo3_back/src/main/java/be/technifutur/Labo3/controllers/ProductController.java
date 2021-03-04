@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin
@@ -62,6 +63,13 @@ public class ProductController implements RestControllable<Product, ProductDto, 
     public ResponseEntity<List<ProductDto>> advSearch(@RequestBody AdvancedSearchDto advancedSearchDto) {
 
         return ResponseEntity.ok(this.productService.search(advancedSearchDto));
+
+    }
+
+    @PatchMapping(path = "/{id}")
+    public ResponseEntity<Boolean> patch(@RequestBody Map<String, Object> productToPatch, @PathVariable Integer id) throws IllegalAccessException {
+
+        return ResponseEntity.ok(this.productService.partialUpdate(productToPatch, id));
 
     }
 

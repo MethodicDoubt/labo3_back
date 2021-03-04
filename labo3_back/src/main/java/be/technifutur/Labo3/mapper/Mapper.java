@@ -88,12 +88,12 @@ public class Mapper {
                 .creationDate(orderDto.getCreationDate())
                 .isPaid(orderDto.getIsPaid())
                 .payementMethod(orderDto.getPayementMethod())
-                .user(toUserEntity(orderDto.getUserDto()))
-                .products(
+                .user(orderDto.getUserDto() != null ? toUserEntity(orderDto.getUserDto()) : null)
+                .products(orderDto.getProductsDto() != null ?
                         orderDto.getProductsDto()
                                 .stream()
                                 .map(this::toProductEntity)
-                                .collect(Collectors.toList())
+                                .collect(Collectors.toList()) : null
                 )
                 .build();
     }
@@ -160,7 +160,12 @@ public class Mapper {
                 .supplier(toSupplierEntity(productDto.getSupplierDto()))
                 .productImage(productDto.getProductImage())
                 .vat(productDto.getVat())
-                .orders(productDto.getOrdersDto().stream().map(this::toOrderEntity).collect(Collectors.toList()))
+                .orders(productDto
+                        .getOrdersDto()
+                        .stream()
+                        .map(this::toOrderEntity)
+                        .collect(Collectors.toList())
+                )
                 .build();
 
     }

@@ -7,6 +7,7 @@ import be.technifutur.Labo3.model.repositories.OrderRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
@@ -70,4 +71,20 @@ public class OrderService implements Crudable<Order, OrderDto, Integer> {
         this.orderRepository.deleteById(integer);
         return this.orderRepository.existsById(integer);
     }
+
+    public String createReference(Order order) {
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        String newRef = stringBuilder.append(Instant.now().getNano())
+                .append(order.getUser().getUserId())
+                .append(order.getUser().getFirstName())
+                .append(order.getUser().getSurname())
+                .append(order.getProducts().stream().map(p -> p.getProductId().toString()).collect(Collectors.joining()))
+                .toString();
+
+        return newRef;
+
+    }
+
 }

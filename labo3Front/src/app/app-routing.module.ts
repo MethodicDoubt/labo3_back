@@ -12,11 +12,13 @@ import { AllProductComponent } from './components/product/all-product/all-produc
 import { ProductByIdComponent } from './components/product/product-by-id/product-by-id.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { ProductResolverService } from './utils/product-resolver.service';
+import { PaymentComponent } from './components/basket/payment/payment.component';
 
 const routes: Routes = [
   { path: 'home', component: AllProductComponent },
   { path: 'product/:id', resolve: { resultat: ProductResolverService }, component: ProductByIdComponent },
   { path: 'basket', component: BasketComponent },
+  { path: 'payment', component: PaymentComponent},
   {
     path: 'admin', canActivate: [AuthGuardService], component: AdminPanelComponent, children: [
       {

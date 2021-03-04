@@ -12,8 +12,11 @@ import be.technifutur.Labo3.model.repositories.SupplierRepository;
 import com.querydsl.core.BooleanBuilder;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Field;
 import java.time.Instant;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -159,6 +162,31 @@ public class ProductService implements Crudable<Product, ProductDto, Integer> {
                 .map(mapper::toProductDto)
                 .collect(Collectors.toList())
                 ;
+
+    }
+
+    public Boolean partialUpdate(Map<String, Object> updates, Integer integer) throws IllegalAccessException {
+
+        Product productToUpdate = this.mapper.toProductEntity(getById(integer));
+
+        Class<?> clazz = Product.class;
+        Field[] fields = clazz.getDeclaredFields();
+
+        for(Map.Entry<String, Object> entry : updates.entrySet()) {
+
+            Field field = Arrays.stream(fields)
+                    .filter(f -> f.getName().equals(entry.getKey()))
+                    .findFirst()
+                    .orElseThrow(()-> new NoSuchElementException("La propriété de la classe n'a pas été trouvé"));
+
+            field.setAccessible(true);
+            field.set(productToUpdate, entry.getValue());
+
+        }
+
+        this.productRepository.save(productToUpdate);
+
+        return true;
 
     }
 

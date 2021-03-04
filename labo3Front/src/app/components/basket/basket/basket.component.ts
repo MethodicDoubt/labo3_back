@@ -48,4 +48,10 @@ export class BasketComponent implements OnInit {
 
   }
 
+  redirectToPayment() {
+
+    this._router.navigate(['payment']).then();
+
+  }
+
 }

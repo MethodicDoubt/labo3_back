@@ -23,6 +23,11 @@ import { AdminCategoriesComponent } from './components/admin-panel/admin-panel/a
 import { AdminOrdersComponent } from './components/admin-panel/admin-panel/admin-orders/admin-orders.component';
 import { AdminSuppliersComponent } from './components/admin-panel/admin-panel/admin-suppliers/admin-suppliers.component';
 import { BasketComponent } from './components/basket/basket/basket.component';
+import { PaymentComponent } from './components/basket/payment/payment.component';
+import { LOCALE_ID } from '@angular/core';
+import localeFr from '@angular/common/locales/fr';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(localeFr, 'fr');
 
 @NgModule({
   declarations: [
@@ -42,7 +47,8 @@ import { BasketComponent } from './components/basket/basket/basket.component';
     AdminCategoriesComponent,
     AdminOrdersComponent,
     AdminSuppliersComponent,
-    BasketComponent
+    BasketComponent,
+    PaymentComponent
   ],
   imports: [
     BrowserModule,
@@ -66,7 +72,10 @@ import { BasketComponent } from './components/basket/basket/basket.component';
     NbSelectModule,
     NbCheckboxModule
   ],
-  providers: [],
+  providers: [{
+    provide: LOCALE_ID,
+    useValue: 'fr'
+   }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -8,5 +8,7 @@ export class Order {
     isPaid: boolean;
     payementMethod: String;
     userDto: User;
+    user: User;
     productsDto: Product[];
+    products: Product[];
 }

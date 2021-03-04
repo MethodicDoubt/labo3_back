@@ -48,6 +48,14 @@ export class ProductService {
     return this._httpClient.post<Product[]>(this.BASE_URL + "/advsearch", advSearch);
   }
 
+  patch(productToPatch : Object, id : number) : Observable<boolean> {
+
+    console.log(productToPatch)
+
+    return this._httpClient.patch<boolean>(this.BASE_URL + "/" + id, productToPatch);
+
+  }
+
   //--------------------------------------------------------METHODES
 
   emitBasketLengthStatus() {

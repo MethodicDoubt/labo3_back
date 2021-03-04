@@ -30,7 +30,7 @@
                     <nb-list-item>{{p.description}}</nb-list-item>
                     <nb-list-item *ngFor="let c of p.categoriesDto">{{c.type}}</nb-list-item>
                     <nb-list-item *ngIf="p.experiationDate != null">{{p.experiationDate}}</nb-list-item>
-                    <nb-list-item>{{p.purchasePrice | currency:'EUR'}}</nb-list-item>
+                    <nb-list-item>{{p.purchasePrice | currency:'EUR': 'symbol' :'0.2-2' : 'fr'}}</nb-list-item>
                     
         
                 </nb-list>
@@ -53,13 +53,13 @@
 
     <div>
 
-        <h3 style="border: 2px white solid; border-radius: 10px; margin: 0;">Total price : {{productService.totalPrice | number:"0.2-2"}}</h3>
+        <h3 style="border: 2px white solid; border-radius: 10px; margin: 0;">Total price : {{productService.totalPrice | currency:'EUR': 'symbol' :'0.2-2' : 'fr'}}</h3>
 
     </div>
 
     <div style="margin-left: 2%;">
 
-        <button nbButton size="large" status="info"> Pay </button>
+        <button nbButton type="button" size="large" status="info" (click)="redirectToPayment()"> Proceed </button>
 
     </div>
 
