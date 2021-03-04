@@ -30,7 +30,14 @@ export class AllProductComponent implements OnInit {
           this.sortProducts(data.get('searchByString'))
 
         } else {
-          this._productService.search(this._productService.searchObject).subscribe(data => this.products = data);
+          this._productService.search(this._productService.searchObject).subscribe(data => {
+            console.log(data)
+            if (data.length == 0) {
+              alert("Your advance search get nothing !");
+              this.initTab();
+            } else
+              this.products = data
+          });
         }
 
       }
@@ -69,7 +76,7 @@ export class AllProductComponent implements OnInit {
 
   }
 
-  addToBasket(p : Product) {
+  addToBasket(p: Product) {
 
     this._productService.basket.push(p);
     this._productService.emitBasketLengthStatus();

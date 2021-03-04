@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Address } from 'cluster';
+import { NbViewportRulerAdapter } from '@nebular/theme';
 import { User } from '../models/user.model';
 
 @Pipe({
