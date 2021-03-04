@@ -10,9 +10,9 @@ import { User } from '../models/user.model';
 export class AuthService {
   private BASE_URL: String = "http://localhost:8080/users";
   currentUser: User;
-  isConnected: boolean = false;
+  isConnected: boolean;
   statusConnexion: Subject<boolean> = new Subject<boolean>();
-  isAdmin: boolean = false;
+  isAdmin: boolean;
   statusAdmin: Subject<boolean> = new Subject<boolean>();
 
   constructor(private _httpClient: HttpClient,
@@ -36,7 +36,8 @@ export class AuthService {
           this._httpClient.get<User>(this.BASE_URL + "/" + surname).subscribe(
             data => {
               this.currentUser = data;
-              localStorage.setItem('role', this.currentUser.accessLevel)
+              localStorage.setItem('role', this.currentUser.accessLevel);
+              localStorage.setItem('isConnected', "true");
               this.isConnected = true;
               this.currentUser.accessLevel == "ADMINISTRATOR" ? this.isAdmin = true : '';
               this.emitStatusConnexion();
@@ -52,6 +53,7 @@ export class AuthService {
   }
 
   logout() {
+    console.log("logout")
     this.currentUser = null;
     this.isConnected = false;
     this.isAdmin = false;

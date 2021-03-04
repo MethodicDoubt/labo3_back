@@ -19,7 +19,7 @@
 
       <div>
         <app-auth-manager></app-auth-manager>
-        <button nbButton status="primary" class="ml-2" (click)="redirect()" *ngIf="isConnected">
+        <button nbButton status="primary" class="ml-2" (click)="redirect()" *ngIf="this.isConnected">
           <nb-icon icon="shopping-bag-outline"></nb-icon>
           {{productNumber}}
         </button>

@@ -1,6 +1,16 @@
 <nb-card class=" col-7 divv">
   <nb-card-header>
     <h3>{{product.name}}</h3>
+    <div *ngIf="this._authService.isConnected">
+
+      <button nbButton type="button" status="primary" (click)="addToBasket(product)">
+
+        <nb-icon icon="plus-outline"></nb-icon>
+        <nb-icon icon="shopping-bag-outline"></nb-icon>
+
+      </button>
+
+    </div>
   </nb-card-header>
   <nb-card-body class="flex">
     <div class="row-left">

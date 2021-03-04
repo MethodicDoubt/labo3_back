@@ -11,7 +11,7 @@
 
       </div>
 
-      <div *ngIf="isConnected">
+      <div *ngIf="this._authService.isConnected">
 
         <button nbButton type="button" status="primary" (click)="addToBasket(p)">
 

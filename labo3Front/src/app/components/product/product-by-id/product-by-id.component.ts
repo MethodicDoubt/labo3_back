@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Product } from 'src/app/models/product.model';
+import { AuthService } from 'src/app/services/auth.service';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -11,12 +13,18 @@ import { ProductService } from 'src/app/services/product.service';
 export class ProductByIdComponent implements OnInit {
 
   product: Product;
+  isConnected: boolean;
+  statusConnexion: Subscription;
 
   constructor(private _productService: ProductService,
     private _activatedRoute: ActivatedRoute,
-    private _router : Router) { }
+    private _router: Router,
+    public _authService: AuthService) { }
 
   ngOnInit(): void {
+    this.statusConnexion = this._authService.statusConnexion.subscribe(
+      dataConnexion => this.isConnected = dataConnexion
+    )
     this.produtById();
   }
 
@@ -25,8 +33,18 @@ export class ProductByIdComponent implements OnInit {
     console.log(this.product);
   }
 
-  redirectToHome(){
-      this._router.navigate(["product"]).then();
+  redirectToHome() {
+    this._router.navigate(["product"]).then();
+  }
+
+  addToBasket(p: Product) {
+
+    this._productService.basket.push(p);
+    this._productService.emitBasketLengthStatus();
+
+    this._productService.calculTotalPrice(p.purchasePrice);
+    this._productService.emitTotalPriceStatus();
+
   }
 
 }

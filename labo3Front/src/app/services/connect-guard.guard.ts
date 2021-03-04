@@ -10,7 +10,7 @@ export class ConnectGuardGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (localStorage.getItem('role') == 'ADMINISTRATOR')
+    if (localStorage.getItem('role') != null)
       return true;
     else
       return this._router.navigate(['home']);
