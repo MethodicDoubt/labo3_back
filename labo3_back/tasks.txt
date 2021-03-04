@@ -95,3 +95,4 @@ JONATHAN : Entities :
     - La gestion des logs de changement sur un produit (prix principalement)
     - pagination
     - gestionnaire des exceptions
+    - pas de produit si stock 0<=
