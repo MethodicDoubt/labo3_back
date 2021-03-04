@@ -84,3 +84,14 @@ JONATHAN : Entities :
      - BASKET MANAGER (ADD TO BASKET, REMOVE FROM BASKET, CHOOSE PAYEMENT OPTION, PAY) -->
 
      - ADMINISTRATOR PANEL (ADD/REMOVE/UPDATE --> ALL) -->
+
+    //------------------------------------------------------------------------
+
+    FIN PROJET 04/03/21
+
+    -- A AJOUTER --
+
+    - Le panel admin pour l'ajout, l'édit, la suppression (product, supplier, user, categories, order)
+    - La gestion des logs de changement sur un produit (prix principalement)
+    - pagination
+    - gestionnaire des exceptions
