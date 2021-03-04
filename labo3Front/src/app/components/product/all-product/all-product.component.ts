@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs/internal/Subscription';
 import { Product } from 'src/app/models/product.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { ProductService } from 'src/app/services/product.service';
@@ -12,11 +13,13 @@ import { ProductService } from 'src/app/services/product.service';
 export class AllProductComponent implements OnInit {
 
   products: Product[];
+  isConnected: boolean;
+  statusConnexion: Subscription;
 
   constructor(private _productService: ProductService,
     private _router: Router,
     private _activatedRoute: ActivatedRoute,
-    private _authService: AuthService) {
+    public _authService: AuthService) {
 
     this._activatedRoute.queryParamMap.subscribe(
 
@@ -47,6 +50,9 @@ export class AllProductComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.statusConnexion = this._authService.statusConnexion.subscribe(
+      dataConnexion => this.isConnected = dataConnexion
+    )
   }
 
   redirect(id: number) {
