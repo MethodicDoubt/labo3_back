@@ -12,6 +12,7 @@ import { AllProductComponent } from './components/product/all-product/all-produc
 import { ProductByIdComponent } from './components/product/product-by-id/product-by-id.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { ProductResolverService } from './utils/product-resolver.service';
+import { MyAccountComponent } from './components/user/my-account/my-account.component';
 
 const routes: Routes = [
   { path: '', component: AllProductComponent },
@@ -37,6 +38,7 @@ const routes: Routes = [
       }
     ]
   },
+  { path: 'my-account', component: MyAccountComponent },
   { path: '404', component: PageNotFoundComponent },
   { path: '**', redirectTo: '/404' }
 ];

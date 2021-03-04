@@ -1,53 +1,53 @@
+<div class="row">
 
-    <div class="row">
 
-    
-        <nb-card *ngFor="let p of products" size="small" class="card col-4">
-    
-            <nb-card-header style="display: flex; justify-content: space-between;">
-        
-                <div>
+  <nb-card *ngFor="let p of products" size="small" class="card col-4">
 
-                    <h3> {{p.name}} </h3>
+    <nb-card-header style="display: flex; justify-content: space-between;">
 
-                </div>
+      <div>
 
-                <div>
+        <h3> {{p.name}} </h3>
 
-                    <button nbButton type="button" status="primary" (click)="addToBasket(p)">
+      </div>
 
-                        <nb-icon icon="plus-outline"></nb-icon>
-                        <nb-icon icon="shopping-bag-outline"></nb-icon>
-    
-                    </button>
+      <div>
 
-                </div>
-        
-            </nb-card-header>
-            <nb-card-body class="row" (click)="redirect(p.productId)">
-        
-                <div class="col-4">
+        <button nbButton type="button" status="primary" (click)="addToBasket(p)">
 
-                    <nb-list>
-        
-                        <nb-list-item>{{p.description}}</nb-list-item>
-                        <nb-list-item *ngFor="let c of p.categoriesDto">{{c.type}}</nb-list-item>
-                        <nb-list-item *ngIf="p.expirationDate != null">{{p.expirationDate}}</nb-list-item>
-                        <nb-list-item>{{p.purchasePrice | currency:'EUR'}}</nb-list-item>
-                        
-            
-                    </nb-list>
+          <nb-icon icon="plus-outline"></nb-icon>
+          <nb-icon icon="shopping-bag-outline"></nb-icon>
 
-                </div>
+        </button>
 
-                <div class="col-8">
+      </div>
 
-                    <img src={{p.productImage}} id="img-selectAll">
+    </nb-card-header>
+    <nb-card-body class="row" (click)="redirect(p.productId)">
 
-                </div>
-        
-            </nb-card-body>
-        
-        </nb-card>
-        
-    </div>
+      <div class="col-4">
+
+        <nb-list>
+
+          <nb-list-item>{{p.purchasePrice | currency:'EUR'}}</nb-list-item>
+          <nb-list-item>{{p.description}}</nb-list-item>
+          <nb-list-item *ngFor="let c of p.categoriesDto">{{c.type}}</nb-list-item>
+          <nb-list-item *ngIf="p.expirationDate != null">{{p.expirationDate}}</nb-list-item>
+
+
+
+        </nb-list>
+
+      </div>
+
+      <div class="col-8">
+
+        <img src={{p.productImage}} id="img-selectAll">
+
+      </div>
+
+    </nb-card-body>
+
+  </nb-card>
+
+</div>

@@ -24,6 +24,8 @@ import { AdminOrdersComponent } from './components/admin-panel/admin-panel/admin
 import { AdminSuppliersComponent } from './components/admin-panel/admin-panel/admin-suppliers/admin-suppliers.component';
 import { BasketComponent } from './components/basket/basket/basket.component';
 import { AddProductComponent } from './components/admin-panel/admin-panel/admin-products/add-product/add-product.component';
+import { MyAccountComponent } from './components/user/my-account/my-account.component';
+import { PipeAddressPipe } from './utils/pipe-address.pipe';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,9 @@ import { AddProductComponent } from './components/admin-panel/admin-panel/admin-
     AdminOrdersComponent,
     AdminSuppliersComponent,
     BasketComponent,
-    AddProductComponent
+    AddProductComponent,
+    MyAccountComponent,
+    PipeAddressPipe
   ],
   imports: [
     BrowserModule,

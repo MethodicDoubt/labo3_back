@@ -38,7 +38,7 @@ export class AdminProductsComponent implements OnInit {
   }
 
   clickEdit() {
-    console.log("Edit")
+    alert("We are preparing this feature ! Stay tuned !");
   }
 
   clickRemove(id: number) {
