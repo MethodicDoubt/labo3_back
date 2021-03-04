@@ -33,9 +33,7 @@ public class CategoryService implements Crudable<Category, CategoryDto, Integer>
     }
 
     public List<String> getAllType() {
-
         return new ArrayList<>(this.categoryRepository.findAllType());
-
     }
 
     @Override

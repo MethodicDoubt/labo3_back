@@ -1,0 +1,15 @@
+<nb-card class="col-4 mx-auto">
+  <nb-card-header style="display: flex; justify-content: space-between; align-items: baseline;">
+    <h3>Welcome to your profil</h3>
+    <div>
+      <button nbButton status="primary" (click)="editProfil()"><nb-icon icon="edit-2-outline"></nb-icon></button>
+    </div>
+  </nb-card-header>
+  <nb-card-body>
+    <p>Lastname : {{this.authService.currentUser.lastName}}</p>
+    <p>Firstname : {{this.authService.currentUser.firstName}}</p>
+    <p>Surname : {{this.authService.currentUser.surname}}</p>
+    <p>Adress : {{this.authService.currentUser | pipeAddress}}</p>
+    <p>Country : {{this.authService.currentUser.address.country}}</p>
+  </nb-card-body>
+</nb-card>

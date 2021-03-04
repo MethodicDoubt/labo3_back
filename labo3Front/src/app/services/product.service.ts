@@ -15,16 +15,16 @@ export class ProductService {
 
   public searchObject: AdvancedSearch
 
-  public basket : Product[] = [];
+  public basket: Product[] = [];
 
-  public totalPrice : number = 0;
+  public totalPrice: number = 0;
 
-  public basketStatus : Subject<number> = new Subject<number>();
+  public basketStatus: Subject<number> = new Subject<number>();
 
-  public totalPriceStatus : Subject<number> = new Subject<number>();
+  public totalPriceStatus: Subject<number> = new Subject<number>();
 
 
-//-------------------------------------------------------CONSTRUCTOR
+  //-------------------------------------------------------CONSTRUCTOR
 
 
   constructor(private _httpClient: HttpClient) { }
@@ -48,6 +48,14 @@ export class ProductService {
     return this._httpClient.post<Product[]>(this.BASE_URL + "/advsearch", advSearch);
   }
 
+  deleteById(id: number): Observable<boolean> {
+    return this._httpClient.delete<boolean>(this.BASE_URL + '/' + id);
+  }
+
+  insert(product: Product): Observable<boolean> {
+    return this._httpClient.post<boolean>(this.BASE_URL, product); 
+  }
+  
   patch(productToPatch : Object, id : number) : Observable<boolean> {
 
     console.log(productToPatch)
@@ -70,7 +78,7 @@ export class ProductService {
 
   }
 
-  calculTotalPrice(n : number) {
+  calculTotalPrice(n: number) {
 
     this.totalPrice += n;
 

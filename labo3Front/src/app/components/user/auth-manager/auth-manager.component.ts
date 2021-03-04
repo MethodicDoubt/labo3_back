@@ -54,4 +54,8 @@ export class AuthManagerComponent implements OnInit {
     this._router.navigate(['admin']).then();
   }
 
+  goToMyAccount() {
+    this._router.navigate(['my-account']).then();
+  }
+
 }

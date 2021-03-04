@@ -3,6 +3,9 @@
   <button nbButton type="button" status="primary" (click)="popupLogin()">Login</button>
 </ng-container>
 <ng-container *ngIf="isConnected">
+  <button nbButton status="primary" class="mr-2" (click)="goToMyAccount()">
+    <nb-icon icon="person-outline"></nb-icon>
+  </button>
   <ng-container *ngIf="isAdmin">
     <button nbButton type="button" status="primary" (click)="redirectToPanelAdmin()" class="mr-2">Panel Admin</button>
   </ng-container>

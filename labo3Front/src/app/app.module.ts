@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbThemeModule, NbLayoutModule, NbSidebarModule, NbMenuModule, NbButtonModule, NbIconModule, NbInputModule, NbListModule, NbCardModule, NbDialogModule, NbPopoverModule, NbSelectModule, NbCheckboxModule } from '@nebular/theme';
+import { NbThemeModule, NbLayoutModule, NbSidebarModule, NbMenuModule, NbButtonModule, NbIconModule, NbInputModule, NbListModule, NbCardModule, NbDialogModule, NbPopoverModule, NbSelectModule, NbCheckboxModule, NbDatepickerModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -23,6 +23,9 @@ import { AdminCategoriesComponent } from './components/admin-panel/admin-panel/a
 import { AdminOrdersComponent } from './components/admin-panel/admin-panel/admin-orders/admin-orders.component';
 import { AdminSuppliersComponent } from './components/admin-panel/admin-panel/admin-suppliers/admin-suppliers.component';
 import { BasketComponent } from './components/basket/basket/basket.component';
+import { AddProductComponent } from './components/admin-panel/admin-panel/admin-products/add-product/add-product.component';
+import { MyAccountComponent } from './components/user/my-account/my-account.component';
+import { PipeAddressPipe } from './utils/pipe-address.pipe';
 import { PaymentComponent } from './components/basket/payment/payment.component';
 import { LOCALE_ID } from '@angular/core';
 import localeFr from '@angular/common/locales/fr';
@@ -48,6 +51,9 @@ registerLocaleData(localeFr, 'fr');
     AdminOrdersComponent,
     AdminSuppliersComponent,
     BasketComponent,
+    AddProductComponent,
+    MyAccountComponent,
+    PipeAddressPipe
     PaymentComponent
   ],
   imports: [
@@ -70,7 +76,8 @@ registerLocaleData(localeFr, 'fr');
     FormsModule,
     NbPopoverModule,
     NbSelectModule,
-    NbCheckboxModule
+    NbCheckboxModule,
+    NbDatepickerModule.forRoot()
   ],
   providers: [{
     provide: LOCALE_ID,

@@ -1,1 +1,61 @@
-<p>admin-products works!</p>
+<h2>List of products</h2>
+<button nbButton status=primary class="mb-2" (click)="clickAdd()">
+  <nb-icon icon="plus-outline"></nb-icon>
+</button>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">
+        Name
+      </th>
+      <th scope="col">
+        Description
+      </th>
+      <th scope="col">
+        Categories
+      </th>
+      <th scope="col">
+        Expiration Date
+      </th>
+      <th scope="col">
+        Price
+      </th>
+      <th scope="col">
+        Quantity
+      </th>
+      <th scope="col">
+        Supplier
+      </th>
+      <th scope="col">
+        Edit
+      </th>
+      <th scope="col">
+        Delete
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let p of products;">
+      <td>{{p.name}}</td>
+      <td>{{p.description}}</td>
+      <td><span *ngFor="let c of p.categoriesDto">{{c.type}} </span></td>
+      <td>
+        <span *ngIf="p.expirationDate == null">/</span>
+        <span *ngIf="p.expirationDate != null">{{p.expirationDate}}</span>
+      </td>
+      <td>{{p.purchasePrice | currency: 'EUR'}}</td>
+      <td>{{p.quantity }}</td>
+      <td>{{p.supplierDto.companyName}}</td>
+      <td>
+        <button nbButton status="primary" (click)="clickEdit()">
+          <nb-icon icon="edit-2-outline"></nb-icon>
+        </button>
+      </td>
+      <td>
+        <button nbButton status="primary" (click)="clickRemove(p.productId)">
+          <nb-icon icon="trash-2-outline"></nb-icon>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
