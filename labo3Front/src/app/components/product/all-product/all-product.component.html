@@ -32,7 +32,7 @@
         
                         <nb-list-item>{{p.description}}</nb-list-item>
                         <nb-list-item *ngFor="let c of p.categoriesDto">{{c.type}}</nb-list-item>
-                        <nb-list-item *ngIf="p.experiationDate != null">{{p.experiationDate}}</nb-list-item>
+                        <nb-list-item *ngIf="p.expirationDate != null">{{p.expirationDate}}</nb-list-item>
                         <nb-list-item>{{p.purchasePrice | currency:'EUR'}}</nb-list-item>
                         
             

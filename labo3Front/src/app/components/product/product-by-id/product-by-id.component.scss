@@ -1,14 +1,18 @@
+.divv{
+    margin: 0 auto;
+}
+
 .no-style{
     list-style: none;
 }
 .no-style li{
     margin: 20px 0;
-    font-size: 1.7vw;
+    font-size: 20px;
 }
 .no-style li span{
     margin: 20px 0;
     padding: 20px 15px;
-    font-size: 1.9vw;
+    font-size: 22px;
 }
 
 .bold{
@@ -19,6 +23,9 @@
     display: flex;
 }
 
-.row{
+.row-left{
+    width: 50%;
+}
+.row-right{
     width: 50%;
 }
