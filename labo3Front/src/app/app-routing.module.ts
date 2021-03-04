@@ -15,6 +15,7 @@ import { ProductResolverService } from './utils/product-resolver.service';
 import { AddProductComponent } from './components/admin-panel/admin-panel/admin-products/add-product/add-product.component';
 
 const routes: Routes = [
+  { path: '', component: AllProductComponent },
   { path: 'home', component: AllProductComponent },
   { path: 'product/:id', resolve: { resultat: ProductResolverService }, component: ProductByIdComponent },
   { path: 'basket', component: BasketComponent },

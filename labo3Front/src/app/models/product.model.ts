@@ -11,7 +11,7 @@ export class Product {
     categories: Category[];
     entryDate: String;
     updateDate: String;
-    experiationDate: String;
+    expirationDate: String;
     purchasePrice: number;
     quantity: number;
     productImage: String;

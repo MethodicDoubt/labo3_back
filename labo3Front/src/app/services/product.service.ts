@@ -52,6 +52,10 @@ export class ProductService {
     return this._httpClient.delete<boolean>(this.BASE_URL + '/' + id);
   }
 
+  insert(product: Product): Observable<boolean> {
+    return this._httpClient.post<boolean>(this.BASE_URL, product);
+  }
+
   //--------------------------------------------------------METHODES
 
   emitBasketLengthStatus() {

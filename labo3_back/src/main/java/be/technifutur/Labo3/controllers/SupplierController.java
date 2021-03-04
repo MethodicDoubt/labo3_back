@@ -20,6 +20,7 @@ public class SupplierController implements RestControllable<Supplier, SupplierDt
     }
 
     @Override
+    @GetMapping
     public ResponseEntity<List<SupplierDto>> getAll() {
         return ResponseEntity.ok(this.supplierService.getAll());
     }

@@ -3,38 +3,31 @@
   <nb-layout-header fixed>
     <div style="display: flex; justify-content: space-between; width: 100%;">
 
-      <p>Amaz-Ace</p>
+
+      <div class="div-logo">
+        <a routerLink="">
+          <p class="logo">Amaz-Ace</p>
+          <!-- <img src="assets/img/logo.png" alt="" class="position-logo"> -->
+        </a>
+      </div>
 
       <div style="display: flex;">
-
         <app-search-bar class=" mr-2"></app-search-bar>
         <button type="button" nbButton status="primary" size="medium" (click)="advancedSearch()">Advanced
           Search</button>
-
       </div>
 
       <div>
         <app-auth-manager></app-auth-manager>
-
         <button nbButton status="primary" class="ml-2" (click)="redirect()">
-          
           <nb-icon icon="shopping-bag-outline"></nb-icon>
-
           {{productNumber}}
-        
         </button>
-
       </div>
 
     </div>
 
   </nb-layout-header>
-
-  <nb-sidebar>
-
-    <app-nav></app-nav>
-
-  </nb-sidebar>
 
   <nb-layout-column>
 

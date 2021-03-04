@@ -18,11 +18,14 @@ export class AdminProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.initProducts();
+
   }
 
   private initProducts() {
     this._productService.getAll().subscribe(
-      data => this.products = data
+      data => {
+        this.products = data
+      }
     );
   }
 
@@ -30,7 +33,8 @@ export class AdminProductsComponent implements OnInit {
     let ref = this._dialogBox.open(
       AddProductComponent
     );
-    ref.onClose.subscribe();
+    ref.onClose.subscribe(() => this.initProducts());
+
   }
 
   clickEdit() {

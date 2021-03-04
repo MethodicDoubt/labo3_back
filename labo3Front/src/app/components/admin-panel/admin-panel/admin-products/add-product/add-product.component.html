@@ -16,23 +16,24 @@
       <p class=" form-build">
         <label for="supplier">Supplier</label>
         <nb-select formControlName="supplier">
-          <nb-option *ngFor="let s of companyName" id="supplier" value="{{s}}">
-            {{s}}
+          <nb-option *ngFor="let s of suppliers" id="supplier" value="{{s.supplierId}}">
+            {{s.companyName}}
           </nb-option>
         </nb-select>
       </p>
       <p class=" form-build">
         <label for="categories">Categories</label>
         <nb-select multiple formControlName="categories">
-          <nb-option *ngFor="let c of categoriesType" id="categories" value="{{c}}">
-            {{c}}
+          <nb-option *ngFor="let c of categories" id="categories" value="{{c.categoryId}}">
+            {{c.type}}
           </nb-option>
         </nb-select>
       </p>
       <p class=" form-build">
-        <label for="name">Expiration date</label>
-        <input [nbDatepicker]="datepicker" formControlName="experiationDate">
-        <nb-datepicker #datepicker></nb-datepicker>
+        <label for="expirationDate">Expiration date</label>
+        <input nbInput type="date" formControlName="expirationDate" id="expirationDate">
+        <!-- <input [nbDatepicker]="datepicker" formControlName="experiationDate">
+        <nb-datepicker #datepicker></nb-datepicker> -->
       </p>
       <p class=" form-build">
         <label for="purchasePrice">Price</label>

@@ -20,17 +20,17 @@ export class AddProductComponent implements OnInit {
 
   constructor(private _formBuilder: FormBuilder,
     private _productService: ProductService,
-    private nbDiagRef: NbDialogRef<AddProductComponent>,
+    private _nBDiagRef: NbDialogRef<AddProductComponent>,
     private _categoryService: CategoryService,
     private _supplierService: SupplierService) { }
 
   ngOnInit(): void {
     this.initFg();
-    this._categoryService.getAllType().subscribe(
-      data => this.categoriesType = data
+    this._categoryService.getAll().subscribe(
+      data => this.categories = data
     )
-    this._supplierService.getAllCompanyName().subscribe(
-      data => this.companyName = data
+    this._supplierService.getAll().subscribe(
+      data => this.suppliers = data
     )
   }
 
@@ -39,7 +39,7 @@ export class AddProductComponent implements OnInit {
       name: ['', [Validators.required]],
       description: [''],
       categories: ['', [Validators.required]],
-      experiationDate: [''],
+      expirationDate: [''],
       purchasePrice: [0, [Validators.required]],
       quantity: [0, [Validators.required]],
       productImage: ['', [Validators.required]],
@@ -49,19 +49,31 @@ export class AddProductComponent implements OnInit {
 
   onSubmit() {
     let newProduct = this.transformingProduct();
-
-    console.log(newProduct);
+    this._productService.insert(newProduct).subscribe(
+      data => {
+        data ? alert("Product create") : alert("Problem, try again");
+        this._nBDiagRef.close();
+      }
+    );
   }
 
   transformingProduct() {
     let newProduct = new Product();
-    console.log(this.fgAddProduct.value);
+    newProduct.categories = [];
     newProduct.name = this.fgAddProduct.value['name'];
     newProduct.description = this.fgAddProduct.value['description'];
     newProduct.productImage = this.fgAddProduct.value['productImage'];
+    newProduct.purchasePrice = this.fgAddProduct.value['purchasePrice'];
     newProduct.quantity = this.fgAddProduct.value['quantity'];
-
-
+    this.fgAddProduct.value['expirationDate'] == "" ? null : newProduct.expirationDate = this.fgAddProduct.value['expirationDate'];
+    newProduct.supplier = this.suppliers.find(supp => supp.supplierId == this.fgAddProduct.value['supplier']);
+    this.fgAddProduct.value['categories'].forEach(element => {
+      newProduct.categories.push(
+        this.categories.find(
+          cat => cat.categoryId == element
+        )
+      )
+    });
     return newProduct;
   }
 }

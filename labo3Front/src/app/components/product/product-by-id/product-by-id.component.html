@@ -15,8 +15,8 @@
         <li><span class="bold">Purchase price : </span>{{product.purchasePrice | currency:'EUR'}}</li>
         <li><span class="bold">Quantity : </span>{{product.quantity}}</li>
         <li><span class="bold">Supplier : </span>{{product.supplierDto.companyName}} </li>
-        <li *ngIf="product.experiationDate != null"><span class="bold">Date d'expiration :
-          </span>{{product.experiationDate | date}}
+        <li *ngIf="product.expirationDate != null"><span class="bold">Date d'expiration :
+          </span>{{product.expirationDate | date}}
         </li>
       </ul>
     </div>
