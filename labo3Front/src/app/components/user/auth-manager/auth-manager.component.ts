@@ -23,10 +23,10 @@ export class AuthManagerComponent implements OnInit {
     private _router: Router) { }
 
   ngOnInit(): void {
-    this.statusConnexion = this._authService.statusConnexion.subscribe(
+    this.statusConnexion = this._authService.statusBehaviorConnexion.subscribe(
       dataConnexion => this.isConnected = dataConnexion
     )
-    this.statusAdmin = this._authService.statusAdmin.subscribe(
+    this.statusAdmin = this._authService.statusBehaviorAdmin.subscribe(
       dataAdmin => this.isAdmin = dataAdmin
     )
     localStorage.getItem('role') == null ? this.isConnected = false : this.isConnected = true;
