@@ -69,9 +69,7 @@ public class ProductController implements RestControllable<Product, ProductDto, 
 
     @PatchMapping(path = "/{id}")
     public ResponseEntity<Boolean> patch(@RequestBody Map<String, Object> productToPatch, @PathVariable Integer id) throws IllegalAccessException {
-
         return ResponseEntity.ok(this.productService.partialUpdate(productToPatch, id));
-
     }
 
 }

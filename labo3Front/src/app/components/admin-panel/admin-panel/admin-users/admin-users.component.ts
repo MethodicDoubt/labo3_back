@@ -25,8 +25,16 @@ export class AdminUsersComponent implements OnInit {
     alert("We are preparing this feature ! Stay tuned !");
   }
 
-  changeActive(userId: number) {
-    
+  changeActive(userId: number, isActive: boolean) {
+    if (confirm("Do you want to change active ?")) {
+      this._userService.userToPatch({ 'isActive': !isActive }, userId).subscribe(
+        next => this._userService.getAllUsers().subscribe(
+          users => {
+            this.users = users;
+          }
+        )
+      )
+    }
   }
 
 }

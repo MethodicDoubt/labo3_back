@@ -56,4 +56,10 @@ public class UserController implements RestControllable<User, UserDto, Integer> 
     public ResponseEntity<Boolean> login(@RequestBody Map<String, String> map) {
         return ResponseEntity.ok(this.userService.login(map.get("surname"), map.get("password")));
     }
+
+    @PatchMapping(path = "/{id}")
+    public ResponseEntity<Boolean> patch(@RequestBody Map<String, Object> userToPatch, @PathVariable Integer id) throws IllegalAccessException {
+        return ResponseEntity.ok(this.userService.partialUpdate(userToPatch, id));
+
+    }
 }

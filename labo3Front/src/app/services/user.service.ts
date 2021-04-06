@@ -20,4 +20,8 @@ export class UserService {
     return this._httpClient.post<boolean>(this.BASE_URL, newUser);
   }
 
+  userToPatch(userToPatch: Object, userId: number): Observable<boolean> {
+    return this._httpClient.patch<boolean>(this.BASE_URL + '/' + userId, userToPatch);
+  }
+
 }

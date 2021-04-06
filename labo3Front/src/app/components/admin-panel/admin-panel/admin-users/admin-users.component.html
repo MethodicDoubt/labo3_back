@@ -22,7 +22,7 @@
         </button>
       </td>
       <td class="text-center">
-        <a (click)="changeActive(u.userId)">
+        <a (click)="changeActive(u.userId, u.isActive)">
           <nb-icon icon="radio-button-on" [status]="u.isActive ? 'success':'danger'"></nb-icon>
         </a>
       </td>

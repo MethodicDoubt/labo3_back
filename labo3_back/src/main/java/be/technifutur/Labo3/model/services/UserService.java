@@ -8,7 +8,10 @@ import be.technifutur.Labo3.model.types.AccessLevel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Field;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
@@ -25,7 +28,7 @@ public class UserService implements Crudable<User, UserDto, Integer> {
 
     @Override
     public List<UserDto> getAll() {
-        return this.userRepository.findAll()
+        return this.userRepository.findAllByOrderByUserId()
                 .stream()
                 .map(u -> this.mapper.toUserDto(u, true))
                 .collect(Collectors.toList())
@@ -72,5 +75,27 @@ public class UserService implements Crudable<User, UserDto, Integer> {
     public boolean login(String surname, String password) {
         User userToTest = this.userRepository.findBySurnameEquals(surname);
         return userToTest != null && userToTest.getPassword().equals(password);
+    }
+
+    public Boolean partialUpdate(Map<String, Object> updates, Integer id) throws IllegalAccessException {
+
+        User userToPatch = this.userRepository.findById(id).orElseThrow(() -> new NoSuchElementException("User with id " + id + " not found"));
+
+        Class<?> clazz = User.class;
+        Field[] fields = clazz.getDeclaredFields();
+
+        for (Map.Entry<String, Object> entry : updates.entrySet()) {
+            Field field = Arrays.stream(fields)
+                    .filter(f -> f.getName().equals(entry.getKey()))
+                    .findAny()
+                    .orElseThrow(() -> new NoSuchElementException("Property not found"));
+
+            field.setAccessible(true);
+            field.set(userToPatch, entry.getValue());
+        }
+
+        this.userRepository.save(userToPatch);
+
+        return true;
     }
 }

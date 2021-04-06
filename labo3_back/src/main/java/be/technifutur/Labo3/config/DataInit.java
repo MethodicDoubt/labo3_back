@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -144,16 +145,6 @@ public class DataInit implements InitializingBean {
                     .vat(.21)
                     .build()
     );
-
-    List<Order> orders = Arrays.asList(
-            Order.builder()
-                    .reference("test0001")
-                    .isPaid(true)
-                    .payementMethod(PayementMethod.CASH)
-                    .products(Arrays.asList(products.get(1)))
-                    .build()
-    );
-
     List<User> users = Arrays.asList(
             User.builder()
                     .lastName("Arabia")
@@ -188,13 +179,23 @@ public class DataInit implements InitializingBean {
                     .build()
     );
 
+    List<Order> orders = Arrays.asList(
+            Order.builder()
+                    .reference("test0001")
+                    .isPaid(true)
+                    .payementMethod(PayementMethod.CASH)
+                    .products(Collections.singletonList(products.get(1)))
+                    .user(users.get(1))
+                    .build()
+    );
+
 
     @Override
     public void afterPropertiesSet() throws Exception {
         categories.forEach(this.categoryService::insert);
         suppliers.forEach(this.supplierService::insert);
         products.forEach(this.productService::insert);
-        orders.forEach(this.orderService::insert);
         users.forEach(this.userService::insert);
+        orders.forEach(this.orderService::insert);
     }
 }
