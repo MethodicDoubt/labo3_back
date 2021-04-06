@@ -21,6 +21,8 @@ export class AllProductComponent implements OnInit {
     private _activatedRoute: ActivatedRoute,
     public _authService: AuthService) {
 
+    console.log("Constructor");
+
 
 
     this._activatedRoute.queryParamMap.subscribe(
@@ -52,7 +54,8 @@ export class AllProductComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.statusConnexion = this._authService.statusConnexion.subscribe(
+    console.log("OnInit")
+    this.statusConnexion = this._authService.statusBehaviorConnexion.subscribe(
       dataConnexion => {
         this.isConnected = dataConnexion;
       }

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { User } from '../models/user.model';
 
 @Injectable({
@@ -11,18 +11,19 @@ export class AuthService {
   private BASE_URL: String = "http://localhost:8080/users";
   currentUser: User;
   isConnected: boolean;
-  statusConnexion: Subject<boolean> = new Subject<boolean>();
+  statusBehaviorConnexion: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   isAdmin: boolean;
+  statusBehaviorAdmin: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   statusAdmin: Subject<boolean> = new Subject<boolean>();
 
   constructor(private _httpClient: HttpClient,
     private _router: Router) { }
 
   emitStatusConnexion() {
-    this.statusConnexion.next(this.isConnected);
+    this.statusBehaviorConnexion.next(this.isConnected);
   }
   emitStatusAdmin() {
-    this.statusAdmin.next(this.isAdmin);
+    this.statusBehaviorAdmin.next(this.isAdmin);
   }
 
   login(surname: String, password: String) {

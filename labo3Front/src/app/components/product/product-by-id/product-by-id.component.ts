@@ -22,7 +22,7 @@ export class ProductByIdComponent implements OnInit {
     public _authService: AuthService) { }
 
   ngOnInit(): void {
-    this.statusConnexion = this._authService.statusConnexion.subscribe(
+    this.statusConnexion = this._authService.statusBehaviorConnexion.subscribe(
       dataConnexion => this.isConnected = dataConnexion
     )
     this.produtById();
