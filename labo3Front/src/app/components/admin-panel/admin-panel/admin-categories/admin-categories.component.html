@@ -1,1 +1,16 @@
-<h1 style="text-align: center;">We are preparing this feature ! Stay tuned !</h1>
+<h2>List of Categories</h2>
+<button nbButton status=primary class="mb-2" (click)="clickAdd()">
+  <nb-icon icon="plus-outline"></nb-icon>
+</button>
+<table class="table table-striped">
+  <thead>
+    <th>Category Id</th>
+    <th>Category Name</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let c of categories">
+      <td>{{c?.categoryId}}</td>
+      <td>{{c?.type}}</td>
+    </tr>
+  </tbody>
+</table>

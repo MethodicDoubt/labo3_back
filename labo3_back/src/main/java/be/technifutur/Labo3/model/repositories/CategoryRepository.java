@@ -11,6 +11,8 @@ public interface CategoryRepository extends JpaRepository<Category, Integer> {
     @Query("SELECT c.type FROM Category as c")
     List<String> findAllType();
 
+    List<Category> findAllByOrderByCategoryId();
+
     Category findByType(String s);
 
 }

@@ -16,13 +16,17 @@ export class AdminSuppliersComponent implements OnInit {
   ngOnInit(): void {
     this.initSuppliers();
   }
-  
+
   initSuppliers() {
     this._supplierService.getAll().subscribe(
       allSuppliers => {
         this.suppliers = allSuppliers
       }
     )
+  }
+
+  clickAdd() {
+
   }
 
   clickEdit() {

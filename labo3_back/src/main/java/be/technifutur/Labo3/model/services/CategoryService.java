@@ -25,9 +25,9 @@ public class CategoryService implements Crudable<Category, CategoryDto, Integer>
     @Override
     public List<CategoryDto> getAll() {
 
-        return this.categoryRepository.findAll()
+        return this.categoryRepository.findAllByOrderByCategoryId()
                 .stream()
-                .map(category -> mapper.toCategoryDto(category))
+                .map(mapper::toCategoryDto)
                 .collect(Collectors.toList());
 
     }
