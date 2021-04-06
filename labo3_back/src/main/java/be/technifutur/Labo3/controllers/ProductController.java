@@ -5,6 +5,7 @@ import be.technifutur.Labo3.model.dtos.ProductDto;
 import be.technifutur.Labo3.model.entities.Category;
 import be.technifutur.Labo3.model.entities.Product;
 import be.technifutur.Labo3.model.entities.Supplier;
+import be.technifutur.Labo3.model.exceptionHandler.ProductNotFoundException;
 import be.technifutur.Labo3.model.services.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -36,9 +37,14 @@ public class ProductController implements RestControllable<Product, ProductDto, 
         return ResponseEntity.ok(this.productService.insert(product));
     }
 
+    @PostMapping(path = "/{id}")
+    public ResponseEntity<Boolean> changeActiveBoolean(@PathVariable int id) {
+        return ResponseEntity.ok(this.productService.changeActiveBoolean(id));
+    }
+
     @Override
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<Boolean> delete(@PathVariable("id") Integer integer) {
+    public ResponseEntity<Boolean> delete(@PathVariable("id") Integer integer) throws ProductNotFoundException {
         return ResponseEntity.ok(this.productService.delete(integer));
     }
 
@@ -56,9 +62,9 @@ public class ProductController implements RestControllable<Product, ProductDto, 
 
     @PostMapping("/search")
     public ResponseEntity<List<ProductDto>> search(@RequestBody Product product) {
-        return ResponseEntity.ok(this.productService.findByNameOrCategoryOrSupplier(product.getName()));   
+        return ResponseEntity.ok(this.productService.findByNameOrCategoryOrSupplier(product.getName()));
     }
-    
+
     @PostMapping(path = "/advsearch")
     public ResponseEntity<List<ProductDto>> advSearch(@RequestBody AdvancedSearchDto advancedSearchDto) {
 

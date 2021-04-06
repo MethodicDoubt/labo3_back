@@ -1,5 +1,7 @@
 package be.technifutur.Labo3.model.services;
 
+import be.technifutur.Labo3.model.exceptionHandler.ProductNotFoundException;
+
 import java.util.List;
 
 public interface Crudable<ENTITY, DTO, ID> {
@@ -11,5 +13,5 @@ public interface Crudable<ENTITY, DTO, ID> {
 
     boolean update(ENTITY entity, ID id);
 
-    boolean delete(ID id);
+    boolean delete(ID id) throws ProductNotFoundException;
 }

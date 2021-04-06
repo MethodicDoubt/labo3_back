@@ -54,7 +54,7 @@ export class AuthService {
   }
 
   logout() {
-    console.log("logout")
+    // console.log("logout")
     this.currentUser = null;
     this.isConnected = false;
     this.isAdmin = false;

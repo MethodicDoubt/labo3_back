@@ -100,4 +100,3 @@ FIN PROJET 04/03/21
     - Ajout de la sécurité :
                 - Ajout de sécurité jwt key en backend
                 - Ajout de guards d'accessibilité front-end (user AccessLevel + authentication)
-                - Ajout de guards d'accessibilité front-end (user AccessLevel + authentication)

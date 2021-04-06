@@ -53,15 +53,18 @@ export class ProductService {
   }
 
   insert(product: Product): Observable<boolean> {
-    return this._httpClient.post<boolean>(this.BASE_URL, product); 
+    return this._httpClient.post<boolean>(this.BASE_URL, product);
   }
-  
-  patch(productToPatch : Object, id : number) : Observable<boolean> {
 
-    console.log(productToPatch)
+  patch(productToPatch: Object, id: number): Observable<boolean> {
 
+    // console.log(productToPatch)
     return this._httpClient.patch<boolean>(this.BASE_URL + "/" + id, productToPatch);
 
+  }
+
+  changeActiveBoolean(idProduct: number): Observable<boolean> {
+    return this._httpClient.post<boolean>(this.BASE_URL + '/' + idProduct, null);
   }
 
   //--------------------------------------------------------METHODES
@@ -83,5 +86,7 @@ export class ProductService {
     this.totalPrice += n;
 
   }
+
+
 
 }

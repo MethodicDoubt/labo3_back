@@ -5,6 +5,7 @@ import be.technifutur.Labo3.model.dtos.AdvancedSearchDto;
 import be.technifutur.Labo3.model.dtos.ProductDto;
 import be.technifutur.Labo3.model.entities.Product;
 import be.technifutur.Labo3.model.entities.QProduct;
+import be.technifutur.Labo3.model.exceptionHandler.ProductNotFoundException;
 import be.technifutur.Labo3.model.repositories.CategoryRepository;
 import be.technifutur.Labo3.model.repositories.OrderRepository;
 import be.technifutur.Labo3.model.repositories.ProductRepository;
@@ -43,10 +44,11 @@ public class ProductService implements Crudable<Product, ProductDto, Integer> {
 
     @Override
     public List<ProductDto> getAll() {
-        return this.productRepository.findAll()
+        return this.productRepository.findAllByOrderByProductId()
                 .stream()
                 .map(p -> mapper.toProductDto(p, true))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList())
+                ;
     }
 
     @Override
@@ -101,12 +103,22 @@ public class ProductService implements Crudable<Product, ProductDto, Integer> {
     }
 
     @Override
-    public boolean delete(Integer integer) {
-        //put isActive at false
+    public boolean delete(Integer integer) throws ProductNotFoundException {
+        Product product = this.productRepository.findById(integer).orElseThrow(
+                () -> new ProductNotFoundException("Product with id " + integer + " is not found")
+        );
+        product.setIsActive(false);
+        Product productIsNotActive = this.productRepository.save(product);
+        return product.getIsActive() == productIsNotActive.getIsActive();
+    }
 
-        Product product = this.productRepository.findById(integer).orElseThrow();
-        return this.productRepository.findById(integer).isEmpty();
-
+    public boolean changeActiveBoolean(Integer integer) throws ProductNotFoundException {
+        Product product = this.productRepository.findById(integer).orElseThrow(
+                () -> new ProductNotFoundException("Product with id " + integer + " is not found")
+        );
+        product.setIsActive(!product.getIsActive());
+        Product productIsNotActive = this.productRepository.save(product);
+        return product.getIsActive() == productIsNotActive.getIsActive();
     }
 
     public List<ProductDto> findByNameOrCategoryOrSupplier(String string) {

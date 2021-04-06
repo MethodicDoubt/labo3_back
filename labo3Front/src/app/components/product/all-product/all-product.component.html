@@ -1,53 +1,55 @@
 <div class="row">
 
+  <ng-container *ngFor="let p of products">
+    <nb-card *ngIf="p.isActive" size="small" class="card col-4">
 
-  <nb-card *ngFor="let p of products" size="small" class="card col-4">
+      <nb-card-header style="display: flex; justify-content: space-between;">
 
-    <nb-card-header style="display: flex; justify-content: space-between;">
+        <div>
 
-      <div>
+          <h3> {{p.name}} </h3>
 
-        <h3> {{p.name}} </h3>
+        </div>
 
-      </div>
+        <div *ngIf="this.isConnected">
 
-      <div *ngIf="this.isConnected">
+          <button nbButton type="button" status="primary" (click)="addToBasket(p)">
 
-        <button nbButton type="button" status="primary" (click)="addToBasket(p)">
+            <nb-icon icon="plus-outline"></nb-icon>
+            <nb-icon icon="shopping-bag-outline"></nb-icon>
 
-          <nb-icon icon="plus-outline"></nb-icon>
-          <nb-icon icon="shopping-bag-outline"></nb-icon>
+          </button>
 
-        </button>
+        </div>
 
-      </div>
+      </nb-card-header>
+      <nb-card-body class="row" (click)="redirect(p.productId)">
 
-    </nb-card-header>
-    <nb-card-body class="row" (click)="redirect(p.productId)">
+        <div class="col-4">
 
-      <div class="col-4">
+          <nb-list>
 
-        <nb-list>
-
-          <nb-list-item>{{p.purchasePrice | currency:'EUR'}}</nb-list-item>
-          <nb-list-item>{{p.description}}</nb-list-item>
-          <nb-list-item *ngFor="let c of p.categoriesDto">{{c.type}}</nb-list-item>
-          <nb-list-item *ngIf="p.expirationDate != null">{{p.expirationDate}}</nb-list-item>
+            <nb-list-item>{{p.purchasePrice | currency:'EUR'}}</nb-list-item>
+            <nb-list-item>{{p.description}}</nb-list-item>
+            <nb-list-item *ngFor="let c of p.categoriesDto">{{c.type}}</nb-list-item>
+            <nb-list-item *ngIf="p.expirationDate != null">{{p.expirationDate}}</nb-list-item>
 
 
 
-        </nb-list>
+          </nb-list>
 
-      </div>
+        </div>
 
-      <div class="col-8">
+        <div class="col-8">
 
-        <img src={{p.productImage}} id="img-selectAll">
+          <img src={{p.productImage}} id="img-selectAll">
 
-      </div>
+        </div>
 
-    </nb-card-body>
+      </nb-card-body>
 
-  </nb-card>
+    </nb-card>
+
+  </ng-container>
 
 </div>

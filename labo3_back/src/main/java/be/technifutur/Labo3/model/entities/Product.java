@@ -16,7 +16,7 @@ import java.util.List;
 @Builder
 @Entity
 @EqualsAndHashCode
-public class Product {
+public class Product{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

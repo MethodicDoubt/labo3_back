@@ -27,13 +27,13 @@
         Supplier
       </th>
       <th scope="col">
-        isActive
-      </th>
-      <th scope="col">
         Edit
       </th>
-      <th scope="col">
+      <!-- <th scope="col">
         Delete
+      </th> -->
+      <th scope="col">
+        Active
       </th>
     </tr>
   </thead>
@@ -49,16 +49,20 @@
       <td>{{p.purchasePrice | currency: 'EUR'}}</td>
       <td>{{p.quantity }}</td>
       <td>{{p.supplierDto.companyName}}</td>
-      <td>{{p.isActive}}</td>
       <td>
         <button nbButton status="primary" (click)="clickEdit()">
           <nb-icon icon="edit-2-outline"></nb-icon>
         </button>
       </td>
-      <td>
+      <!-- <td>
         <button nbButton status="primary" (click)="clickRemove(p.productId)">
           <nb-icon icon="trash-2-outline"></nb-icon>
         </button>
+      </td> -->
+      <td class=" text-center">
+        <a (click)="changeActive(p.productId)">
+          <nb-icon icon="radio-button-on" [status]="p.isActive ? 'success':'danger'"></nb-icon>
+        </a>
       </td>
     </tr>
   </tbody>

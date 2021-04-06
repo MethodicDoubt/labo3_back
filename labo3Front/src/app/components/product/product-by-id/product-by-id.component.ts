@@ -30,7 +30,7 @@ export class ProductByIdComponent implements OnInit {
 
   produtById() {
     this.product = this._activatedRoute.snapshot.data['resultat']
-    console.log(this.product);
+    // console.log(this.product);
   }
 
   redirectToHome() {
