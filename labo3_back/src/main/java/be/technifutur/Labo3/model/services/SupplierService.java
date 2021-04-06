@@ -25,7 +25,7 @@ public class SupplierService implements Crudable<Supplier, SupplierDto, Integer>
     @Override
     public List<SupplierDto> getAll() {
 
-        return this.supplierRepository.findAll()
+        return this.supplierRepository.findAllByOrderBySupplierId()
                 .stream()
                 .map(supplier -> mapper.toSupplierDto(supplier))
                 .collect(Collectors.toList());

@@ -1,1 +1,25 @@
-<h1 style="text-align: center;">We are preparing this feature ! Stay tuned !</h1>
+<h2>List of Suppliers</h2>
+<table class="table table-striped">
+  <thead>
+    <th>Company Name</th>
+    <th>Juridical Status</th>
+    <th>Sector</th>
+    <th>Insertion Date</th>
+    <th>Update Date</th>
+    <th>Edit</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let s of suppliers">
+      <td>{{s?.companyName}}</td>
+      <td>{{s?.juridicalStatus}}</td>
+      <td>{{s?.sector}}</td>
+      <td>{{s?.insertionDate | date : 'dd MMM YYYY - HH\'h\'mm'}}</td>
+      <td>{{s?.updateDate | date : 'dd MMM YYYY - HH\'h\'mm'}}</td>
+      <td>
+        <button nbButton status="primary" (click)="clickEdit()">
+          <nb-icon icon="edit-2-outline"></nb-icon>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

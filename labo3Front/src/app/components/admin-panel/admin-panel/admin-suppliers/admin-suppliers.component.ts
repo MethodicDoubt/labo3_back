@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Supplier } from 'src/app/models/supplier.model';
+import { SupplierService } from 'src/app/services/supplier.service';
 
 @Component({
   selector: 'app-admin-suppliers',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminSuppliersComponent implements OnInit {
 
-  constructor() { }
+  suppliers: Supplier[] = [];
+
+  constructor(private _supplierService: SupplierService) { }
 
   ngOnInit(): void {
+    this._supplierService.getAll().subscribe(
+      allSuppliers => {
+        this.suppliers = allSuppliers
+      }
+    )
+  }
+
+  clickEdit() {
+
   }
 
 }
