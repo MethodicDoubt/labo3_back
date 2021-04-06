@@ -5,10 +5,7 @@ import be.technifutur.Labo3.model.dtos.CategoryDto;
 import be.technifutur.Labo3.model.entities.Category;
 import be.technifutur.Labo3.model.services.CategoryService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -42,8 +39,9 @@ public class CategoryController implements RestControllable<Category, CategoryDt
     }
 
     @Override
-    public ResponseEntity<Boolean> insert(Category category) {
-        return null;
+    @PostMapping
+    public ResponseEntity<Boolean> insert(@RequestBody Category category) {
+        return ResponseEntity.ok(this.categoryService.insert(category));
     }
 
     @Override

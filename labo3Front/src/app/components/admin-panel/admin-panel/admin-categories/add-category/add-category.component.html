@@ -1,0 +1,17 @@
+<nb-card>
+    <nb-card-header style="text-align: center;">
+      <h3>New Category</h3>
+    </nb-card-header>
+    <nb-card-body>
+      <form [formGroup]="formCategory" (submit)="onSubmit()">
+        <p class="form-build">
+          <label for="type">Category Name</label>
+          <input nbInput type="text" id="type" formControlName="type">
+        </p>
+        <div class="fr">
+          <button status="primary" type="submit" nbButton [disabled]="formCategory.invalid">Create</button>
+        </div>
+      </form>
+    </nb-card-body>
+  </nb-card>
+  

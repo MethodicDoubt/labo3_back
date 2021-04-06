@@ -31,6 +31,7 @@ import { LOCALE_ID } from '@angular/core';
 import localeFr from '@angular/common/locales/fr';
 import { registerLocaleData } from '@angular/common';
 import { AdminUsersComponent } from './components/admin-panel/admin-panel/admin-users/admin-users.component';
+import { AddCategoryComponent } from './components/admin-panel/admin-panel/admin-categories/add-category/add-category.component';
 registerLocaleData(localeFr, 'fr');
 
 @NgModule({
@@ -56,7 +57,8 @@ registerLocaleData(localeFr, 'fr');
     MyAccountComponent,
     PipeAddressPipe,
     PaymentComponent,
-    AdminUsersComponent
+    AdminUsersComponent,
+    AddCategoryComponent
   ],
   imports: [
     BrowserModule,

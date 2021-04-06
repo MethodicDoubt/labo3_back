@@ -8,7 +8,8 @@ import { Category } from '../models/category.model';
 })
 export class CategoryService {
 
-  private BASE_URL : string = "http://localhost:8080/categories";
+
+  private BASE_URL: string = "http://localhost:8080/categories";
 
   constructor(private _httpClient: HttpClient) { }
 
@@ -22,6 +23,10 @@ export class CategoryService {
 
     return this._httpClient.get<String[]>(this.BASE_URL + "/type");
 
+  }
+
+  insert(newCategory: Category): Observable<boolean> {
+    return this._httpClient.post<boolean>(this.BASE_URL, newCategory);
   }
 
 }

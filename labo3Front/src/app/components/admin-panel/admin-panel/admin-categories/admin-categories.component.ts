@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { NbDialogService } from '@nebular/theme';
 import { Category } from 'src/app/models/category.model';
 import { CategoryService } from 'src/app/services/category.service';
+import { AddCategoryComponent } from './add-category/add-category.component';
 
 @Component({
   selector: 'app-admin-categories',
@@ -11,7 +13,8 @@ export class AdminCategoriesComponent implements OnInit {
 
   categories: Category[] = [];
 
-  constructor(private _categoryService: CategoryService) { }
+  constructor(private _categoryService: CategoryService,
+    private _dialogBox: NbDialogService) { }
 
   ngOnInit(): void {
     this.initCategories()
@@ -26,7 +29,10 @@ export class AdminCategoriesComponent implements OnInit {
   }
 
   clickAdd() {
-
+    let ref = this._dialogBox.open(
+      AddCategoryComponent
+    );
+    ref.onClose.subscribe(() => this.initCategories());
   }
 
 }
