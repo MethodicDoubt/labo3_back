@@ -25,9 +25,9 @@ public class OrderService implements Crudable<Order, OrderDto, Integer> {
 
     @Override
     public List<OrderDto> getAll() {
-        return this.orderRepository.findAll()
+        return this.orderRepository.findAllByOrderByOrderId()
                 .stream()
-                .map(o -> this.mapper.toOrderDto(o))
+                .map(o -> this.mapper.toOrderDto(o, true, true))
                 .collect(Collectors.toList())
                 ;
     }
@@ -78,11 +78,10 @@ public class OrderService implements Crudable<Order, OrderDto, Integer> {
 
         String newRef = stringBuilder.append(Instant.now().getNano())
                 .append(order.getUser().getUserId())
-                .append(order.getUser().getFirstName())
+//                .append(order.getUser().getFirstName())
                 .append(order.getUser().getSurname())
                 .append(order.getProducts().stream().map(p -> p.getProductId().toString()).collect(Collectors.joining()))
                 .toString();
-
         return newRef;
 
     }

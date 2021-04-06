@@ -13,7 +13,7 @@ import java.util.Map;
 @RestController
 @CrossOrigin
 @RequestMapping("orders")
-public class OrderController implements RestControllable<Order, OrderDto, Integer>  {
+public class OrderController implements RestControllable<Order, OrderDto, Integer> {
 
     private final OrderService orderService;
 
@@ -21,10 +21,10 @@ public class OrderController implements RestControllable<Order, OrderDto, Intege
         this.orderService = orderService;
     }
 
-
     @Override
+    @GetMapping
     public ResponseEntity<List<OrderDto>> getAll() {
-        return null;
+        return ResponseEntity.ok(this.orderService.getAll());
     }
 
     @Override

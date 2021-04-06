@@ -1,3 +1,4 @@
+import { TOUCH_BUFFER_MS } from '@angular/cdk/a11y';
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
@@ -14,6 +15,10 @@ export class AdminUsersComponent implements OnInit {
   constructor(private _userService: UserService) { }
 
   ngOnInit(): void {
+    this.initUsers();
+  }
+
+  initUsers() {
     this._userService.getAllUsers().subscribe(
       users => {
         this.users = users;
@@ -28,11 +33,7 @@ export class AdminUsersComponent implements OnInit {
   changeActive(userId: number, isActive: boolean) {
     if (confirm("Do you want to change active ?")) {
       this._userService.userToPatch({ 'isActive': !isActive }, userId).subscribe(
-        next => this._userService.getAllUsers().subscribe(
-          users => {
-            this.users = users;
-          }
-        )
+        next => this.initUsers()
       )
     }
   }

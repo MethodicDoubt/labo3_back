@@ -14,6 +14,10 @@ export class AdminSuppliersComponent implements OnInit {
   constructor(private _supplierService: SupplierService) { }
 
   ngOnInit(): void {
+    this.initSuppliers();
+  }
+  
+  initSuppliers() {
     this._supplierService.getAll().subscribe(
       allSuppliers => {
         this.suppliers = allSuppliers

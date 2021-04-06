@@ -14,8 +14,8 @@ import java.util.stream.Collectors;
 @Service
 public class SupplierService implements Crudable<Supplier, SupplierDto, Integer> {
 
-    private SupplierRepository supplierRepository;
-    private Mapper mapper;
+    private final SupplierRepository supplierRepository;
+    private final Mapper mapper;
 
     public SupplierService(SupplierRepository supplierRepository, Mapper mapper) {
         this.supplierRepository = supplierRepository;
