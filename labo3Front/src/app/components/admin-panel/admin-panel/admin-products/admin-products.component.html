@@ -54,13 +54,8 @@
           <nb-icon icon="edit-2-outline"></nb-icon>
         </button>
       </td>
-      <!-- <td>
-        <button nbButton status="primary" (click)="clickRemove(p.productId)">
-          <nb-icon icon="trash-2-outline"></nb-icon>
-        </button>
-      </td> -->
       <td class=" text-center">
-        <a (click)="changeActive(p.productId)">
+        <a (click)="changeActive(p.productId, p.isActive)">
           <nb-icon icon="radio-button-on" [status]="p.isActive ? 'success':'danger'"></nb-icon>
         </a>
       </td>

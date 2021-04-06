@@ -26,7 +26,7 @@ export class AdminUsersComponent implements OnInit {
   }
 
   changeActive(userId: number) {
-
+    
   }
 
 }

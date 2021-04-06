@@ -41,25 +41,16 @@ export class AdminProductsComponent implements OnInit {
     alert("We are preparing this feature ! Stay tuned !");
   }
 
-  changeActive(idProduct: number) {
+  changeActive(idProduct: number, isActive: boolean) {
     if (confirm("Do you want to change active ? ")) {
-      this._productService.changeActiveBoolean(idProduct).subscribe(
+      this._productService.patch({ "isActive": !isActive }, idProduct).subscribe(
         next => {
           this._productService.getAll().subscribe(
             allProducts => this.products = allProducts
-          )
+          );
         }
       );
     }
   }
-
-  // clickRemove(id: number) {
-  //   this._productService.deleteById(id).subscribe(
-  //     data => {
-  //       data ? alert("Item delete") : alert("Item not found");
-  //       this.initProducts();
-  //     }
-  //   );
-  // }
 
 }

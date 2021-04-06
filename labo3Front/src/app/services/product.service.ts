@@ -63,10 +63,6 @@ export class ProductService {
 
   }
 
-  changeActiveBoolean(idProduct: number): Observable<boolean> {
-    return this._httpClient.post<boolean>(this.BASE_URL + '/' + idProduct, null);
-  }
-
   //--------------------------------------------------------METHODES
 
   emitBasketLengthStatus() {

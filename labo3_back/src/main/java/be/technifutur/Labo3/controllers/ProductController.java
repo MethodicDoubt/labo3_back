@@ -37,11 +37,6 @@ public class ProductController implements RestControllable<Product, ProductDto, 
         return ResponseEntity.ok(this.productService.insert(product));
     }
 
-    @PostMapping(path = "/{id}")
-    public ResponseEntity<Boolean> changeActiveBoolean(@PathVariable int id) {
-        return ResponseEntity.ok(this.productService.changeActiveBoolean(id));
-    }
-
     @Override
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<Boolean> delete(@PathVariable("id") Integer integer) throws ProductNotFoundException {

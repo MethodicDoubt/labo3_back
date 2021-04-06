@@ -104,21 +104,7 @@ public class ProductService implements Crudable<Product, ProductDto, Integer> {
 
     @Override
     public boolean delete(Integer integer) throws ProductNotFoundException {
-        Product product = this.productRepository.findById(integer).orElseThrow(
-                () -> new ProductNotFoundException("Product with id " + integer + " is not found")
-        );
-        product.setIsActive(false);
-        Product productIsNotActive = this.productRepository.save(product);
-        return product.getIsActive() == productIsNotActive.getIsActive();
-    }
-
-    public boolean changeActiveBoolean(Integer integer) throws ProductNotFoundException {
-        Product product = this.productRepository.findById(integer).orElseThrow(
-                () -> new ProductNotFoundException("Product with id " + integer + " is not found")
-        );
-        product.setIsActive(!product.getIsActive());
-        Product productIsNotActive = this.productRepository.save(product);
-        return product.getIsActive() == productIsNotActive.getIsActive();
+        return false;
     }
 
     public List<ProductDto> findByNameOrCategoryOrSupplier(String string) {
