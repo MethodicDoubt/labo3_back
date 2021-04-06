@@ -27,6 +27,9 @@
         Supplier
       </th>
       <th scope="col">
+        isActive
+      </th>
+      <th scope="col">
         Edit
       </th>
       <th scope="col">
@@ -46,6 +49,7 @@
       <td>{{p.purchasePrice | currency: 'EUR'}}</td>
       <td>{{p.quantity }}</td>
       <td>{{p.supplierDto.companyName}}</td>
+      <td>{{p.isActive}}</td>
       <td>
         <button nbButton status="primary" (click)="clickEdit()">
           <nb-icon icon="edit-2-outline"></nb-icon>

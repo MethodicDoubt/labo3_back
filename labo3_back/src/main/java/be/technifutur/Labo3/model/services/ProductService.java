@@ -64,6 +64,7 @@ public class ProductService implements Crudable<Product, ProductDto, Integer> {
 
         product.setEntryDate(Instant.now());
         product.setUpdateDate(Instant.now());
+        product.setIsActive(true);
         Product newProduct = this.productRepository.save(product);
 
         return this.productRepository.findById(newProduct.getProductId()).isPresent();
@@ -86,6 +87,7 @@ public class ProductService implements Crudable<Product, ProductDto, Integer> {
                 oldProduct.getQuantity(),
                 oldProduct.getSupplier(),
                 oldProduct.getProductImage(),
+                oldProduct.getIsActive(),
                 oldProduct.getVat(),
                 oldProduct.getOrders());
 
@@ -100,9 +102,9 @@ public class ProductService implements Crudable<Product, ProductDto, Integer> {
 
     @Override
     public boolean delete(Integer integer) {
+        //put isActive at false
 
-        this.productRepository.deleteById(integer);
-
+        Product product = this.productRepository.findById(integer).orElseThrow();
         return this.productRepository.findById(integer).isEmpty();
 
     }
@@ -172,12 +174,12 @@ public class ProductService implements Crudable<Product, ProductDto, Integer> {
         Class<?> clazz = Product.class;
         Field[] fields = clazz.getDeclaredFields();
 
-        for(Map.Entry<String, Object> entry : updates.entrySet()) {
+        for (Map.Entry<String, Object> entry : updates.entrySet()) {
 
             Field field = Arrays.stream(fields)
                     .filter(f -> f.getName().equals(entry.getKey()))
                     .findFirst()
-                    .orElseThrow(()-> new NoSuchElementException("La propriété de la classe n'a pas été trouvé"));
+                    .orElseThrow(() -> new NoSuchElementException("La propriété de la classe n'a pas été trouvé"));
 
             field.setAccessible(true);
             field.set(productToUpdate, entry.getValue());

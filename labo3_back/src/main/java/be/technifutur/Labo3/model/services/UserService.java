@@ -42,6 +42,7 @@ public class UserService implements Crudable<User, UserDto, Integer> {
     public boolean insert(User user) {
         if (user.getAccessLevel() == null)
             user.setAccessLevel(AccessLevel.CUSTOMER);
+        user.setIsActive(true);
         User newUser = this.userRepository.save(user);
         return this.userRepository.existsById(newUser.getUserId());
     }
@@ -51,7 +52,7 @@ public class UserService implements Crudable<User, UserDto, Integer> {
         User old = this.userRepository.getOne(integer);
         User toTest = new User(
                 old.getUserId(), old.getLastName(), old.getFirstName(), old.getAccessLevel(), old.getSurname()
-                , old.getPassword(), old.getAddress(), old.getOrders(), old.getAvatar()
+                , old.getPassword(), old.getAddress(), old.getIsActive(), old.getOrders(), old.getAvatar()
         );
         user.setUserId(integer);
         this.userRepository.save(user);

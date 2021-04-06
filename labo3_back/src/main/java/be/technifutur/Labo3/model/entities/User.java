@@ -40,6 +40,9 @@ public class User {
     @Embedded
     Address address;
 
+    @Column(nullable = false)
+    Boolean isActive;
+
     @OneToMany(mappedBy = "user")
     List<Order> orders;
 

@@ -55,6 +55,9 @@ public class Product {
     @Column
     String productImage;
 
+    @Column
+    Boolean isActive;
+
     @Min(value = 0, message = "The vat must be a positive number")
     Double vat;
 

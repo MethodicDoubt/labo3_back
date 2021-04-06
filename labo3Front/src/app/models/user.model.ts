@@ -7,6 +7,7 @@ export class User {
     accessLevel: string;
     surname: string;
     password: string;
+    isActive: boolean;
     address: {
         "street": string;
         "number": number;

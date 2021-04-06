@@ -21,8 +21,9 @@ public class UserController implements RestControllable<User, UserDto, Integer> 
     }
 
     @Override
+    @GetMapping
     public ResponseEntity<List<UserDto>> getAll() {
-        return null;
+        return ResponseEntity.ok(this.userService.getAll());
     }
 
     @Override

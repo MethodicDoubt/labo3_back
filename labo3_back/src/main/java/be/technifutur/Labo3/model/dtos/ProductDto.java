@@ -30,5 +30,5 @@ public class ProductDto {
     List<OrderDto> ordersDto;
     String productImage;
     Double vat;
-
+    Boolean isActive;
 }

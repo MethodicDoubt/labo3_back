@@ -26,5 +26,7 @@ public class UserDto {
 
     Address address;
 
+    Boolean isActive;
+
     List<OrderDto> ordersDto;
 }

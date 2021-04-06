@@ -31,6 +31,7 @@ public class Mapper {
                 .accessLevel(user.getAccessLevel())
                 .surname(user.getSurname())
                 .address(user.getAddress())
+                .isActive(user.getIsActive())
                 .ordersDto(withOrders ?
                         user.getOrders()
                                 .stream()
@@ -49,6 +50,7 @@ public class Mapper {
                 .surname(userDto.getSurname())
                 .password(userDto.getPassword())
                 .address(userDto.getAddress())
+                .isActive(userDto.getIsActive())
                 .orders(
                         userDto.getOrdersDto()
                                 .stream()
@@ -141,6 +143,7 @@ public class Mapper {
                 .productImage(product.getProductImage())
                 .vat(product.getVat())
                 .ordersDto(withOrder ? product.getOrders().stream().map(this::toOrderDto).collect(Collectors.toList()) : null)
+                .isActive(product.getIsActive())
                 .build();
 
     }
@@ -166,6 +169,7 @@ public class Mapper {
                         .map(this::toOrderEntity)
                         .collect(Collectors.toList())
                 )
+                .isActive(productDto.getIsActive())
                 .build();
 
     }
