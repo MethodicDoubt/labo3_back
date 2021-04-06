@@ -3,6 +3,7 @@ package be.technifutur.Labo3.model.services;
 import be.technifutur.Labo3.mapper.Mapper;
 import be.technifutur.Labo3.model.dtos.LogDto;
 import be.technifutur.Labo3.model.entities.Log;
+import be.technifutur.Labo3.model.exceptionHandler.LogNotFoundException;
 import be.technifutur.Labo3.model.repositories.LogRepository;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +34,7 @@ public class LogService implements Crudable<Log, LogDto, Integer> {
 
     @Override
     public LogDto getById(Integer integer) {
-        Log log = this.logRepository.findById(integer).orElseThrow(() -> new NoSuchElementException("Log not found"));
+        Log log = this.logRepository.findById(integer).orElseThrow(() -> new LogNotFoundException("Log not found"));
         return this.mapper.toLogDto(log);
     }
 

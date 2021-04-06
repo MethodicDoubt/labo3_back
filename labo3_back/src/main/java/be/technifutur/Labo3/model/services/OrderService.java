@@ -3,6 +3,7 @@ package be.technifutur.Labo3.model.services;
 import be.technifutur.Labo3.mapper.Mapper;
 import be.technifutur.Labo3.model.dtos.OrderDto;
 import be.technifutur.Labo3.model.entities.Order;
+import be.technifutur.Labo3.model.exceptionHandler.OrderNotFoundException;
 import be.technifutur.Labo3.model.repositories.OrderRepository;
 import org.springframework.stereotype.Service;
 
@@ -27,14 +28,14 @@ public class OrderService implements Crudable<Order, OrderDto, Integer> {
     public List<OrderDto> getAll() {
         return this.orderRepository.findAll()
                 .stream()
-                .map(o -> this.mapper.toOrderDto(o))
+                .map(this.mapper::toOrderDto)
                 .collect(Collectors.toList())
                 ;
     }
 
     @Override
     public OrderDto getById(Integer integer) {
-        Order order = this.orderRepository.findById(integer).orElseThrow(() -> new NoSuchElementException("Order not found"));
+        Order order = this.orderRepository.findById(integer).orElseThrow(() -> new OrderNotFoundException("Order not found"));
 
         return this.mapper.toOrderDto(order, true, true);
     }

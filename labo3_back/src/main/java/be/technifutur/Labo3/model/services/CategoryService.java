@@ -3,6 +3,7 @@ package be.technifutur.Labo3.model.services;
 import be.technifutur.Labo3.mapper.Mapper;
 import be.technifutur.Labo3.model.dtos.CategoryDto;
 import be.technifutur.Labo3.model.entities.Category;
+import be.technifutur.Labo3.model.exceptionHandler.NoSuchCategoryException;
 import be.technifutur.Labo3.model.repositories.CategoryRepository;
 import org.springframework.stereotype.Service;
 
@@ -39,7 +40,7 @@ public class CategoryService implements Crudable<Category, CategoryDto, Integer>
     @Override
     public CategoryDto getById(Integer integer) {
 
-        Category category = this.categoryRepository.findById(integer).orElseThrow(() -> new NoSuchElementException("No category found with this ID"));
+        Category category = this.categoryRepository.findById(integer).orElseThrow(() -> new NoSuchCategoryException("No category found with this ID"));
 
         return mapper.toCategoryDto(category);
 

@@ -5,6 +5,7 @@ import be.technifutur.Labo3.model.dtos.AdvancedSearchDto;
 import be.technifutur.Labo3.model.dtos.ProductDto;
 import be.technifutur.Labo3.model.entities.Product;
 import be.technifutur.Labo3.model.entities.QProduct;
+import be.technifutur.Labo3.model.exceptionHandler.ProductNotFoundException;
 import be.technifutur.Labo3.model.repositories.CategoryRepository;
 import be.technifutur.Labo3.model.repositories.OrderRepository;
 import be.technifutur.Labo3.model.repositories.ProductRepository;
@@ -52,7 +53,7 @@ public class ProductService implements Crudable<Product, ProductDto, Integer> {
     @Override
     public ProductDto getById(Integer integer) {
 
-        Product product = this.productRepository.findById(integer).orElseThrow(() -> new NoSuchElementException(("Product not found")));
+        Product product = this.productRepository.findById(integer).orElseThrow(() -> new ProductNotFoundException(("Product not found")));
 
         product.setOrders(this.orderRepository.findByProducts(product));
 
