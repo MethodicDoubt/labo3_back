@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.time.LocalDate;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -25,16 +26,19 @@ public class DataInit implements InitializingBean {
     private final UserService userService;
     private final SupplierService supplierService;
 
+    private final PDFManager pdfManager;
+
     public DataInit(
             CategoryService categoryService, LogService logService, OrderService orderService,
-            ProductService productService, UserService userService, SupplierService supplierService
-    ) {
+            ProductService productService, UserService userService, SupplierService supplierService,
+            PDFManager pdfManager) {
         this.categoryService = categoryService;
         this.logService = logService;
         this.orderService = orderService;
         this.productService = productService;
         this.userService = userService;
         this.supplierService = supplierService;
+        this.pdfManager = pdfManager;
     }
 
     private List<Category> categories = Arrays.asList(
@@ -197,10 +201,23 @@ public class DataInit implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
+
+        this.pdfManager.createDocument();
+
         categories.forEach(this.categoryService::insert);
         suppliers.forEach(this.supplierService::insert);
-        products.forEach(this.productService::insert);
+
         users.forEach(this.userService::insert);
+
+        products.forEach(p -> {
+            try {
+                this.productService.insert(p, users.get(0));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
         orders.forEach(this.orderService::insert);
+
     }
 }

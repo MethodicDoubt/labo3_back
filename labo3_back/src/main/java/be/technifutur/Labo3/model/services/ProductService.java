@@ -1,18 +1,25 @@
 package be.technifutur.Labo3.model.services;
 
+import be.technifutur.Labo3.config.PDFManager;
 import be.technifutur.Labo3.mapper.Mapper;
 import be.technifutur.Labo3.model.dtos.AdvancedSearchDto;
 import be.technifutur.Labo3.model.dtos.ProductDto;
+import be.technifutur.Labo3.model.entities.Log;
 import be.technifutur.Labo3.model.entities.Product;
 import be.technifutur.Labo3.model.entities.QProduct;
+import be.technifutur.Labo3.model.entities.User;
 import be.technifutur.Labo3.model.exceptionHandler.ProductNotFoundException;
 import be.technifutur.Labo3.model.repositories.CategoryRepository;
 import be.technifutur.Labo3.model.repositories.OrderRepository;
 import be.technifutur.Labo3.model.repositories.ProductRepository;
 import be.technifutur.Labo3.model.repositories.SupplierRepository;
 import com.querydsl.core.BooleanBuilder;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.time.Instant;
 import java.util.Arrays;
@@ -30,15 +37,21 @@ public class ProductService implements Crudable<Product, ProductDto, Integer> {
     private final SupplierRepository supplierRepository;
     private final OrderRepository orderRepository;
 
+    private final LogService logService;
+
     private final Mapper mapper;
 
+    private final PDFManager pdfManager;
 
-    public ProductService(ProductRepository productRepository, CategoryRepository categoryRepository, SupplierRepository supplierRepository, OrderRepository orderRepository, Mapper mapper) {
+
+    public ProductService(ProductRepository productRepository, CategoryRepository categoryRepository, SupplierRepository supplierRepository, OrderRepository orderRepository, LogService logService, Mapper mapper, PDFManager pdfManager) {
         this.productRepository = productRepository;
         this.categoryRepository = categoryRepository;
         this.supplierRepository = supplierRepository;
         this.orderRepository = orderRepository;
+        this.logService = logService;
         this.mapper = mapper;
+        this.pdfManager = pdfManager;
     }
 
 
@@ -54,7 +67,7 @@ public class ProductService implements Crudable<Product, ProductDto, Integer> {
     @Override
     public ProductDto getById(Integer integer) {
 
-        Product product = this.productRepository.findById(integer).orElseThrow(() -> new NoSuchElementException(("Product not found")));
+        Product product = this.productRepository.findById(integer).orElseThrow(() -> new ProductNotFoundException(("Product not found")));
 
         product.setOrders(this.orderRepository.findByProducts(product));
 
@@ -63,11 +76,34 @@ public class ProductService implements Crudable<Product, ProductDto, Integer> {
 
     @Override
     public boolean insert(Product product) {
+        return false;
+    }
+
+    public boolean insert(Product product, User user) throws IOException {
 
         product.setEntryDate(Instant.now());
         product.setUpdateDate(Instant.now());
         product.setIsActive(true);
         Product newProduct = this.productRepository.save(product);
+
+        Log newLog = Log.builder()
+                .product(product)
+                .price(product.getPurchasePrice())
+                .user(user)
+                .build();
+
+        this.logService.insert(newLog);
+
+        this.pdfManager.generateToPdf(
+
+                List.of(newLog.getLogId().toString(),
+                        newLog.getProduct().getName(),
+                        newLog.getCreationDate().toString(),
+                        newLog.getPrice().toString(),
+                        newLog.getUser().getSurname()
+                        )
+
+        );
 
         return this.productRepository.findById(newProduct.getProductId()).isPresent();
 
@@ -189,6 +225,19 @@ public class ProductService implements Crudable<Product, ProductDto, Integer> {
         this.productRepository.save(productToUpdate);
 
         return true;
+
+    }
+
+    public Page<ProductDto> getAllWithPagination(int page, int size) {
+
+        int nbEntry = this.productRepository.findAll().size();
+
+        List<ProductDto> result = this.productRepository.findAll(PageRequest.of(page, size))
+                .stream()
+                .map(p -> mapper.toProductDto(p, true))
+                .collect(Collectors.toList());
+
+        return new PageImpl<>(result, PageRequest.of(page, size), nbEntry);
 
     }
 

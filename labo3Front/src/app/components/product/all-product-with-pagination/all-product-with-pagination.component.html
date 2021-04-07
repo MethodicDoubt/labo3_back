@@ -1,0 +1,52 @@
+<div>
+  
+    <div class="col-12">
+
+      <h4>Products List</h4>
+  
+        <nb-list>
+
+            <nb-list-item
+
+            *ngFor="
+
+                let product of products | paginate : {
+                  itemsPerPage: pageSize,
+                  currentPage: page,
+                  totalItems: count
+                };
+
+                let i = index"
+
+            [class.active]="i == currentIndex">
+
+              {{ product.name }}
+
+            </nb-list-item>
+
+        </nb-list>
+
+    </div>
+
+    <div>
+
+      <pagination-controls
+          previousLabel="Prev"
+          nextLabel="Next"
+          [responsive]="true"
+          (pageChange)="handlePageChange($event)">
+  
+      </pagination-controls>
+
+  </div>
+  
+    <div>
+  
+      Items per Page:
+      <nb-select (selectedChange)="handlePageSizeChange($event)">
+        <nb-option *ngFor="let size of pageSizes" value="{{size}}">
+          {{ size }}
+        </nb-option>
+      </nb-select>
+    </div>
+  </div>

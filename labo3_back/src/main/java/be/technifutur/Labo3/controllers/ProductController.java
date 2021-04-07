@@ -8,6 +8,7 @@ import be.technifutur.Labo3.model.entities.Supplier;
 import be.technifutur.Labo3.model.exceptionHandler.ProductNotFoundException;
 import be.technifutur.Labo3.model.services.ProductService;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,6 +30,11 @@ public class ProductController implements RestControllable<Product, ProductDto, 
     @GetMapping
     public ResponseEntity<List<ProductDto>> getAll() {
         return ResponseEntity.ok(this.productService.getAll());
+    }
+
+    @GetMapping(params = {"page", "size"})
+    public ResponseEntity<Page<ProductDto>> getAllWithPagination(@RequestParam int page, @RequestParam int size) {
+        return ResponseEntity.ok(this.productService.getAllWithPagination(page, size));
     }
 
     @Override

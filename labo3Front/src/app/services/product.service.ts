@@ -36,6 +36,12 @@ export class ProductService {
     return this._httpClient.get<Product[]>(this.BASE_URL);
   }
 
+  getAllWithPagination(params: any) : Observable<any> {
+
+    return this._httpClient.get<any>(this.BASE_URL, { params });
+
+  }
+
   getById(id: number): Observable<Product> {
     return this._httpClient.get<Product>(this.BASE_URL + "/" + id);
   }

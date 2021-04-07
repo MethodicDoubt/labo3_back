@@ -3,6 +3,7 @@ package be.technifutur.Labo3.model.services;
 import be.technifutur.Labo3.mapper.Mapper;
 import be.technifutur.Labo3.model.dtos.UserDto;
 import be.technifutur.Labo3.model.entities.User;
+import be.technifutur.Labo3.model.exceptionHandler.UserNotFoundException;
 import be.technifutur.Labo3.model.repositories.UserRepository;
 import be.technifutur.Labo3.model.types.AccessLevel;
 import org.springframework.http.ResponseEntity;
@@ -37,7 +38,7 @@ public class UserService implements Crudable<User, UserDto, Integer> {
 
     @Override
     public UserDto getById(Integer integer) {
-        User user = this.userRepository.findById(integer).orElseThrow(() -> new NoSuchElementException("User not found"));
+        User user = this.userRepository.findById(integer).orElseThrow(() -> new UserNotFoundException("User not found"));
         return this.mapper.toUserDto(user, true);
     }
 

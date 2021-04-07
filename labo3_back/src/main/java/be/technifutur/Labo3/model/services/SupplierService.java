@@ -3,6 +3,7 @@ package be.technifutur.Labo3.model.services;
 import be.technifutur.Labo3.mapper.Mapper;
 import be.technifutur.Labo3.model.dtos.SupplierDto;
 import be.technifutur.Labo3.model.entities.Supplier;
+import be.technifutur.Labo3.model.exceptionHandler.SupplierNotFoundException;
 import be.technifutur.Labo3.model.repositories.SupplierRepository;
 import org.springframework.stereotype.Service;
 
@@ -39,7 +40,7 @@ public class SupplierService implements Crudable<Supplier, SupplierDto, Integer>
     @Override
     public SupplierDto getById(Integer integer) {
 
-        Supplier supplier = this.supplierRepository.findById(integer).orElseThrow(() -> new NoSuchElementException("No supplier found with this ID"));
+        Supplier supplier = this.supplierRepository.findById(integer).orElseThrow(() -> new SupplierNotFoundException("No supplier found with this ID"));
 
         return mapper.toSupplierDto(supplier);
 
