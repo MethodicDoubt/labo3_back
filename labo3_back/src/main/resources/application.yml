@@ -12,3 +12,5 @@ spring:
       ddl-auto: create-drop
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
+folders:
+  pdf: 'C:\Users\Willa\Desktop\Formation\labo3\Labo3\labo3_back\pdf'
