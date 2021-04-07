@@ -5,6 +5,7 @@ import be.technifutur.Labo3.model.dtos.CategoryDto;
 import be.technifutur.Labo3.model.entities.Category;
 import be.technifutur.Labo3.model.repositories.CategoryRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,9 +58,7 @@ public class CategoryService implements Crudable<Category, CategoryDto, Integer>
     @Override
     public boolean update(Category category, Integer integer) {
 
-        Category oldCategory = this.categoryRepository.getOne(integer);
-
-        Category newCategory = new Category(oldCategory.getCategoryId(), oldCategory.getType());
+        Category newCategory = new Category(category.getCategoryId(), category.getType());
 
         category.setCategoryId(integer);
 

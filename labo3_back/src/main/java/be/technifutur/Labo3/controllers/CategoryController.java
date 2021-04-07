@@ -34,7 +34,7 @@ public class CategoryController implements RestControllable<Category, CategoryDt
     }
 
     @Override
-    public ResponseEntity<CategoryDto> getOne(Integer integer) {
+    public ResponseEntity<CategoryDto> getOne(@PathVariable Integer id) {
         return null;
     }
 
@@ -45,8 +45,9 @@ public class CategoryController implements RestControllable<Category, CategoryDt
     }
 
     @Override
-    public ResponseEntity<Boolean> update(Category category, Integer integer) {
-        return null;
+    @PutMapping(path = "/{id}")
+    public ResponseEntity<Boolean> update(@RequestBody Category category, @PathVariable Integer id) {
+        return ResponseEntity.ok(this.categoryService.update(category,id));
     }
 
     @Override

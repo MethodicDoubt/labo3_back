@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NbDialogService } from '@nebular/theme';
 import { Category } from 'src/app/models/category.model';
 import { CategoryService } from 'src/app/services/category.service';
@@ -14,7 +15,8 @@ export class AdminCategoriesComponent implements OnInit {
   categories: Category[] = [];
 
   constructor(private _categoryService: CategoryService,
-    private _dialogBox: NbDialogService) { }
+    private _dialogBox: NbDialogService,
+    private _router: Router) { }
 
   ngOnInit(): void {
     this.initCategories()
@@ -33,6 +35,10 @@ export class AdminCategoriesComponent implements OnInit {
       AddCategoryComponent
     );
     ref.onClose.subscribe(() => this.initCategories());
+  }
+
+  clickEdit(categoryId: number) {
+    this._router.navigate(['admin', 'categories', categoryId]).then();
   }
 
 }

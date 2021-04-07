@@ -1,4 +1,4 @@
-<nb-card>
+<nb-card class="col-6 mx-auto mt-2">
   <nb-card-header style="text-align: center;">
     <h3>New Category</h3>
   </nb-card-header>
@@ -9,7 +9,8 @@
         <input nbInput type="text" id="type" formControlName="type">
       </p>
       <div class="fr">
-        <button status="primary" type="submit" nbButton [disabled]="formCategory.invalid">Create</button>
+        <button class="mr-2" status="primary" type="submit" nbButton [disabled]="formCategory.invalid">Update</button>
+        <button status="primary" type="button" nbButton routerLink='..' >Cancel</button>
       </div>
     </form>
   </nb-card-body>

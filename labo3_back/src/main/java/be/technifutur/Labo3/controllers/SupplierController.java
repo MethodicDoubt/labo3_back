@@ -38,7 +38,7 @@ public class SupplierController implements RestControllable<Supplier, SupplierDt
     @Override
     @PostMapping
     public ResponseEntity<Boolean> insert(@RequestBody Supplier supplier) {
-        return null;
+        return ResponseEntity.ok(this.supplierService.insert(supplier));
     }
 
 

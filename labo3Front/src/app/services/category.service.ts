@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Category } from '../models/category.model';
+import { Product } from '../models/product.model';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,10 @@ export class CategoryService {
 
   insert(newCategory: Category): Observable<boolean> {
     return this._httpClient.post<boolean>(this.BASE_URL, newCategory);
+  }
+
+  update(categoryToUpdate: Category): Observable<boolean> {
+    return this._httpClient.put<boolean>(this.BASE_URL + '/' + categoryToUpdate.categoryId, categoryToUpdate);
   }
 
 }

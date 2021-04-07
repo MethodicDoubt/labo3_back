@@ -6,11 +6,17 @@
   <thead>
     <th>Category Id</th>
     <th>Category Name</th>
+    <th>Edit</th>
   </thead>
   <tbody>
     <tr *ngFor="let c of categories">
       <td>{{c?.categoryId}}</td>
       <td>{{c?.type}}</td>
+      <td>
+        <button nbButton status="primary" (click)="clickEdit(c.categoryId)">
+          <nb-icon icon="edit-2-outline"></nb-icon>
+        </button>
+      </td>
     </tr>
   </tbody>
 </table>

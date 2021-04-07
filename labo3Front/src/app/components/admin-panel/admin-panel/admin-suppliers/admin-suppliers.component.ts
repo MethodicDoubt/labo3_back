@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { NbDialogService } from '@nebular/theme';
 import { Supplier } from 'src/app/models/supplier.model';
 import { SupplierService } from 'src/app/services/supplier.service';
+import { AddSupplierComponent } from './add-supplier/add-supplier.component';
 
 @Component({
   selector: 'app-admin-suppliers',
@@ -11,7 +13,8 @@ export class AdminSuppliersComponent implements OnInit {
 
   suppliers: Supplier[] = [];
 
-  constructor(private _supplierService: SupplierService) { }
+  constructor(private _supplierService: SupplierService,
+    private _dialogBox: NbDialogService) { }
 
   ngOnInit(): void {
     this.initSuppliers();
@@ -22,11 +25,14 @@ export class AdminSuppliersComponent implements OnInit {
       allSuppliers => {
         this.suppliers = allSuppliers
       }
-    )
+    );
   }
 
   clickAdd() {
-
+    let ref = this._dialogBox.open(
+      AddSupplierComponent
+    );
+    ref.onClose.subscribe(() => this.initSuppliers());
   }
 
   clickEdit() {
