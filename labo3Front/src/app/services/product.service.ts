@@ -9,6 +9,7 @@ import { Product } from '../models/product.model';
 })
 export class ProductService {
 
+
   //-------------------------------------------------------PROPERTIES
 
   private BASE_URL = "http://localhost:8080/products";
@@ -60,6 +61,10 @@ export class ProductService {
     // console.log(productToPatch)
     return this._httpClient.patch<boolean>(this.BASE_URL + "/" + id, productToPatch);
 
+  }
+
+  update(productToUpdate: Product, productId: number): Observable<boolean> {
+    return this._httpClient.put<boolean>(this.BASE_URL + '/' + productId, productToUpdate);
   }
 
   //--------------------------------------------------------METHODES

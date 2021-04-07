@@ -51,8 +51,8 @@ public class ProductController implements RestControllable<Product, ProductDto, 
 
     @Override
     @PutMapping("/{id}")
-    public ResponseEntity<Boolean> update(Product product, @PathVariable("id") Integer integer) {
-        return ResponseEntity.ok(this.productService.update(product, integer));
+    public ResponseEntity<Boolean> update(@RequestBody Product product, @PathVariable("id") Integer id) {
+        return ResponseEntity.ok(this.productService.update(product, id));
     }
 
     @PostMapping("/search")

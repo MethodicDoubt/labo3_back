@@ -38,7 +38,7 @@ export class AddProductComponent implements OnInit {
     this.fgAddProduct = this._formBuilder.group({
       name: ['', [Validators.required]],
       description: [''],
-      categories: ['', [Validators.required]],
+      categories: [[''], [Validators.required]],
       expirationDate: [''],
       purchasePrice: [0, [Validators.required]],
       quantity: [0, [Validators.required]],

@@ -50,7 +50,7 @@
       <td>{{p.quantity }}</td>
       <td>{{p.supplierDto.companyName}}</td>
       <td>
-        <button nbButton status="primary" (click)="clickEdit()">
+        <button nbButton status="primary" (click)="clickEdit(p.productId)">
           <nb-icon icon="edit-2-outline"></nb-icon>
         </button>
       </td>

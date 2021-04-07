@@ -1,1 +1,56 @@
-<p>edit-product works!</p>
+<nb-card class="col-6 mx-auto mt-2">
+  <nb-card-header style="text-align: center;">
+    <h3>New Product</h3>
+  </nb-card-header>
+  <nb-card-body>
+    <form [formGroup]="fgAddProduct" (submit)="onSubmit()">
+      <p class="form-build">
+        <label for="name">Name</label>
+        <input nbInput type="text" id="name" formControlName="name">
+      </p>
+      <p class="form-build">
+        <label for="description">Description</label>
+        <textarea nbInput name="description" id="description" cols="22" rows="5"
+          formControlName="description"></textarea>
+      </p>
+      <p class="form-build">
+        <label for="supplier">Supplier</label>
+        <nb-select formControlName="supplier">
+          <nb-option *ngFor="let s of suppliers" id="supplier" value="{{s.supplierId}}">
+            {{s.companyName}}
+          </nb-option>
+        </nb-select>
+      </p>
+      <p class="form-build">
+        <label for="categories">Categories</label>
+        <nb-select multiple formControlName="categories">
+          <nb-option *ngFor="let c of categories" id="categories" value="{{c.categoryId}}">
+            {{c.type}}
+          </nb-option>
+        </nb-select>
+      </p>
+      <p class="form-build">
+        <label for="expirationDate">Expiration date</label>
+        <input nbInput type="date" formControlName="expirationDate" id="expirationDate">
+      </p>
+      <p class="form-build">
+        <label for="purchasePrice">Price</label>
+        <input nbInput type="number" min="0" max="1000" id="purchasePrice" formControlName="purchasePrice">
+      </p>
+      <p class="form-build">
+        <label for="quantity">Quantity</label>
+        <input nbInput type="number" min="0" max="1000" id="quantity" formControlName="quantity">
+      </p>
+
+      <p class="form-build">
+        <label for="productImage">Image</label>
+        <input nbInput type="text" id="productImage" formControlName="productImage">
+      </p>
+      <div class="fr">
+        <button class="mr-2" status="primary" type="submit" nbButton
+          [disabled]="fgAddProduct.invalid || fgAddProduct.pristine">Create</button>
+        <button nbButton status="primary" type="button" routerLink='..'>Cancel</button>
+      </div>
+    </form>
+  </nb-card-body>
+</nb-card>

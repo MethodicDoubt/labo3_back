@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NbDialogModule, NbDialogService } from '@nebular/theme';
 import { Product } from 'src/app/models/product.model';
 import { ProductService } from 'src/app/services/product.service';
@@ -14,7 +15,8 @@ export class AdminProductsComponent implements OnInit {
   products: Product[] = [];
 
   constructor(private _productService: ProductService,
-    private _dialogBox: NbDialogService) { }
+    private _dialogBox: NbDialogService,
+    private _router: Router) { }
 
   ngOnInit(): void {
     this.initProducts();
@@ -37,8 +39,8 @@ export class AdminProductsComponent implements OnInit {
 
   }
 
-  clickEdit() {
-    alert("We are preparing this feature ! Stay tuned !");
+  clickEdit(productId: number) {
+    this._router.navigate(['admin', 'products', productId])
   }
 
   changeActive(idProduct: number, isActive: boolean) {

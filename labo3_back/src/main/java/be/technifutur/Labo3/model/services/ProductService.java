@@ -94,6 +94,8 @@ public class ProductService implements Crudable<Product, ProductDto, Integer> {
                 oldProduct.getOrders());
 
         product.setProductId(integer);
+        product.setEntryDate(oldProduct.getEntryDate());
+        product.setIsActive(oldProduct.getIsActive());
         product.setUpdateDate(Instant.now());
 
         this.productRepository.save(product);
