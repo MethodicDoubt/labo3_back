@@ -19,7 +19,7 @@
       <td>{{s?.insertionDate | date : 'dd MMM YYYY - HH\'h\'mm'}}</td>
       <td>{{s?.updateDate | date : 'dd MMM YYYY - HH\'h\'mm'}}</td>
       <td>
-        <button nbButton status="primary" (click)="clickEdit()">
+        <button nbButton status="primary" (click)="clickEdit(s.supplierId)">
           <nb-icon icon="edit-2-outline"></nb-icon>
         </button>
       </td>

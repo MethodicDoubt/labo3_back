@@ -12,7 +12,6 @@ import { JuridicalStatus, Sector } from 'src/app/utils/enumeration';
 })
 export class AddSupplierComponent implements OnInit {
 
-  // bidule = Object.values(enum)
   formSupplier: FormGroup;
   sector = Object.values(Sector).filter(elt => typeof elt === 'string');
   juridicalStatus = Object.values(JuridicalStatus).filter(elt => typeof elt === 'string');

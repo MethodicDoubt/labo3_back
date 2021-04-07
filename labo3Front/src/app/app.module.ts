@@ -34,6 +34,7 @@ import { AdminUsersComponent } from './components/admin-panel/admin-panel/admin-
 import { AddCategoryComponent } from './components/admin-panel/admin-panel/admin-categories/add-category/add-category.component';
 import { AddSupplierComponent } from './components/admin-panel/admin-panel/admin-suppliers/add-supplier/add-supplier.component';
 import { EditCategoryComponent } from './components/admin-panel/admin-panel/admin-categories/edit-category/edit-category.component';
+import { EditsupplierComponent } from './components/admin-panel/admin-panel/admin-suppliers/editsupplier/editsupplier.component';
 registerLocaleData(localeFr, 'fr');
 
 @NgModule({
@@ -62,7 +63,8 @@ registerLocaleData(localeFr, 'fr');
     AdminUsersComponent,
     AddCategoryComponent,
     AddSupplierComponent,
-    EditCategoryComponent
+    EditCategoryComponent,
+    EditsupplierComponent
   ],
   imports: [
     BrowserModule,

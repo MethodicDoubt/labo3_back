@@ -16,6 +16,7 @@ import { MyAccountComponent } from './components/user/my-account/my-account.comp
 import { PaymentComponent } from './components/basket/payment/payment.component';
 import { ConnectGuardGuard } from './services/connect-guard.guard';
 import { EditCategoryComponent } from './components/admin-panel/admin-panel/admin-categories/edit-category/edit-category.component';
+import { EditsupplierComponent } from './components/admin-panel/admin-panel/admin-suppliers/editsupplier/editsupplier.component';
 
 const routes: Routes = [
   { path: '', component: AllProductComponent },
@@ -39,6 +40,9 @@ const routes: Routes = [
       },
       {
         path: 'suppliers', component: AdminSuppliersComponent
+      },
+      {
+        path: 'suppliers/:id', component: EditsupplierComponent
       },
       {
         path: 'users', component: AdminUsersComponent

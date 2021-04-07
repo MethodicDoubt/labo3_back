@@ -60,13 +60,16 @@ public class SupplierService implements Crudable<Supplier, SupplierDto, Integer>
 
         Supplier oldSupplier = this.supplierRepository.getOne(integer);
 
-        Supplier newSupplier = new Supplier(oldSupplier.getSupplierId(),
+        Supplier newSupplier = new Supplier(
+                oldSupplier.getSupplierId(),
                 oldSupplier.getCompanyName(),
                 oldSupplier.getJuridicalStatus(),
                 oldSupplier.getSector(),
                 oldSupplier.getInsertionDate(),
-                oldSupplier.getUpdateDate());
+                oldSupplier.getUpdateDate()
+        );
 
+        supplier.setInsertionDate(oldSupplier.getInsertionDate());
         supplier.setUpdateDate(Instant.now());
         supplier.setSupplierId(integer);
 

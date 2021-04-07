@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NbDialogService } from '@nebular/theme';
 import { Supplier } from 'src/app/models/supplier.model';
 import { SupplierService } from 'src/app/services/supplier.service';
@@ -14,7 +15,8 @@ export class AdminSuppliersComponent implements OnInit {
   suppliers: Supplier[] = [];
 
   constructor(private _supplierService: SupplierService,
-    private _dialogBox: NbDialogService) { }
+    private _dialogBox: NbDialogService,
+    private _router: Router) { }
 
   ngOnInit(): void {
     this.initSuppliers();
@@ -35,8 +37,8 @@ export class AdminSuppliersComponent implements OnInit {
     ref.onClose.subscribe(() => this.initSuppliers());
   }
 
-  clickEdit() {
-
+  clickEdit(supplierId: number) {
+    this._router.navigate(['admin', 'suppliers', supplierId])
   }
 
 }

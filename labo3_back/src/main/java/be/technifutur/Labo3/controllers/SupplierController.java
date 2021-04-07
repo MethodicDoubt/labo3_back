@@ -31,8 +31,9 @@ public class SupplierController implements RestControllable<Supplier, SupplierDt
     }
 
     @Override
-    public ResponseEntity<SupplierDto> getOne(Integer integer) {
-        return null;
+    @GetMapping(path = "/{id}")
+    public ResponseEntity<SupplierDto> getOne(@PathVariable Integer id) {
+        return ResponseEntity.ok(this.supplierService.getById(id));
     }
 
     @Override
@@ -43,8 +44,9 @@ public class SupplierController implements RestControllable<Supplier, SupplierDt
 
 
     @Override
-    public ResponseEntity<Boolean> update(Supplier supplier, Integer integer) {
-        return null;
+    @PutMapping(path = "/{id}")
+    public ResponseEntity<Boolean> update(@RequestBody Supplier supplier, @PathVariable Integer id) {
+        return ResponseEntity.ok(this.supplierService.update(supplier, id));
     }
 
     @Override

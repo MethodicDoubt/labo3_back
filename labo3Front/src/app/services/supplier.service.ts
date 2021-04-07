@@ -7,8 +7,6 @@ import { Supplier } from '../models/supplier.model';
   providedIn: 'root'
 })
 export class SupplierService {
-
-
   private BASE_URL: string = "http://localhost:8080/suppliers";
 
   constructor(private _httpClient: HttpClient) { }
@@ -22,7 +20,15 @@ export class SupplierService {
     return this._httpClient.get<string[]>(this.BASE_URL + "/companyName");
   }
 
+  getById(supplierId: number): Observable<Supplier> {
+    return this._httpClient.get<Supplier>(this.BASE_URL + '/' + supplierId);
+  }
+
   insert(newSupplier: Supplier): Observable<boolean> {
     return this._httpClient.post<boolean>(this.BASE_URL, newSupplier);
+  }
+
+  update(supplierToUpdate: Supplier, supplierId: number) {
+    return this._httpClient.put<boolean>(this.BASE_URL + '/' + supplierId, supplierToUpdate);
   }
 }
