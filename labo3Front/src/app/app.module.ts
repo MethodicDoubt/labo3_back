@@ -30,6 +30,8 @@ import { PaymentComponent } from './components/basket/payment/payment.component'
 import { LOCALE_ID } from '@angular/core';
 import localeFr from '@angular/common/locales/fr';
 import { registerLocaleData } from '@angular/common';
+import { AllProductWithPaginationComponent } from './components/product/all-product-with-pagination/all-product-with-pagination.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 registerLocaleData(localeFr, 'fr');
 
 @NgModule({
@@ -54,7 +56,8 @@ registerLocaleData(localeFr, 'fr');
     AddProductComponent,
     MyAccountComponent,
     PipeAddressPipe,
-    PaymentComponent
+    PaymentComponent,
+    AllProductWithPaginationComponent
   ],
   imports: [
     BrowserModule,
@@ -77,7 +80,8 @@ registerLocaleData(localeFr, 'fr');
     NbPopoverModule,
     NbSelectModule,
     NbCheckboxModule,
-    NbDatepickerModule.forRoot()
+    NbDatepickerModule.forRoot(),
+    NgxPaginationModule
   ],
   providers: [{
     provide: LOCALE_ID,

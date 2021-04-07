@@ -15,6 +15,7 @@ import { ProductResolverService } from './utils/product-resolver.service';
 import { MyAccountComponent } from './components/user/my-account/my-account.component';
 import { PaymentComponent } from './components/basket/payment/payment.component';
 import { ConnectGuardGuard } from './services/connect-guard.guard';
+import { AllProductWithPaginationComponent } from './components/product/all-product-with-pagination/all-product-with-pagination.component';
 
 const routes: Routes = [
   { path: '', component: AllProductComponent },
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'product/:id', resolve: { resultat: ProductResolverService }, component: ProductByIdComponent },
   { path: 'basket', canActivate: [ConnectGuardGuard], component: BasketComponent },
   { path: 'payment', canActivate: [ConnectGuardGuard], component: PaymentComponent },
+  { path: 'pagination', component: AllProductWithPaginationComponent },
   {
     path: 'admin', canActivate: [AuthGuardService], component: AdminPanelComponent, children: [
       {
@@ -39,6 +41,7 @@ const routes: Routes = [
       {
         path: 'users', component: AdminUsersComponent
       }
+      
     ]
   },
   { path: 'my-account', canActivate: [ConnectGuardGuard], component: MyAccountComponent },

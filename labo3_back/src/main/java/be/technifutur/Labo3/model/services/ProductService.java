@@ -14,6 +14,9 @@ import be.technifutur.Labo3.model.repositories.OrderRepository;
 import be.technifutur.Labo3.model.repositories.ProductRepository;
 import be.technifutur.Labo3.model.repositories.SupplierRepository;
 import com.querydsl.core.BooleanBuilder;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -221,6 +224,19 @@ public class ProductService implements Crudable<Product, ProductDto, Integer> {
         this.productRepository.save(productToUpdate);
 
         return true;
+
+    }
+
+    public Page<ProductDto> getAllWithPagination(int page, int size) {
+
+        int nbEntry = this.productRepository.findAll().size();
+
+        List<ProductDto> result = this.productRepository.findAll(PageRequest.of(page, size))
+                .stream()
+                .map(p -> mapper.toProductDto(p, true))
+                .collect(Collectors.toList());
+
+        return new PageImpl<>(result, PageRequest.of(page, size), nbEntry);
 
     }
 

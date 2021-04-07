@@ -74,15 +74,11 @@ public class PDFManager implements InitializingBean {
             nbPage++;
             newCoordY = initialCoordY;
 
-            System.out.println("Le nombre de page du document : " + nbPage);
-
         }
 
         PDPage pdPage = pdDocument.getPage(nbPage);
 
         stringList.forEach(string -> {
-
-            System.out.println("CoordY : " + newCoordY);
 
             newCoordY-= fontSize + leading;
 
@@ -108,8 +104,6 @@ public class PDFManager implements InitializingBean {
     public void addLineTextToPage(PDDocument document, PDPage page, String log, Integer coordX, Integer coordY, PDType1Font font, int fontSize) throws IOException {
 
         PDPageContentStream contentStream = new PDPageContentStream(document, page, PDPageContentStream.AppendMode.APPEND, true, true);
-
-        System.out.println(log);
 
         contentStream.beginText();
         contentStream.setFont(font, fontSize);
