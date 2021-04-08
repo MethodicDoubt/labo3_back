@@ -9,6 +9,7 @@ import be.technifutur.Labo3.model.types.AccessLevel;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Field;
@@ -23,10 +24,12 @@ public class UserService implements Crudable<User, UserDto, Integer>, UserDetail
 
     private final UserRepository userRepository;
     private final Mapper mapper;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository, Mapper mapper) {
+    public UserService(UserRepository userRepository, Mapper mapper, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.mapper = mapper;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -49,9 +52,10 @@ public class UserService implements Crudable<User, UserDto, Integer>, UserDetail
         if (user.getAccessLevel() == null)
             user.setAccessLevel(AccessLevel.CUSTOMER);
         user.setAccountNonExpired(true);
-        user.setAccountNonExpired(true);
-        user.setAccountNonExpired(true);
+        user.setAccountNonLocked(true);
+        user.setCredentialsNonExpired(true);
         user.setEnabled(true);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         User newUser = this.userRepository.save(user);
         return this.userRepository.existsById(newUser.getUserId());
     }

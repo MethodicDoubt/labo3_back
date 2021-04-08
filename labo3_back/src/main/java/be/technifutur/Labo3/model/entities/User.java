@@ -39,7 +39,7 @@ public class User implements UserDetails {
     @Column(nullable = false, unique = true, length = 50)
     String surname;
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false)
     String password;
 
     @Embedded

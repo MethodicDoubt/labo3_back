@@ -100,3 +100,6 @@ FIN PROJET 04/03/21
     - Ajout de la sécurité : (J)
                 - Ajout de sécurité jwt key en backend
                 - Ajout de guards d'accessibilité front-end (user AccessLevel + authentication)
+
+
+    - Modifier LocalDate(Time) --> INSTANT (FRONT ET BACK)

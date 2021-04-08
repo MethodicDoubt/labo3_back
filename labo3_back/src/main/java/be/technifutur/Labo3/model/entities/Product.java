@@ -16,7 +16,7 @@ import java.util.List;
 @Builder
 @Entity
 @EqualsAndHashCode
-public class Product{
+public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -63,5 +63,4 @@ public class Product{
 
     @ManyToMany(mappedBy = "products")
     List<Order> orders;
-
 }
