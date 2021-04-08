@@ -24,7 +24,7 @@ export class AppComponent {
     private _authService: AuthService,
     private _productService: ProductService,
     private _router: Router) {
-    this._authService.login("Wizounet", "password");//TODO --> A REMOVE POUR LA PRODUCTION
+    this._authService.login("admin", "1234");//TODO --> A REMOVE POUR LA PRODUCTION
     this.basketStatus = this._productService.basketStatus.subscribe(data => this.productNumber = data);
     this.statusConnexion = this._authService.statusBehaviorConnexion.subscribe(
       dataConnexion => this.isConnected = dataConnexion

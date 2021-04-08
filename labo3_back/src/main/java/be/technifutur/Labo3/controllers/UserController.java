@@ -1,5 +1,6 @@
 package be.technifutur.Labo3.controllers;
 
+import be.technifutur.Labo3.mapper.Mapper;
 import be.technifutur.Labo3.model.dtos.UserDto;
 import be.technifutur.Labo3.model.entities.User;
 import be.technifutur.Labo3.model.services.UserService;
@@ -15,9 +16,11 @@ import java.util.Map;
 public class UserController implements RestControllable<User, UserDto, Integer> {
 
     private final UserService userService;
+    private final Mapper mapper;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, Mapper mapper) {
         this.userService = userService;
+        this.mapper = mapper;
     }
 
     @Override
@@ -49,7 +52,7 @@ public class UserController implements RestControllable<User, UserDto, Integer> 
 
     @GetMapping("/{surname}")
     public ResponseEntity<UserDto> getBySurname(@PathVariable("surname") String surname) {
-        return ResponseEntity.ok(this.userService.getBySurname(surname));
+        return ResponseEntity.ok(this.mapper.toUserDto((User) this.userService.loadUserByUsername(surname), true));
     }
 
     @PostMapping("/login")

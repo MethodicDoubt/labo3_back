@@ -107,11 +107,6 @@ public class UserService implements Crudable<User, UserDto, Integer>, UserDetail
         return true;
     }
 
-    //TODO VERIF OU QUE CAY
-    public UserDto getBySurname(String surname) {
-        return this.mapper.toUserDto(this.userRepository.findBySurnameEquals(surname));
-    }
-
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         return this.userRepository.findBySurnameEquals(s);
