@@ -6,6 +6,9 @@ import be.technifutur.Labo3.model.entities.User;
 import be.technifutur.Labo3.model.exceptionHandler.UserNotFoundException;
 import be.technifutur.Labo3.model.repositories.UserRepository;
 import be.technifutur.Labo3.model.types.AccessLevel;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Field;
@@ -16,7 +19,7 @@ import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @Service
-public class UserService implements Crudable<User, UserDto, Integer> {
+public class UserService implements Crudable<User, UserDto, Integer>, UserDetailsService {
 
     private final UserRepository userRepository;
     private final Mapper mapper;
@@ -101,5 +104,10 @@ public class UserService implements Crudable<User, UserDto, Integer> {
         this.userRepository.save(userToPatch);
 
         return true;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+        return this.userRepository.findBySurnameEquals(s);
     }
 }
