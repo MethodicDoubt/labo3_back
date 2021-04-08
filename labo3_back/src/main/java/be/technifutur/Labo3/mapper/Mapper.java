@@ -1,17 +1,7 @@
 package be.technifutur.Labo3.mapper;
 
-import be.technifutur.Labo3.model.dtos.LogDto;
-import be.technifutur.Labo3.model.dtos.OrderDto;
-import be.technifutur.Labo3.model.dtos.UserDto;
-import be.technifutur.Labo3.model.entities.Log;
-import be.technifutur.Labo3.model.entities.Order;
-import be.technifutur.Labo3.model.entities.User;
-import be.technifutur.Labo3.model.dtos.CategoryDto;
-import be.technifutur.Labo3.model.dtos.ProductDto;
-import be.technifutur.Labo3.model.dtos.SupplierDto;
-import be.technifutur.Labo3.model.entities.Category;
-import be.technifutur.Labo3.model.entities.Product;
-import be.technifutur.Labo3.model.entities.Supplier;
+import be.technifutur.Labo3.model.dtos.*;
+import be.technifutur.Labo3.model.entities.*;
 import org.springframework.stereotype.Service;
 
 import java.util.stream.Collectors;
@@ -31,13 +21,16 @@ public class Mapper {
                 .accessLevel(user.getAccessLevel())
                 .surname(user.getSurname())
                 .address(user.getAddress())
-                .isActive(user.getIsActive())
                 .ordersDto(withOrders ?
                         user.getOrders()
                                 .stream()
                                 .map(this::toOrderDto)
                                 .collect(Collectors.toList()) : null
                 )
+                .isAccountNonExpired(user.isAccountNonExpired())
+                .isAccountNonLocked(user.isAccountNonLocked())
+                .isEnabled(user.isEnabled())
+                .isCredentialsNonExpired(user.isCredentialsNonExpired())
                 .build();
     }
 
@@ -50,13 +43,16 @@ public class Mapper {
                 .surname(userDto.getSurname())
                 .password(userDto.getPassword())
                 .address(userDto.getAddress())
-                .isActive(userDto.getIsActive())
                 .orders(
                         userDto.getOrdersDto()
                                 .stream()
                                 .map(this::toOrderEntity)
                                 .collect(Collectors.toList())
                 )
+                .isAccountNonExpired(userDto.isAccountNonExpired())
+                .isAccountNonLocked(userDto.isAccountNonLocked())
+                .isEnabled(userDto.isEnabled())
+                .isCredentialsNonExpired(userDto.isCredentialsNonExpired())
                 .build();
     }
 

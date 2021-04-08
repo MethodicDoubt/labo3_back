@@ -6,7 +6,6 @@ import be.technifutur.Labo3.model.entities.User;
 import be.technifutur.Labo3.model.exceptionHandler.UserNotFoundException;
 import be.technifutur.Labo3.model.repositories.UserRepository;
 import be.technifutur.Labo3.model.types.AccessLevel;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Field;
@@ -46,7 +45,10 @@ public class UserService implements Crudable<User, UserDto, Integer> {
     public boolean insert(User user) {
         if (user.getAccessLevel() == null)
             user.setAccessLevel(AccessLevel.CUSTOMER);
-        user.setIsActive(true);
+        user.setAccountNonExpired(true);
+        user.setAccountNonExpired(true);
+        user.setAccountNonExpired(true);
+        user.setEnabled(true);
         User newUser = this.userRepository.save(user);
         return this.userRepository.existsById(newUser.getUserId());
     }
@@ -56,7 +58,8 @@ public class UserService implements Crudable<User, UserDto, Integer> {
         User old = this.userRepository.getOne(integer);
         User toTest = new User(
                 old.getUserId(), old.getLastName(), old.getFirstName(), old.getAccessLevel(), old.getSurname()
-                , old.getPassword(), old.getAddress(), old.getIsActive(), old.getOrders(), old.getAvatar()
+                , old.getPassword(), old.getAddress(), old.getOrders(), old.getAvatar(), old.isAccountNonExpired()
+                , old.isAccountNonLocked(), old.isCredentialsNonExpired(), old.isEnabled()
         );
         user.setUserId(integer);
         this.userRepository.save(user);
