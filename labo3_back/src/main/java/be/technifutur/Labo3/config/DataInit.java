@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -116,7 +118,7 @@ public class DataInit implements InitializingBean {
                     .purchasePrice(8.15)
                     .quantity(27)
                     .supplier(suppliers.get(2))
-                    .expirationDate(LocalDate.of(2021, 6, 12))
+                    .expirationDate(LocalDateTime.of(2021, 12, 12, 00, 00).atZone(ZoneId.of("Europe/Paris")).toInstant())
                     .productImage("https://assets-us-01.kc-usercontent.com/f5a2b33b-f1c1-0070-ebd4-26269b6538af/b95b5554-169c-4f2d-8764-72affd5252c8/actimel_8_Strawberry%200%25.png?fm=webp&w=320&h=268")
                     .vat(.21)
                     .build(),
@@ -127,7 +129,7 @@ public class DataInit implements InitializingBean {
                     .purchasePrice(7.15)
                     .quantity(36)
                     .supplier(suppliers.get(2))
-                    .expirationDate(LocalDate.of(2021, 6, 12))
+                    .expirationDate(LocalDateTime.of(2021, 12, 12, 00, 00).atZone(ZoneId.of("Europe/Paris")).toInstant())
                     .productImage("https://assets-us-01.kc-usercontent.com/f5a2b33b-f1c1-0070-ebd4-26269b6538af/ad653be8-86a7-403f-8fd1-782aea548e25/Oikos%200%25_manguepassion_2x145g.png?fm=webp&w=320&h=268")
                     .vat(.21)
                     .build(),
@@ -138,7 +140,7 @@ public class DataInit implements InitializingBean {
                     .purchasePrice(18.3)
                     .quantity(52)
                     .supplier(suppliers.get(2))
-                    .expirationDate(LocalDate.of(2021, 6, 12))
+                    .expirationDate(LocalDateTime.of(2021, 12, 12, 00, 00).atZone(ZoneId.of("Europe/Paris")).toInstant())
                     .productImage("https://assets-us-01.kc-usercontent.com/f5a2b33b-f1c1-0070-ebd4-26269b6538af/6d06e063-e0af-40be-8d5d-2dbc15ce01ac/7191.jpg?fm=webp&w=320&h=268")
                     .vat(.21)
                     .build(),
@@ -149,7 +151,7 @@ public class DataInit implements InitializingBean {
                     .purchasePrice(7.69)
                     .quantity(15)
                     .supplier(suppliers.get(2))
-                    .expirationDate(LocalDate.of(2021, 6, 12))
+                    .expirationDate(LocalDateTime.of(2021, 12, 12, 00, 00).atZone(ZoneId.of("Europe/Paris")).toInstant())
                     .productImage("https://assets-us-01.kc-usercontent.com/f5a2b33b-f1c1-0070-ebd4-26269b6538af/8f310711-9c15-4161-aaa8-905ef937243a/Danone%20Cottage%20Cheese%20420g%20Facing%20B%20MUD.png?fm=webp&w=320&h=268")
                     .vat(.21)
                     .build()

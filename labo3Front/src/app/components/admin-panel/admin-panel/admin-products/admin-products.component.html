@@ -44,7 +44,7 @@
       <td><span *ngFor="let c of p.categoriesDto">{{c.type}} </span></td>
       <td>
         <span *ngIf="p.expirationDate == null">/</span>
-        <span *ngIf="p.expirationDate != null">{{p.expirationDate}}</span>
+        <span *ngIf="p.expirationDate != null">{{p.expirationDate | date : "dd MMM YYYY"}}</span>
       </td>
       <td>{{p.purchasePrice | currency: 'EUR'}}</td>
       <td>{{p.quantity }}</td>

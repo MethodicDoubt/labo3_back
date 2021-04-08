@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { AdvancedSearch } from '../models/advanced-search.model';
 import { Product } from '../models/product.model';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +29,8 @@ export class ProductService {
   //-------------------------------------------------------CONSTRUCTOR
 
 
-  constructor(private _httpClient: HttpClient) { }
+  constructor(private _httpClient: HttpClient,
+    public authService: AuthService) { }
 
   //-----------------------------------------------------SERVICES
 
@@ -36,7 +38,7 @@ export class ProductService {
     return this._httpClient.get<Product[]>(this.BASE_URL);
   }
 
-  getAllWithPagination(params: any) : Observable<any> {
+  getAllWithPagination(params: any): Observable<any> {
 
     return this._httpClient.get<any>(this.BASE_URL, { params });
 
@@ -60,7 +62,7 @@ export class ProductService {
   }
 
   insert(product: Product): Observable<boolean> {
-    return this._httpClient.post<boolean>(this.BASE_URL, product);
+    return this._httpClient.post<boolean>(this.BASE_URL, { product: product, user: this.authService.currentUser });
   }
 
   patch(productToPatch: Object, id: number): Observable<boolean> {
@@ -70,7 +72,7 @@ export class ProductService {
   }
 
   update(productToUpdate: Product, productId: number): Observable<boolean> {
-    return this._httpClient.put<boolean>(this.BASE_URL + '/' + productId, productToUpdate);
+    return this._httpClient.put<boolean>(this.BASE_URL + '/' + productId, { product: productToUpdate, user: this.authService.currentUser });
   }
 
   //--------------------------------------------------------METHODES

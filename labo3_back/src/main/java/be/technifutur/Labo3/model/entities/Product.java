@@ -39,7 +39,7 @@ public class Product {
     Instant updateDate;
 
     @Column
-    LocalDate expirationDate;
+    Instant expirationDate;
 
     @Column(nullable = false)
     @Min(value = 0, message = "The price must be a positive number")

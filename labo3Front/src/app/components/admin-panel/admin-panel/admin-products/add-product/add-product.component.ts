@@ -65,7 +65,6 @@ export class AddProductComponent implements OnInit {
     newProduct.productImage = this.fgAddProduct.value['productImage'];
     newProduct.purchasePrice = this.fgAddProduct.value['purchasePrice'];
     newProduct.quantity = this.fgAddProduct.value['quantity'];
-    this.fgAddProduct.value['expirationDate'] == "" ? null : newProduct.expirationDate = this.fgAddProduct.value['expirationDate'];
     newProduct.supplier = this.suppliers.find(supp => supp.supplierId == this.fgAddProduct.value['supplier']);
     this.fgAddProduct.value['categories'].forEach(element => {
       newProduct.categories.push(
@@ -74,6 +73,13 @@ export class AddProductComponent implements OnInit {
         )
       )
     });
+    this.fgAddProduct.value['expirationDate'] == "" ? null :
+      newProduct.expirationDate = this.transformToInstant(this.fgAddProduct.value['expirationDate']);
     return newProduct;
+  }
+
+  transformToInstant(dateToTransform: string): String {
+    dateToTransform = dateToTransform.concat("T00:00:00.000000Z")
+    return dateToTransform;
   }
 }

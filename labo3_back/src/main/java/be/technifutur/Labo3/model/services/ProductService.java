@@ -74,11 +74,6 @@ public class ProductService implements Crudable<Product, ProductDto, Integer> {
         return mapper.toProductDto(product, true);
     }
 
-    @Override
-    public boolean insert(Product product) {
-        return false;
-    }
-
     public boolean insert(Product product, User user) throws IOException {
 
         product.setEntryDate(Instant.now());
@@ -101,16 +96,13 @@ public class ProductService implements Crudable<Product, ProductDto, Integer> {
                         newLog.getCreationDate().toString(),
                         newLog.getPrice().toString(),
                         newLog.getUser().getSurname()
-                        )
+                )
 
         );
-
         return this.productRepository.findById(newProduct.getProductId()).isPresent();
-
     }
 
-    @Override
-    public boolean update(Product product, Integer integer) {
+    public boolean update(Product product, User user, Integer integer) throws IOException {
 
         Product oldProduct = this.productRepository.getOne(integer);
 
@@ -135,6 +127,25 @@ public class ProductService implements Crudable<Product, ProductDto, Integer> {
         product.setUpdateDate(Instant.now());
 
         this.productRepository.save(product);
+
+        Log newLog = Log.builder()
+                .product(product)
+                .price(product.getPurchasePrice())
+                .user(user)
+                .build();
+
+        this.logService.insert(newLog);
+
+        this.pdfManager.generateToPdf(
+
+                List.of(newLog.getLogId().toString(),
+                        newLog.getProduct().getName(),
+                        newLog.getCreationDate().toString(),
+                        newLog.getPrice().toString(),
+                        newLog.getUser().getSurname()
+                )
+
+        );
 
         return !newProduct.equals(this.productRepository.getOne(integer));
 
@@ -239,6 +250,18 @@ public class ProductService implements Crudable<Product, ProductDto, Integer> {
 
         return new PageImpl<>(result, PageRequest.of(page, size), nbEntry);
 
+    }
+
+    // useless
+
+    @Override
+    public boolean insert(Product product) {
+        return false;
+    }
+
+    @Override
+    public boolean update(Product product, Integer integer) {
+        return false;
     }
 
 }

@@ -23,7 +23,7 @@ public class ProductDto {
     List<CategoryDto> categoriesDto;
     Instant entryDate;
     Instant updateDate;
-    LocalDate expirationDate;
+    Instant expirationDate;
     Double purchasePrice;
     Integer quantity;
     SupplierDto supplierDto;
