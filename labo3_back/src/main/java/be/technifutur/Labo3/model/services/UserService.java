@@ -75,9 +75,6 @@ public class UserService implements Crudable<User, UserDto, Integer>, UserDetail
         return this.userRepository.existsById(integer);
     }
 
-    public UserDto getBySurname(String surname) {
-        return this.mapper.toUserDto(this.userRepository.findBySurnameEquals(surname));
-    }
 
     public boolean login(String surname, String password) {
         User userToTest = this.userRepository.findBySurnameEquals(surname);
@@ -104,6 +101,11 @@ public class UserService implements Crudable<User, UserDto, Integer>, UserDetail
         this.userRepository.save(userToPatch);
 
         return true;
+    }
+
+    //TODO VERIF OU QUE CAY
+    public UserDto getBySurname(String surname) {
+        return this.mapper.toUserDto(this.userRepository.findBySurnameEquals(surname));
     }
 
     @Override
