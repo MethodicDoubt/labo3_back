@@ -63,7 +63,7 @@ registerLocaleData(localeFr, 'fr');
     MyAccountComponent,
     PipeAddressPipe,
     PaymentComponent,
-    AllProductWithPaginationComponent
+    AllProductWithPaginationComponent,
     AdminUsersComponent,
     AddCategoryComponent,
     AddSupplierComponent,

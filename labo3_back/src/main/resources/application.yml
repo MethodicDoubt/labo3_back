@@ -1,7 +1,7 @@
 spring:
-#  mvc:
-#    throw-exception-if-no-handler-found: true
-#    static-path-pattern: /static
+  #  mvc:
+  #    throw-exception-if-no-handler-found: true
+  #    static-path-pattern: /static
   datasource:
     url: jdbc:postgresql://localhost:5432/techni_labo_3
     username: postgres
@@ -13,4 +13,4 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
 folders:
-  pdf: 'C:\Users\Willa\Desktop\Formation\labo3\Labo3\labo3_back\pdf'
+  pdf: 'C:\Users\Jojo\Desktop'

@@ -63,7 +63,7 @@ public class PDFManager implements InitializingBean {
 
     public void generateToPdf(List<String> stringList) throws IOException {
 
-        File file = new File("C:\\Users\\Willa\\Desktop\\Formation\\labo3\\Labo3\\labo3_back\\pdf\\log.pdf");
+        File file = new File("C:\\Users\\Jojo\\Desktop\\log.pdf");
 
         PDDocument pdDocument = PDDocument.load(file);
 
@@ -95,7 +95,7 @@ public class PDFManager implements InitializingBean {
 
         });
 
-        pdDocument.save("C:\\Users\\Willa\\Desktop\\Formation\\labo3\\Labo3\\labo3_back\\pdf\\log.pdf");
+        pdDocument.save("C:\\Users\\Jojo\\Desktop\\log.pdf");
 
         pdDocument.close();
 
@@ -123,7 +123,7 @@ public class PDFManager implements InitializingBean {
         PDPage page = new PDPage();
 
         document.addPage(page);
-        document.save("C:\\Users\\Willa\\Desktop\\Formation\\labo3\\Labo3\\labo3_back\\pdf\\log.pdf");
+        document.save("C:\\Users\\Jojo\\Desktop\\log.pdf");
         document.close();
 
     }
