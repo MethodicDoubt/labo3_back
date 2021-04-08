@@ -23,19 +23,6 @@ export class AdminUsersComponent implements OnInit {
       users => {
         this.users = users;
       }
-    )
+    );
   }
-
-  clickEdit() {
-    alert("We are preparing this feature ! Stay tuned !");
-  }
-
-  changeActive(userId: number, isActive: boolean) {
-    if (confirm("Do you want to change active ?")) {
-      this._userService.userToPatch({ 'isActive': !isActive }, userId).subscribe(
-        next => this.initUsers()
-      )
-    }
-  }
-
 }

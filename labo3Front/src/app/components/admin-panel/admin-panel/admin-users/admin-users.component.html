@@ -6,7 +6,6 @@
     <th>Surname</th>
     <th>Address</th>
     <th>Number of Order(s)</th>
-    <th>Active</th>
   </thead>
   <tbody>
     <tr *ngFor="let u of users">
@@ -15,11 +14,6 @@
       <td>{{u?.surname}}</td>
       <td>{{u | pipeAddress}}, {{u?.address.country}}</td>
       <td>{{u?.ordersDto.length}}</td>
-      <td class="text-center">
-        <a (click)="changeActive(u.userId, u.isActive)">
-          <nb-icon icon="radio-button-on" [status]="u.isActive ? 'success':'danger'"></nb-icon>
-        </a>
-      </td>
     </tr>
   </tbody>
 </table>
