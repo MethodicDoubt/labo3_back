@@ -40,7 +40,7 @@ export class AdvSearchComponent implements OnInit {
   private initForm() {
     this.fg = this._builder.group({
       name: [''],
-      categories: [''],
+      categories: [['']],
       minimumPrice: [0],
       maximumPrice: [1000],
       quantity: [false, Validators.required],
