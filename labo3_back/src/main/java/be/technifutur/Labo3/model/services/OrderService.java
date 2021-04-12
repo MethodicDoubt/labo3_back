@@ -43,11 +43,12 @@ public class OrderService implements Crudable<Order, OrderDto, Integer> {
     @Override
     public boolean insert(Order order) {
 
-        if()
+
 
         order.setCreationDate(Instant.now());
         Order newOrder = this.orderRepository.save(order);
         return this.orderRepository.existsById(newOrder.getOrderId());
+
     }
 
     @Override

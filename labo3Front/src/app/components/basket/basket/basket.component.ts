@@ -11,9 +11,13 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class BasketComponent implements OnInit {
 
-  products : Product[];
+  mapProductQuantity : Map<Product, number> = new Map<Product, number>();
+
+  uniqueProduct: Product[] = [];
 
   totalPrice : number = 0;
+
+  quantity: number = 0;
 
   totalPriceStatus : Subscription;
 
@@ -25,20 +29,27 @@ export class BasketComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.products = this.productService.basket;
+    this.mapProductQuantity = this.productService.basket;
+
+    this.uniqueProduct = this.mapProductQuantity.size > 0 ? Array.from(this.mapProductQuantity.keys()) : [];
 
     this.totalPriceStatus = this.productService.totalPriceStatus.subscribe(data => this.totalPrice = data);
 
+    console.log(this.mapProductQuantity);
+
   }
 
-  removeFromBasket(i : number, p : Product) {
+  removeFromBasket(p : Product) {
 
-    this.productService.basket.splice(i, 1);
+    this.productService.basket.delete(p);
+    this.uniqueProduct = Array.from(this.mapProductQuantity.keys());
+
+    console.log(this.productService.basket)
+    console.log(this.uniqueProduct)
 
     this.productService.emitBasketLengthStatus();
 
-    this.productService.calculTotalPrice(-(p.purchasePrice));
-    this.productService.emitTotalPriceStatus();
+    this.productService.calculTotalPrice();
 
   }
 
@@ -51,6 +62,24 @@ export class BasketComponent implements OnInit {
   redirectToPayment() {
 
     this._router.navigate(['payment']).then();
+
+  }
+
+  onQuantityLoad(p: Product) {
+
+    this.quantity = this.productService.basket.get(p);
+
+  }
+
+  changeQuantity(p: Product, quantity: number) {
+
+    console.log(quantity);
+
+    this.productService.basket.set(p, quantity);
+
+    this.productService.calculTotalPrice();
+
+    console.log(this.productService.basket)
 
   }
 

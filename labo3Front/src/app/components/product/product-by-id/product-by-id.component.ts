@@ -37,13 +37,12 @@ export class ProductByIdComponent implements OnInit {
     this._router.navigate(["product"]).then();
   }
 
-  addToBasket(p: Product) {
+  addToBasket(p: Product, quantity: number) {
 
-    this._productService.basket.push(p);
+    this._productService.basket.set(p, quantity);
     this._productService.emitBasketLengthStatus();
 
-    this._productService.calculTotalPrice(p.purchasePrice);
-    this._productService.emitTotalPriceStatus();
+    this._productService.calculTotalPrice();
 
   }
 

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NbPopoverDirective } from '@nebular/theme';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { Product } from 'src/app/models/product.model';
 import { AuthService } from 'src/app/services/auth.service';
@@ -12,7 +13,12 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class AllProductComponent implements OnInit {
 
+  @ViewChildren(NbPopoverDirective) popovers: QueryList<NbPopoverDirective>;
+
   products: Product[];
+
+  quantity : number = 0;
+
   isConnected: boolean;
   statusConnexion: Subscription;
 
@@ -103,11 +109,23 @@ export class AllProductComponent implements OnInit {
 
   addToBasket(p: Product) {
 
-    this._productService.basket.push(p);
-    this._productService.emitBasketLengthStatus();
+    console.log(this.quantity);
+    
+    if(this.quantity > 0 && this.quantity <= p.quantity) {
 
-    this._productService.calculTotalPrice(p.purchasePrice);
-    this._productService.emitTotalPriceStatus();
+      this._productService.basket.set(p, this.quantity);
+      
+      this._productService.emitBasketLengthStatus();
+  
+      this._productService.calculTotalPrice();
+
+      this.quantity = 0;
+  
+      this.popovers.forEach(pop => {
+        pop.hide();
+    });
+
+    }
 
   }
 
