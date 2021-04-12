@@ -10,11 +10,11 @@ import { AdminUsersComponent } from './components/admin-panel/admin-panel/admin-
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found/page-not-found.component';
 import { AllProductComponent } from './components/product/all-product/all-product.component';
 import { ProductByIdComponent } from './components/product/product-by-id/product-by-id.component';
-import { AuthGuardService } from './services/auth-guard.service';
+import { AuthGuardService } from './utils/auth-guard.guard';
 import { ProductResolverService } from './utils/product-resolver.service';
 import { MyAccountComponent } from './components/user/my-account/my-account.component';
 import { PaymentComponent } from './components/basket/payment/payment.component';
-import { ConnectGuardGuard } from './services/connect-guard.guard';
+import { ConnectGuard } from './utils/connect.guard';
 import { AllProductWithPaginationComponent } from './components/product/all-product-with-pagination/all-product-with-pagination.component';
 import { EditCategoryComponent } from './components/admin-panel/admin-panel/admin-categories/edit-category/edit-category.component';
 import { EditsupplierComponent } from './components/admin-panel/admin-panel/admin-suppliers/editsupplier/editsupplier.component';
@@ -24,8 +24,8 @@ const routes: Routes = [
   { path: '', component: AllProductComponent },
   { path: 'home', component: AllProductComponent },
   { path: 'product/:id', resolve: { resultat: ProductResolverService }, component: ProductByIdComponent },
-  { path: 'basket', canActivate: [ConnectGuardGuard], component: BasketComponent },
-  { path: 'payment', canActivate: [ConnectGuardGuard], component: PaymentComponent },
+  { path: 'basket', canActivate: [ConnectGuard], component: BasketComponent },
+  { path: 'payment', canActivate: [ConnectGuard], component: PaymentComponent },
   { path: 'pagination', component: AllProductWithPaginationComponent },
   {
     path: 'admin', canActivate: [AuthGuardService], component: AdminPanelComponent, children: [
@@ -56,7 +56,7 @@ const routes: Routes = [
       
     ]
   },
-  { path: 'my-account', canActivate: [ConnectGuardGuard], component: MyAccountComponent },
+  { path: 'my-account', canActivate: [ConnectGuard], component: MyAccountComponent },
   { path: '404', component: PageNotFoundComponent },
   { path: '**', redirectTo: '/404' }
 ];
