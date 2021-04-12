@@ -38,11 +38,9 @@ export class AuthService {
           let token = data.headers.get('Authorization');
           token = token.replace('Bearer ', '');
           localStorage.setItem('token', token);
-          console.log('coucou')
           // get currentUser
           this._httpClient.get<User>(this.BASE_URL + "users/" + surname).subscribe(
             user => {
-              console.log(user)
               this.currentUser = user;
               localStorage.setItem('role', this.currentUser.accessLevel);
               localStorage.setItem('isConnected', "true");
@@ -50,7 +48,6 @@ export class AuthService {
               this.currentUser.accessLevel == "ADMINISTRATOR" ? this.isAdmin = true : '';
               this.emitStatusConnexion();
               this.emitStatusAdmin();
-              console.log('coucou2')
             }
           );
         } else {

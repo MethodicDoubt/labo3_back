@@ -38,7 +38,7 @@ export class AllProductComponent implements OnInit {
 
         } else {
           this._productService.search(this._productService.searchObject).subscribe(data => {
-            console.log(data)
+            // console.log(data)
             if (data.length == 0) {
               alert("Your advance search get nothing !");
               this.initTab();
