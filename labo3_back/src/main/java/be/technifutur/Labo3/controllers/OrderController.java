@@ -5,13 +5,14 @@ import be.technifutur.Labo3.model.entities.Order;
 import be.technifutur.Labo3.model.services.OrderService;
 import be.technifutur.Labo3.model.services.ProductService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
 
 @RestController
-@CrossOrigin
+//@CrossOrigin
 @RequestMapping("orders")
 public class OrderController implements RestControllable<Order, OrderDto, Integer> {
 
@@ -35,11 +36,8 @@ public class OrderController implements RestControllable<Order, OrderDto, Intege
     @Override
     @PostMapping
     public ResponseEntity<Boolean> insert(@RequestBody Order order) {
-
         order.setReference(this.orderService.createReference(order));
-
         return ResponseEntity.ok(this.orderService.insert(order));
-
     }
 
     @Override

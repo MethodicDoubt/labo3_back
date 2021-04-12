@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@CrossOrigin
+//@CrossOrigin
 @RequestMapping("users")
 public class UserController implements RestControllable<User, UserDto, Integer> {
 

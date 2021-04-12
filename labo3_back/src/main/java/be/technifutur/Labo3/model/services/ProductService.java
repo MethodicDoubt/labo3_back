@@ -165,7 +165,7 @@ public class ProductService implements Crudable<Product, ProductDto, Integer> {
     }
 
     public List<ProductDto> search(AdvancedSearchDto advancedSearchDto) {
-
+        System.out.println(advancedSearchDto.toString());
         BooleanBuilder predicate = new BooleanBuilder();
 
         QProduct qProduct = QProduct.product;

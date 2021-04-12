@@ -40,7 +40,7 @@ export class AdvSearchComponent implements OnInit {
   private initForm() {
     this.fg = this._builder.group({
       name: [''],
-      categories: [['']],
+      categories: [null],
       minimumPrice: [0],
       maximumPrice: [1000],
       quantity: [false, Validators.required],
@@ -50,7 +50,7 @@ export class AdvSearchComponent implements OnInit {
 
   onSubmit() {
     let searchObject = this.transformFgIntoAdvSrch();
-    
+
     this._router.navigate(['/home'], {
       queryParams: {
         searchObject: searchObject.name == "" ? this.date.getMilliseconds() : searchObject.name
@@ -65,7 +65,7 @@ export class AdvSearchComponent implements OnInit {
     let searchObject = new AdvancedSearch();
 
     searchObject.name = this.fg.get('name').value;
-    searchObject.categoriesType = this.fg.get('categories').value.length > 0 ? this.fg.get('categories').value : null;
+    searchObject.categoriesType = this.fg.get('categories').value != null ? this.fg.get('categories').value : null;
     searchObject.minimumPrice = this.fg.get('minimumPrice').value;
     searchObject.maximumPrice = this.fg.get('maximumPrice').value;
     searchObject.quantity = this.fg.get('quantity').value;

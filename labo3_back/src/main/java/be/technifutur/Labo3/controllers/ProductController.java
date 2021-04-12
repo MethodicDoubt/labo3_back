@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -19,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@CrossOrigin
+//@CrossOrigin
 @RequestMapping("products")
 public class ProductController implements RestControllable<Product, ProductDto, Integer> {
 
@@ -41,12 +42,14 @@ public class ProductController implements RestControllable<Product, ProductDto, 
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('ADMINISTRATOR')")
     public ResponseEntity<Boolean> insert(@RequestBody AssociationProductUser productUser) throws IOException {
         return ResponseEntity.ok(this.productService.insert(productUser.getProduct(), productUser.getUser()));
     }
 
     @Override
     @DeleteMapping(path = "/{id}")
+    @PreAuthorize("hasAuthority('ADMINISTRATOR')")
     public ResponseEntity<Boolean> delete(@PathVariable("id") Integer integer) throws ProductNotFoundException {
         return ResponseEntity.ok(this.productService.delete(integer));
     }
@@ -71,6 +74,7 @@ public class ProductController implements RestControllable<Product, ProductDto, 
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMINISTRATOR')")
     public ResponseEntity<Boolean> update(@RequestBody AssociationProductUser productUser, @PathVariable("id") Integer id) throws IOException {
         return ResponseEntity.ok(this.productService.update(productUser.getProduct(), productUser.getUser(), id));
     }
@@ -82,12 +86,11 @@ public class ProductController implements RestControllable<Product, ProductDto, 
 
     @PostMapping(path = "/advsearch")
     public ResponseEntity<List<ProductDto>> advSearch(@RequestBody AdvancedSearchDto advancedSearchDto) {
-
         return ResponseEntity.ok(this.productService.search(advancedSearchDto));
-
     }
 
     @PatchMapping(path = "/{id}")
+    @PreAuthorize("hasAuthority('ADMINISTRATOR')")
     public ResponseEntity<Boolean> patch(@RequestBody Map<String, Object> productToPatch, @PathVariable Integer id) throws IllegalAccessException {
         return ResponseEntity.ok(this.productService.partialUpdate(productToPatch, id));
     }

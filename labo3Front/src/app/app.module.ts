@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NbThemeModule, NbLayoutModule, NbSidebarModule, NbMenuModule, NbButtonModule, NbIconModule, NbInputModule, NbListModule, NbCardModule, NbDialogModule, NbPopoverModule, NbSelectModule, NbCheckboxModule, NbDatepickerModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AllProductComponent } from './components/product/all-product/all-product.component';
 import { ProductByIdComponent } from './components/product/product-by-id/product-by-id.component';
 import { NavComponent } from './components/navigation-bar/nav/nav.component';
@@ -38,6 +38,7 @@ import { AddSupplierComponent } from './components/admin-panel/admin-panel/admin
 import { EditCategoryComponent } from './components/admin-panel/admin-panel/admin-categories/edit-category/edit-category.component';
 import { EditsupplierComponent } from './components/admin-panel/admin-panel/admin-suppliers/editsupplier/editsupplier.component';
 import { EditProductComponent } from './components/admin-panel/admin-panel/admin-products/edit-product/edit-product.component';
+import { AuthInterceptor } from './utils/auth.interceptor';
 registerLocaleData(localeFr, 'fr');
 
 @NgModule({
@@ -98,7 +99,12 @@ registerLocaleData(localeFr, 'fr');
   providers: [{
     provide: LOCALE_ID,
     useValue: 'fr'
-   }],
+  }, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
