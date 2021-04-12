@@ -2,29 +2,37 @@
   
     <div class="col-12">
 
-      <h4>Products List</h4>
+      <nb-card>
+
+        <nb-card-header><h4>Products List</h4></nb-card-header>
+
+        <nb-card-body>
   
-        <nb-list>
+          <nb-list>
 
-            <nb-list-item
+              <nb-list-item
 
-            *ngFor="
+              *ngFor="
 
-                let product of products | paginate : {
-                  itemsPerPage: pageSize,
-                  currentPage: page,
-                  totalItems: count
-                };
+                  let product of products | paginate : {
+                    itemsPerPage: pageSize,
+                    currentPage: page,
+                    totalItems: count
+                  };
 
-                let i = index"
+                  let i = index"
 
-            [class.active]="i == currentIndex">
+              [class.active]="i == currentIndex">
 
-              {{ product.name }}
+                {{ product.name }}
 
-            </nb-list-item>
+              </nb-list-item>
 
-        </nb-list>
+          </nb-list>
+
+      </nb-card-body>
+
+      </nb-card>
 
     </div>
 
@@ -43,10 +51,17 @@
     <div>
   
       Items per Page:
+
       <nb-select (selectedChange)="handlePageSizeChange($event)">
+
         <nb-option *ngFor="let size of pageSizes" value="{{size}}">
+
           {{ size }}
+
         </nb-option>
+
       </nb-select>
+
     </div>
+
   </div>

@@ -92,9 +92,9 @@ JONATHAN : Entities :
     -- A AJOUTER --
 
     - Le panel admin pour l'ajout, l'édit, la suppression (product, supplier, user, categories, order) (J)
-    - La gestion des logs de changement sur un produit (prix principalement) (A)
-    - pagination (A)
-    - gestionnaire des exceptions (A)
+    - La gestion des logs de changement sur un produit (prix principalement) (A) √
+    - pagination (A) √
+    - gestionnaire des exceptions (A) √
     - pas de produit si stock 0<=
     - Ajout d'un boolean (Active) qui indique si un profil user est actif ou si un produit n'est plus distribué (J)
     - Ajout de la sécurité :
