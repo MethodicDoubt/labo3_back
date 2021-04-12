@@ -10,6 +10,8 @@ public interface SupplierRepository extends JpaRepository<Supplier, Integer> {
     @Query("SELECT s.companyName FROM Supplier as s")
     List<String> findAllByCompanyName();
 
+    List<Supplier> findAllByOrderBySupplierId();
+
     Supplier findByCompanyName(String s);
 
 }

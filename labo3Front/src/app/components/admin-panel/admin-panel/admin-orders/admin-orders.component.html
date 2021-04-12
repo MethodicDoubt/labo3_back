@@ -1,1 +1,27 @@
-<h1 style="text-align: center;">We are preparing this feature ! Stay tuned !</h1>
+<h2>List of Orders</h2>
+<table class="table table-striped">
+  <thead>
+    <th>Order Id</th>
+    <th>Reference</th>
+    <th>Creation Date</th>
+    <th>Paid</th>
+    <th>Payement Method</th>
+    <th>User</th>
+    <th>Product</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let o of orders">
+      <td>{{o?.orderId}}</td>
+      <td>{{o?.reference}}</td>
+      <td>{{o?.creationDate | date : 'dd MMM YYYY - HH\'h\'mm'}}</td>
+      <td>{{o?.isPaid}}</td>
+      <td>{{o?.payementMethod}}</td>
+      <td>{{o?.userDto.surname}}</td>
+      <td>
+        <ul>
+          <li *ngFor="let p of o?.productsDto">{{p?.name}}</li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>

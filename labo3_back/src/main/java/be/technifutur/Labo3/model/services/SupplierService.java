@@ -15,8 +15,8 @@ import java.util.stream.Collectors;
 @Service
 public class SupplierService implements Crudable<Supplier, SupplierDto, Integer> {
 
-    private SupplierRepository supplierRepository;
-    private Mapper mapper;
+    private final SupplierRepository supplierRepository;
+    private final Mapper mapper;
 
     public SupplierService(SupplierRepository supplierRepository, Mapper mapper) {
         this.supplierRepository = supplierRepository;
@@ -26,7 +26,7 @@ public class SupplierService implements Crudable<Supplier, SupplierDto, Integer>
     @Override
     public List<SupplierDto> getAll() {
 
-        return this.supplierRepository.findAll()
+        return this.supplierRepository.findAllByOrderBySupplierId()
                 .stream()
                 .map(supplier -> mapper.toSupplierDto(supplier))
                 .collect(Collectors.toList());
@@ -61,13 +61,16 @@ public class SupplierService implements Crudable<Supplier, SupplierDto, Integer>
 
         Supplier oldSupplier = this.supplierRepository.getOne(integer);
 
-        Supplier newSupplier = new Supplier(oldSupplier.getSupplierId(),
+        Supplier newSupplier = new Supplier(
+                oldSupplier.getSupplierId(),
                 oldSupplier.getCompanyName(),
                 oldSupplier.getJuridicalStatus(),
                 oldSupplier.getSector(),
                 oldSupplier.getInsertionDate(),
-                oldSupplier.getUpdateDate());
+                oldSupplier.getUpdateDate()
+        );
 
+        supplier.setInsertionDate(oldSupplier.getInsertionDate());
         supplier.setUpdateDate(Instant.now());
         supplier.setSupplierId(integer);
 

@@ -11,6 +11,7 @@ import { ProductService } from './product.service';
   providedIn: 'root'
 })
 export class OrderService {
+  
 
   private BASE_URL = "http://localhost:8080/orders";
 
@@ -26,6 +27,10 @@ export class OrderService {
 
     return this._httpClient.post<boolean>(this.BASE_URL, order);
 
+  }
+
+  getAllOrders():Observable<Order[]> {
+    return this._httpClient.get<Order[]>(this.BASE_URL);
   }
 
 }

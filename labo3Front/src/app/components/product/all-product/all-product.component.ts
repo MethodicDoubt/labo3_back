@@ -21,7 +21,7 @@ export class AllProductComponent implements OnInit {
     private _activatedRoute: ActivatedRoute,
     public _authService: AuthService) {
 
-    console.log("Constructor");
+    // console.log("Constructor");
 
 
 
@@ -38,7 +38,7 @@ export class AllProductComponent implements OnInit {
 
         } else {
           this._productService.search(this._productService.searchObject).subscribe(data => {
-            console.log(data)
+            // console.log(data)
             if (data.length == 0) {
               alert("Your advance search get nothing !");
               this.initTab();
@@ -54,7 +54,7 @@ export class AllProductComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("OnInit")
+    // console.log("OnInit")
     this.statusConnexion = this._authService.statusBehaviorConnexion.subscribe(
       dataConnexion => {
         this.isConnected = dataConnexion;

@@ -57,10 +57,11 @@ public class ProductService implements Crudable<Product, ProductDto, Integer> {
 
     @Override
     public List<ProductDto> getAll() {
-        return this.productRepository.findAll()
+        return this.productRepository.findAllByOrderByProductId()
                 .stream()
                 .map(p -> mapper.toProductDto(p, true))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList())
+                ;
     }
 
     @Override
@@ -73,15 +74,11 @@ public class ProductService implements Crudable<Product, ProductDto, Integer> {
         return mapper.toProductDto(product, true);
     }
 
-    @Override
-    public boolean insert(Product product) {
-        return false;
-    }
-
     public boolean insert(Product product, User user) throws IOException {
 
         product.setEntryDate(Instant.now());
         product.setUpdateDate(Instant.now());
+        product.setIsActive(true);
         Product newProduct = this.productRepository.save(product);
 
         Log newLog = Log.builder()
@@ -99,16 +96,13 @@ public class ProductService implements Crudable<Product, ProductDto, Integer> {
                         newLog.getCreationDate().toString(),
                         newLog.getPrice().toString(),
                         newLog.getUser().getSurname()
-                        )
+                )
 
         );
-
         return this.productRepository.findById(newProduct.getProductId()).isPresent();
-
     }
 
-    @Override
-    public boolean update(Product product, Integer integer) {
+    public boolean update(Product product, User user, Integer integer) throws IOException {
 
         Product oldProduct = this.productRepository.getOne(integer);
 
@@ -123,25 +117,43 @@ public class ProductService implements Crudable<Product, ProductDto, Integer> {
                 oldProduct.getQuantity(),
                 oldProduct.getSupplier(),
                 oldProduct.getProductImage(),
+                oldProduct.getIsActive(),
                 oldProduct.getVat(),
                 oldProduct.getOrders());
 
         product.setProductId(integer);
+        product.setEntryDate(oldProduct.getEntryDate());
+        product.setIsActive(oldProduct.getIsActive());
         product.setUpdateDate(Instant.now());
 
         this.productRepository.save(product);
+
+        Log newLog = Log.builder()
+                .product(product)
+                .price(product.getPurchasePrice())
+                .user(user)
+                .build();
+
+        this.logService.insert(newLog);
+
+        this.pdfManager.generateToPdf(
+
+                List.of(newLog.getLogId().toString(),
+                        newLog.getProduct().getName(),
+                        newLog.getCreationDate().toString(),
+                        newLog.getPrice().toString(),
+                        newLog.getUser().getSurname()
+                )
+
+        );
 
         return !newProduct.equals(this.productRepository.getOne(integer));
 
     }
 
     @Override
-    public boolean delete(Integer integer) {
-
-        this.productRepository.deleteById(integer);
-
-        return this.productRepository.findById(integer).isEmpty();
-
+    public boolean delete(Integer integer) throws ProductNotFoundException {
+        return false;
     }
 
     public List<ProductDto> findByNameOrCategoryOrSupplier(String string) {
@@ -153,7 +165,7 @@ public class ProductService implements Crudable<Product, ProductDto, Integer> {
     }
 
     public List<ProductDto> search(AdvancedSearchDto advancedSearchDto) {
-
+        System.out.println(advancedSearchDto.toString());
         BooleanBuilder predicate = new BooleanBuilder();
 
         QProduct qProduct = QProduct.product;
@@ -209,12 +221,12 @@ public class ProductService implements Crudable<Product, ProductDto, Integer> {
         Class<?> clazz = Product.class;
         Field[] fields = clazz.getDeclaredFields();
 
-        for(Map.Entry<String, Object> entry : updates.entrySet()) {
+        for (Map.Entry<String, Object> entry : updates.entrySet()) {
 
             Field field = Arrays.stream(fields)
                     .filter(f -> f.getName().equals(entry.getKey()))
                     .findFirst()
-                    .orElseThrow(()-> new NoSuchElementException("La propriété de la classe n'a pas été trouvé"));
+                    .orElseThrow(() -> new NoSuchElementException("La propriété de la classe n'a pas été trouvé"));
 
             field.setAccessible(true);
             field.set(productToUpdate, entry.getValue());
@@ -238,6 +250,18 @@ public class ProductService implements Crudable<Product, ProductDto, Integer> {
 
         return new PageImpl<>(result, PageRequest.of(page, size), nbEntry);
 
+    }
+
+    // useless
+
+    @Override
+    public boolean insert(Product product) {
+        return false;
+    }
+
+    @Override
+    public boolean update(Product product, Integer integer) {
+        return false;
     }
 
 }

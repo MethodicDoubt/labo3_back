@@ -2,13 +2,15 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Category } from '../models/category.model';
+import { Product } from '../models/product.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryService {
 
-  private BASE_URL : string = "http://localhost:8080/categories";
+
+  private BASE_URL: string = "http://localhost:8080/categories";
 
   constructor(private _httpClient: HttpClient) { }
 
@@ -22,6 +24,14 @@ export class CategoryService {
 
     return this._httpClient.get<String[]>(this.BASE_URL + "/type");
 
+  }
+
+  insert(newCategory: Category): Observable<boolean> {
+    return this._httpClient.post<boolean>(this.BASE_URL, newCategory);
+  }
+
+  update(categoryToUpdate: Category): Observable<boolean> {
+    return this._httpClient.put<boolean>(this.BASE_URL + '/' + categoryToUpdate.categoryId, categoryToUpdate);
   }
 
 }

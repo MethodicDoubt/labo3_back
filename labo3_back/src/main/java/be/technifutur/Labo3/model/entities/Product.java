@@ -39,7 +39,7 @@ public class Product {
     Instant updateDate;
 
     @Column
-    LocalDate expirationDate;
+    Instant expirationDate;
 
     @Column(nullable = false)
     @Min(value = 0, message = "The price must be a positive number")
@@ -55,10 +55,12 @@ public class Product {
     @Column
     String productImage;
 
+    @Column
+    Boolean isActive;
+
     @Min(value = 0, message = "The vat must be a positive number")
     Double vat;
 
     @ManyToMany(mappedBy = "products")
     List<Order> orders;
-
 }

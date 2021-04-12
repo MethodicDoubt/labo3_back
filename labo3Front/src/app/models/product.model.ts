@@ -19,4 +19,5 @@ export class Product {
     supplier: Supplier;
     ordersDto: Order[];
     orders: Order[];
+    isActive: boolean;
 }

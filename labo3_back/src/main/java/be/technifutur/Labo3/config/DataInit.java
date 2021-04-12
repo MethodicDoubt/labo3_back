@@ -9,8 +9,13 @@ import be.technifutur.Labo3.model.types.Sector;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
+import java.time.LocalDate;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -113,6 +118,7 @@ public class DataInit implements InitializingBean {
                     .purchasePrice(8.15)
                     .quantity(27)
                     .supplier(suppliers.get(2))
+                    .expirationDate(LocalDateTime.of(2021, 12, 12, 00, 00).atZone(ZoneId.of("Europe/Paris")).toInstant())
                     .productImage("https://assets-us-01.kc-usercontent.com/f5a2b33b-f1c1-0070-ebd4-26269b6538af/b95b5554-169c-4f2d-8764-72affd5252c8/actimel_8_Strawberry%200%25.png?fm=webp&w=320&h=268")
                     .vat(.21)
                     .build(),
@@ -123,6 +129,7 @@ public class DataInit implements InitializingBean {
                     .purchasePrice(7.15)
                     .quantity(36)
                     .supplier(suppliers.get(2))
+                    .expirationDate(LocalDateTime.of(2021, 12, 12, 00, 00).atZone(ZoneId.of("Europe/Paris")).toInstant())
                     .productImage("https://assets-us-01.kc-usercontent.com/f5a2b33b-f1c1-0070-ebd4-26269b6538af/ad653be8-86a7-403f-8fd1-782aea548e25/Oikos%200%25_manguepassion_2x145g.png?fm=webp&w=320&h=268")
                     .vat(.21)
                     .build(),
@@ -133,6 +140,7 @@ public class DataInit implements InitializingBean {
                     .purchasePrice(18.3)
                     .quantity(52)
                     .supplier(suppliers.get(2))
+                    .expirationDate(LocalDateTime.of(2021, 12, 12, 00, 00).atZone(ZoneId.of("Europe/Paris")).toInstant())
                     .productImage("https://assets-us-01.kc-usercontent.com/f5a2b33b-f1c1-0070-ebd4-26269b6538af/6d06e063-e0af-40be-8d5d-2dbc15ce01ac/7191.jpg?fm=webp&w=320&h=268")
                     .vat(.21)
                     .build(),
@@ -143,26 +151,17 @@ public class DataInit implements InitializingBean {
                     .purchasePrice(7.69)
                     .quantity(15)
                     .supplier(suppliers.get(2))
+                    .expirationDate(LocalDateTime.of(2021, 12, 12, 00, 00).atZone(ZoneId.of("Europe/Paris")).toInstant())
                     .productImage("https://assets-us-01.kc-usercontent.com/f5a2b33b-f1c1-0070-ebd4-26269b6538af/8f310711-9c15-4161-aaa8-905ef937243a/Danone%20Cottage%20Cheese%20420g%20Facing%20B%20MUD.png?fm=webp&w=320&h=268")
                     .vat(.21)
                     .build()
     );
-
-    List<Order> orders = Arrays.asList(
-            Order.builder()
-                    .reference("test0001")
-                    .isPaid(true)
-                    .payementMethod(PayementMethod.CASH)
-                    .products(Arrays.asList(products.get(1)))
-                    .build()
-    );
-
     List<User> users = Arrays.asList(
             User.builder()
                     .lastName("Arabia")
                     .firstName("Jonathan")
-                    .surname("Wizounet")
-                    .password("password")
+                    .surname("admin")
+                    .password("1234")
                     .accessLevel(AccessLevel.ADMINISTRATOR)
                     .address(
                             Address.builder()
@@ -177,8 +176,8 @@ public class DataInit implements InitializingBean {
             User.builder()
                     .lastName("Del Piero")
                     .firstName("Alessandro")
-                    .surname("BestPlayerInTheWorld")
-                    .password("password")
+                    .surname("user")
+                    .password("1234")
                     .address(
                             Address.builder()
                                     .city("Torino")
@@ -188,6 +187,16 @@ public class DataInit implements InitializingBean {
                                     .number(50)
                                     .build()
                     )
+                    .build()
+    );
+
+    List<Order> orders = Arrays.asList(
+            Order.builder()
+                    .reference("test0001")
+                    .isPaid(true)
+                    .payementMethod(PayementMethod.CASH)
+                    .products(Collections.singletonList(products.get(1)))
+                    .user(users.get(1))
                     .build()
     );
 

@@ -6,6 +6,7 @@ import be.technifutur.Labo3.model.entities.Category;
 import be.technifutur.Labo3.model.exceptionHandler.NoSuchCategoryException;
 import be.technifutur.Labo3.model.repositories.CategoryRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,9 +27,9 @@ public class CategoryService implements Crudable<Category, CategoryDto, Integer>
     @Override
     public List<CategoryDto> getAll() {
 
-        return this.categoryRepository.findAll()
+        return this.categoryRepository.findAllByOrderByCategoryId()
                 .stream()
-                .map(category -> mapper.toCategoryDto(category))
+                .map(mapper::toCategoryDto)
                 .collect(Collectors.toList());
 
     }
@@ -58,9 +59,7 @@ public class CategoryService implements Crudable<Category, CategoryDto, Integer>
     @Override
     public boolean update(Category category, Integer integer) {
 
-        Category oldCategory = this.categoryRepository.getOne(integer);
-
-        Category newCategory = new Category(oldCategory.getCategoryId(), oldCategory.getType());
+        Category newCategory = new Category(category.getCategoryId(), category.getType());
 
         category.setCategoryId(integer);
 

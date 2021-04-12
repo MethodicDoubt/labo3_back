@@ -1,0 +1,17 @@
+<nb-card class="col-6 mx-auto mt-2">
+  <nb-card-header style="text-align: center;">
+    <h3>New Category</h3>
+  </nb-card-header>
+  <nb-card-body>
+    <form [formGroup]="formCategory" (submit)="onSubmit()">
+      <p class="form-build">
+        <label for="type">Category Name</label>
+        <input nbInput type="text" id="type" formControlName="type">
+      </p>
+      <div class="fr">
+        <button class="mr-2" status="primary" type="submit" nbButton [disabled]="formCategory.invalid">Update</button>
+        <button status="primary" type="button" nbButton routerLink='..' >Cancel</button>
+      </div>
+    </form>
+  </nb-card-body>
+</nb-card>

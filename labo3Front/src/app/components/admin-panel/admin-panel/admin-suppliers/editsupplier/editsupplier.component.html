@@ -1,0 +1,29 @@
+<nb-card class="col-6 mx-auto mt-2">
+  <nb-card-header style="text-align: center;">
+    <h3>New Supplier</h3>
+  </nb-card-header>
+  <nb-card-body>
+    <form [formGroup]="formSupplier" (submit)="onSubmit()">
+      <p class="form-build">
+        <label for="companyName">Company Name</label>
+        <input nbInput type="text" id="companyName" formControlName="companyName">
+      </p>
+      <p class="form-build">
+        <label for="sector">Sector</label>
+        <nb-select formControlName="sector">
+          <nb-option *ngFor="let s of sector" value="{{s.toString()}}"> {{s.toString()}}</nb-option>
+        </nb-select>
+      </p>
+      <p class="form-build">
+        <label for="juridicalStatus">Juridical Status</label>
+        <nb-select formControlName="juridicalStatus">
+          <nb-option *ngFor="let js of juridicalStatus" value="{{js.toString()}}"> {{js.toString()}}</nb-option>
+        </nb-select>
+      </p>
+      <div class="fr">
+        <button class="mr-2" status="primary" type="submit" nbButton [disabled]="formSupplier.invalid">Create</button>
+        <button status="primary" type="button" nbButton routerLink='..'>Cancel</button>
+      </div>
+    </form>
+  </nb-card-body>
+</nb-card>

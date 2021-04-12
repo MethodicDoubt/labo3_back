@@ -1,17 +1,7 @@
 package be.technifutur.Labo3.mapper;
 
-import be.technifutur.Labo3.model.dtos.LogDto;
-import be.technifutur.Labo3.model.dtos.OrderDto;
-import be.technifutur.Labo3.model.dtos.UserDto;
-import be.technifutur.Labo3.model.entities.Log;
-import be.technifutur.Labo3.model.entities.Order;
-import be.technifutur.Labo3.model.entities.User;
-import be.technifutur.Labo3.model.dtos.CategoryDto;
-import be.technifutur.Labo3.model.dtos.ProductDto;
-import be.technifutur.Labo3.model.dtos.SupplierDto;
-import be.technifutur.Labo3.model.entities.Category;
-import be.technifutur.Labo3.model.entities.Product;
-import be.technifutur.Labo3.model.entities.Supplier;
+import be.technifutur.Labo3.model.dtos.*;
+import be.technifutur.Labo3.model.entities.*;
 import org.springframework.stereotype.Service;
 
 import java.util.stream.Collectors;
@@ -37,6 +27,10 @@ public class Mapper {
                                 .map(this::toOrderDto)
                                 .collect(Collectors.toList()) : null
                 )
+                .isAccountNonExpired(user.isAccountNonExpired())
+                .isAccountNonLocked(user.isAccountNonLocked())
+                .isEnabled(user.isEnabled())
+                .isCredentialsNonExpired(user.isCredentialsNonExpired())
                 .build();
     }
 
@@ -55,6 +49,10 @@ public class Mapper {
                                 .map(this::toOrderEntity)
                                 .collect(Collectors.toList())
                 )
+                .isAccountNonExpired(userDto.isAccountNonExpired())
+                .isAccountNonLocked(userDto.isAccountNonLocked())
+                .isEnabled(userDto.isEnabled())
+                .isCredentialsNonExpired(userDto.isCredentialsNonExpired())
                 .build();
     }
 
@@ -141,6 +139,7 @@ public class Mapper {
                 .productImage(product.getProductImage())
                 .vat(product.getVat())
                 .ordersDto(withOrder ? product.getOrders().stream().map(this::toOrderDto).collect(Collectors.toList()) : null)
+                .isActive(product.getIsActive())
                 .build();
 
     }
@@ -166,6 +165,7 @@ public class Mapper {
                         .map(this::toOrderEntity)
                         .collect(Collectors.toList())
                 )
+                .isActive(productDto.getIsActive())
                 .build();
 
     }
