@@ -16,6 +16,15 @@ export class AllProductComponent implements OnInit {
   isConnected: boolean;
   statusConnexion: Subscription;
 
+  currentProduct?: Product;
+  currentIndex = -1;
+
+  page = 1;
+  count = 0;
+  pageSize = 4;
+  pageSizes = [4, 8, 12];
+  totalPages : number;
+
   constructor(private _productService: ProductService,
     private _router: Router,
     private _activatedRoute: ActivatedRoute,
@@ -60,6 +69,9 @@ export class AllProductComponent implements OnInit {
         this.isConnected = dataConnexion;
       }
     )
+
+    this.retrieveProducts();
+
   }
 
   redirect(id: number) {
@@ -96,6 +108,61 @@ export class AllProductComponent implements OnInit {
 
     this._productService.calculTotalPrice(p.purchasePrice);
     this._productService.emitTotalPriceStatus();
+
+  }
+
+  getRequestParams(page: number, pageSize: number): any {
+    // tslint:disable-next-line:prefer-const
+    let params: any = {};
+
+    if (page) {
+
+      params["page"] = page - 1;
+
+    }
+
+    if (pageSize) {
+
+      params["size"] = pageSize;
+
+    }
+
+    return params;
+
+  }
+
+  retrieveProducts(): void {
+
+    const params = this.getRequestParams(this.page, this.pageSize);
+
+    this._productService.getAllWithPagination(params)
+    .subscribe(
+
+      response => {
+
+        this.products = response.content;
+        this.count = response.totalElements;
+        this.totalPages = response.totalPages;
+
+      },
+      error => {
+        console.log(error);
+      });
+  }
+
+  handlePageChange(event: number): void {
+
+    this.page = event;
+
+    this.retrieveProducts();
+
+  }
+
+  handlePageSizeChange(event: any): void {
+
+    this.pageSize = event;
+    this.page = 1;
+    this.retrieveProducts();
 
   }
 

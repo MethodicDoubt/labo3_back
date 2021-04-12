@@ -1,6 +1,15 @@
 <div class="row">
 
-  <ng-container *ngFor="let p of products">
+  <ng-container *ngFor="let p of products | paginate : {
+    itemsPerPage: pageSize,
+    currentPage: page,
+    totalItems: count
+  };
+
+  let i = index"
+
+  [class.active]="i == currentIndex">
+
     <nb-card *ngIf="p.isActive" size="small" class="card col-4">
 
       <nb-card-header style="display: flex; justify-content: space-between;">
@@ -53,3 +62,33 @@
   </ng-container>
 
 </div>
+
+<div class="text-center">
+
+    <pagination-controls
+          previousLabel="Prev"
+          nextLabel="Next"
+          [responsive]="true"
+          (pageChange)="handlePageChange($event)">
+  
+    </pagination-controls>
+
+  <div>
+  
+    Items per Page:
+  
+    <nb-select (selectedChange)="handlePageSizeChange($event)">
+
+      <nb-option *ngFor="let size of pageSizes" value="{{size}}">
+
+        {{ size }}
+
+      </nb-option>
+
+    </nb-select>
+
+  </div>
+
+</div>
+
+  

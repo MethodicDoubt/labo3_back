@@ -1,8 +1,5 @@
 package be.technifutur.Labo3.config;
 
-import be.technifutur.Labo3.model.dtos.LogDto;
-import be.technifutur.Labo3.model.entities.Log;
-import be.technifutur.Labo3.model.repositories.LogRepository;
 import be.technifutur.Labo3.model.services.LogService;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -12,13 +9,11 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.Instant;
 import java.util.List;
 
 @Component
@@ -53,7 +48,7 @@ public class PDFManager implements InitializingBean {
 
         Path pdfPath = Paths.get(pdfFolder);
 
-        if(!Files.exists(pdfPath)) {
+        if (!Files.exists(pdfPath)) {
 
             Files.createDirectories(pdfPath);
 
@@ -63,11 +58,11 @@ public class PDFManager implements InitializingBean {
 
     public void generateToPdf(List<String> stringList) throws IOException {
 
-        File file = new File("C:\\Users\\Jojo\\Desktop\\log.pdf");
+        File file = new File("pdf\\log.pdf");
 
         PDDocument pdDocument = PDDocument.load(file);
 
-        if (newCoordY <= (fontSize + leading)*5) {
+        if (newCoordY <= (fontSize + leading) * 5) {
 
             PDPage page = new PDPage();
             pdDocument.addPage(page);
@@ -80,7 +75,7 @@ public class PDFManager implements InitializingBean {
 
         stringList.forEach(string -> {
 
-            newCoordY-= fontSize + leading;
+            newCoordY -= fontSize + leading;
 
             try {
 
@@ -95,7 +90,7 @@ public class PDFManager implements InitializingBean {
 
         });
 
-        pdDocument.save("C:\\Users\\Jojo\\Desktop\\log.pdf");
+        pdDocument.save("pdf\\log.pdf");
 
         pdDocument.close();
 
@@ -123,7 +118,7 @@ public class PDFManager implements InitializingBean {
         PDPage page = new PDPage();
 
         document.addPage(page);
-        document.save("C:\\Users\\Jojo\\Desktop\\log.pdf");
+        document.save("pdf\\log.pdf");
         document.close();
 
     }

@@ -92,14 +92,14 @@ FIN PROJET 04/03/21
     -- A AJOUTER --
 
     - Le panel admin pour l'ajout, l'édit, la suppression (product, supplier, user, categories, order) (J) V
-    - La gestion des logs de changement sur un produit (prix principalement) (A)
-    - pagination (A) --> + integration TODO
-    - gestionnaire des exceptions (A)
+    - La gestion des logs de changement sur un produit (prix principalement) (A) V
+    - pagination (A) --> + integration V
+    - gestionnaire des exceptions (A) V
     - pas de produit si stock 0<= (A) --> TODO
     - Ajout d'un boolean (Active) qui indique si un profil user est actif ou si un produit n'est plus distribué (J) V
-    - Ajout de la sécurité : (J)
-                - Ajout de sécurité jwt key en backend
-                - Ajout de guards d'accessibilité front-end (user AccessLevel + authentication) --> TODO
+    - Ajout de la sécurité : (J) V
+                - Ajout de sécurité jwt key en backend V
+                - Ajout de guards d'accessibilité front-end (user AccessLevel + authentication) --> V
 
 
     - Modifier LocalDate(Time) --> INSTANT (FRONT ET BACK) V
