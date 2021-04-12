@@ -13,4 +13,4 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
 folders:
-  pdf: 'C:\Users\Jojo\Desktop'
+  pdf: '\pdf'
