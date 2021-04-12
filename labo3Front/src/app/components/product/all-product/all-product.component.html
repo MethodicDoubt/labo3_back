@@ -6,9 +6,7 @@
     totalItems: count
   };
 
-  let i = index"
-
-  [class.active]="i == currentIndex">
+  let i = index" [class.active]="i == currentIndex">
 
     <nb-card *ngIf="p.isActive" size="small" class="card col-4">
 
@@ -41,9 +39,7 @@
             <nb-list-item>{{p.purchasePrice | currency:'EUR'}}</nb-list-item>
             <nb-list-item>{{p.description}}</nb-list-item>
             <nb-list-item *ngFor="let c of p.categoriesDto">{{c.type}}</nb-list-item>
-            <nb-list-item *ngIf="p.expirationDate != null">{{p.expirationDate}}</nb-list-item>
-
-
+            <nb-list-item *ngIf="p.expirationDate != null">{{p.expirationDate | date : 'dd MMM YYYY'}}</nb-list-item>
 
           </nb-list>
 
@@ -65,19 +61,16 @@
 
 <div class="text-center">
 
-    <pagination-controls
-          previousLabel="Prev"
-          nextLabel="Next"
-          [responsive]="true"
-          (pageChange)="handlePageChange($event)">
-  
-    </pagination-controls>
+  <pagination-controls previousLabel="Prev" nextLabel="Next" [responsive]="true"
+    (pageChange)="handlePageChange($event)">
+
+  </pagination-controls>
 
   <div>
-  
+
     Items per Page:
-  
-    <nb-select (selectedChange)="handlePageSizeChange($event)">
+
+    <nb-select (selectedChange)="handlePageSizeChange($event)" ngModel="{{pageSize}}">
 
       <nb-option *ngFor="let size of pageSizes" value="{{size}}">
 
@@ -90,5 +83,3 @@
   </div>
 
 </div>
-
-  

@@ -23,7 +23,7 @@ export class AllProductComponent implements OnInit {
   count = 0;
   pageSize = 4;
   pageSizes = [4, 8, 12];
-  totalPages : number;
+  totalPages: number;
 
   constructor(private _productService: ProductService,
     private _router: Router,
@@ -136,18 +136,18 @@ export class AllProductComponent implements OnInit {
     const params = this.getRequestParams(this.page, this.pageSize);
 
     this._productService.getAllWithPagination(params)
-    .subscribe(
+      .subscribe(
 
-      response => {
+        response => {
 
-        this.products = response.content;
-        this.count = response.totalElements;
-        this.totalPages = response.totalPages;
+          this.products = response.content;
+          this.count = response.totalElements;
+          this.totalPages = response.totalPages;
 
-      },
-      error => {
-        console.log(error);
-      });
+        },
+        error => {
+          console.log(error);
+        });
   }
 
   handlePageChange(event: number): void {
@@ -165,5 +165,4 @@ export class AllProductComponent implements OnInit {
     this.retrieveProducts();
 
   }
-
 }
