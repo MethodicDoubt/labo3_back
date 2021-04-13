@@ -17,7 +17,7 @@ export class AllProductComponent implements OnInit {
 
   products: Product[];
 
-  quantity : number = 1;
+  quantity: number = 1;
 
   isConnected: boolean;
   statusConnexion: Subscription;
@@ -35,37 +35,8 @@ export class AllProductComponent implements OnInit {
     private _router: Router,
     private _activatedRoute: ActivatedRoute,
     public _authService: AuthService) {
-
     // console.log("Constructor");
-
-
-
-    this._activatedRoute.queryParamMap.subscribe(
-
-      data => {
-        if (data.get('searchByString') == undefined && data.get('searchObject') == undefined || data.get('searchByString') == "") {
-
-          this.initTab()
-
-        } else if (data.get('searchByString') != "" && data.get('searchObject') == undefined) {
-
-          this.sortProducts(data.get('searchByString'))
-
-        } else {
-          this._productService.search(this._productService.searchObject).subscribe(data => {
-            // console.log(data)
-            if (data.length == 0) {
-              alert("Your advance search get nothing !");
-              this.initTab();
-            } else
-              this.products = data
-          });
-        }
-
-      }
-
-    )
-
+    this.loadPageWithProducts();
   }
 
   ngOnInit(): void {
@@ -85,7 +56,15 @@ export class AllProductComponent implements OnInit {
   }
 
   initTab() {
-    this._productService.getAll().subscribe(data => this.products = data)
+    const params = this.getRequestParams(this.page, this.pageSize);
+    this._productService.getAllWithPagination(params).subscribe(
+      response => {
+        console.log(response)
+        this.products = response.content;
+        this.count = response.totalElements;
+        this.totalPages = response.totalPages;
+      }
+    )
   }
 
   sortProducts(searchByString: String) {
@@ -110,20 +89,20 @@ export class AllProductComponent implements OnInit {
   addToBasket(p: Product) {
 
     // console.log(this.quantity);
-    
-    if(this.quantity > 0 && this.quantity <= p.quantity) {
+
+    if (this.quantity > 0 && this.quantity <= p.quantity) {
 
       this._productService.basket.set(p, this.quantity);
-      
+
       this._productService.emitBasketLengthStatus();
-  
+
       this._productService.calculTotalPrice();
 
       this.quantity = 1;
-  
+
       this.popovers.forEach(pop => {
         pop.hide();
-    });
+      });
 
     }
 
@@ -172,7 +151,7 @@ export class AllProductComponent implements OnInit {
 
     this.page = event;
 
-    this.retrieveProducts();
+    this.loadPageWithProducts();
 
   }
 
@@ -183,4 +162,34 @@ export class AllProductComponent implements OnInit {
     this.retrieveProducts();
 
   }
+
+  loadPageWithProducts() {
+    this._activatedRoute.queryParamMap.subscribe(
+
+      data => {
+        if (data.get('searchByString') == undefined && data.get('searchObject') == undefined || data.get('searchByString') == "") {
+          this.initTab()
+        } else if (data.get('searchByString') != "" && data.get('searchObject') == undefined) {
+          this.sortProducts(data.get('searchByString'))
+        } else {
+          const params = this.getRequestParams(this.page, this.pageSize);
+          this._productService.search(this._productService.searchObject, params).subscribe(data => {
+            // console.log(data.content)
+            if (data.content.length == 0) {
+              alert("Your advance search get nothing !");
+              this.initTab();
+            } else {
+              // console.log(data)
+              this.products = data.content;
+              this.count = data.totalElements;
+              this.totalPages = data.totalPages;
+            }
+          });
+        }
+
+      }
+
+    )
+  }
+
 }

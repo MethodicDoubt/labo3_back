@@ -55,8 +55,8 @@ export class ProductService {
     return this._httpClient.post<Product[]>(this.BASE_URL + "/search", json);
   }
 
-  search(advSearch: AdvancedSearch): Observable<Product[]> {
-    return this._httpClient.post<Product[]>(this.BASE_URL + "/advsearch", advSearch);
+  search(advSearch: AdvancedSearch, params: any): Observable<any> {
+    return this._httpClient.post<Product[]>(this.BASE_URL + "/advsearch", advSearch, { params });
   }
 
   deleteById(id: number): Observable<boolean> {

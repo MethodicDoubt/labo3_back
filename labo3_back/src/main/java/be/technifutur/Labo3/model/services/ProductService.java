@@ -164,7 +164,7 @@ public class ProductService implements Crudable<Product, ProductDto, Integer> {
                 ;
     }
 
-    public List<ProductDto> search(AdvancedSearchDto advancedSearchDto) {
+    public Page<ProductDto> search(AdvancedSearchDto advancedSearchDto, int page, int size) {
         System.out.println(advancedSearchDto.toString());
         BooleanBuilder predicate = new BooleanBuilder();
 
@@ -205,12 +205,20 @@ public class ProductService implements Crudable<Product, ProductDto, Integer> {
 
         }
 
-        Iterable<Product> result = this.productRepository.findAll(predicate);
 
-        return StreamSupport.stream(result.spliterator(), false)
+        Iterable<Product> result = this.productRepository.findAll(predicate);
+        int nbEntry = StreamSupport.stream(result.spliterator(), false)
                 .map(mapper::toProductDto)
                 .collect(Collectors.toList())
-                ;
+                .size();
+
+        Iterable<Product> resultIterable = this.productRepository.findAll(predicate, PageRequest.of(page, size));
+        List<ProductDto> resultList = StreamSupport.stream(resultIterable.spliterator(), false)
+                .map(mapper::toProductDto)
+                .collect(Collectors.toList());
+
+
+        return new PageImpl<>(resultList, PageRequest.of(page, size), nbEntry);
 
     }
 

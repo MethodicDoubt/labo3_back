@@ -84,9 +84,9 @@ public class ProductController implements RestControllable<Product, ProductDto, 
         return ResponseEntity.ok(this.productService.findByNameOrCategoryOrSupplier(product.getName()));
     }
 
-    @PostMapping(path = "/advsearch")
-    public ResponseEntity<List<ProductDto>> advSearch(@RequestBody AdvancedSearchDto advancedSearchDto) {
-        return ResponseEntity.ok(this.productService.search(advancedSearchDto));
+    @PostMapping(path = "/advsearch", params = {"page", "size"})
+    public ResponseEntity<Page<ProductDto>> advSearch(@RequestBody AdvancedSearchDto advancedSearchDto, @RequestParam int page, @RequestParam int size) {
+        return ResponseEntity.ok(this.productService.search(advancedSearchDto, page, size));
     }
 
     @PatchMapping(path = "/{id}")
