@@ -50,13 +50,15 @@ export class AdvSearchComponent implements OnInit {
 
   onSubmit() {
     let searchObject = this.transformFgIntoAdvSrch();
-
-    this._router.navigate(['/home'], {
-      queryParams: {
-        searchObject: searchObject.name == "" ? this.date.getMilliseconds() : searchObject.name
-      }
-    });
-
+    let search = searchObject.name == "" ? this.date.getMilliseconds() : searchObject.name;
+    this._router.navigate(['easterEgg']).then(
+      () => this._router.navigate(['/home'], {
+        queryParams: {
+          searchObject: search
+        }
+      })
+    );
+    
     this._nbDiagRef.close();
   }
 

@@ -35,12 +35,10 @@ export class AllProductComponent implements OnInit {
     private _router: Router,
     private _activatedRoute: ActivatedRoute,
     public _authService: AuthService) {
-    console.log("Constructor");
     this.handlePageChange(1)
   }
 
   ngOnInit(): void {
-    // console.log("OnInit")
     this.statusConnexion = this._authService.statusBehaviorConnexion.subscribe(
       dataConnexion => {
         this.isConnected = dataConnexion;
@@ -55,7 +53,6 @@ export class AllProductComponent implements OnInit {
   initTab(params: any) {
     this._productService.getAllWithPagination(params).subscribe(
       response => {
-        console.log(response)
         this.products = response.content;
         this.count = response.totalElements;
         this.totalPages = response.totalPages;
@@ -71,14 +68,12 @@ export class AllProductComponent implements OnInit {
     } else {
       this._productService.searchByString(searchByString, params).subscribe(
         data => {
-          console.log(data);
           if (data.content.length == 0) {
             this.initTab(params);
           } else {
             this.products = data.content;
             this.count = data.totalElements;
             this.totalPages = data.totalPages;
-            console.log(this.products)
           }
         }
       );
@@ -88,7 +83,6 @@ export class AllProductComponent implements OnInit {
 
   addToBasket(p: Product) {
 
-    // console.log(this.quantity);
 
     if (this.quantity > 0 && this.quantity <= p.quantity) {
 
@@ -129,7 +123,6 @@ export class AllProductComponent implements OnInit {
   }
 
   retrieveProducts(): void {
-    console.log("retrieveProducts")
 
     const params = this.getRequestParams(this.page, this.pageSize);
 
@@ -138,7 +131,6 @@ export class AllProductComponent implements OnInit {
 
         response => {
 
-          console.log(response)
 
           this.products = response.content;
           this.count = response.totalElements;
@@ -146,18 +138,15 @@ export class AllProductComponent implements OnInit {
 
         },
         error => {
-          console.log(error);
         });
   }
 
   handlePageChange(event: number): void {
-    console.log("handlePageChange")
     this.page = event;
     this.loadPageWithProducts();
   }
 
   handlePageSizeChange(event: any): void {
-    console.log("handlePageSizeChange")
     this.pageSize = event;
     this.page = 1;
     this.retrieveProducts();
@@ -165,37 +154,33 @@ export class AllProductComponent implements OnInit {
   }
 
   loadPageWithProducts() {
-    console.log("loadPageWithProducts")
     const params = this.getRequestParams(this.page, this.pageSize);
-    this._activatedRoute.queryParamMap.subscribe(
-      data => {
-        if (data.get('searchByString') == undefined && data.get('searchObject') == undefined || data.get('searchByString') == "") {
-          console.log('all product')
-          this.initTab(params)
-        } else if (data.get('searchByString') != "" && data.get('searchObject') == undefined) {
-          console.log('search by string')
-          this.sortProducts(data.get('searchByString'), params)
-        } else {
-          console.log('advance search')
-          this._productService.search(this._productService.searchObject, params).subscribe(data => {
-            console.log(data)
-            console.log(data.content.length)
-            if (data.content.length == 0) {
-              alert("Your advance search get nothing !");
-              this.initTab(params);
-            } else {
-              console.log(data.content.length)
-              this.products = data.content;
-              this.count = data.totalElements;
-              this.totalPages = data.totalPages;
-              console.log(this.products)
-            }
-          });
+    this._activatedRoute.queryParamMap
+      .subscribe(
+        data => {
+          if (data.get('searchByString') == undefined && data.get('searchObject') == undefined || data.get('searchByString') == "") {
+            this.initTab(params)
+          } else if (data.get('searchByString') != "" && data.get('searchObject') == undefined) {
+            this.sortProducts(data.get('searchByString'), params)
+          } else {
+            this._productService.search(this._productService.searchObject, params).subscribe(data => {
+              if (data.content.length == 0) {
+                alert("Your advance search get nothing !");
+                this._productService.searchObject = null;
+                this.initTab(params);
+                this._router.navigate(['']).then()
+              } else {
+                this.products = data.content;
+                this.count = data.totalElements;
+                this.totalPages = data.totalPages;
+              }
+            });
+          }
+
         }
 
-      }
-
-    )
+      )
+      .unsubscribe()
   }
 
 }

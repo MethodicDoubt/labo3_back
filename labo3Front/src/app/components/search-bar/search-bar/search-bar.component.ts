@@ -20,7 +20,10 @@ export class SearchBarComponent implements OnInit {
   }
 
   onSubmit() {
-    this._router.navigate(['/home'], { queryParams: { searchByString: this.fg.value['name']} })
+    let search: string = this.fg.value['name'];
+    this._router.navigate(['easterEgg']).then(
+      () => this._router.navigate(['/home'], { queryParams: { searchByString: search } })
+    );
     this.initFg();
   }
 
