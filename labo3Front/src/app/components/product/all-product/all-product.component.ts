@@ -122,25 +122,6 @@ export class AllProductComponent implements OnInit {
 
   }
 
-  retrieveProducts(): void {
-
-    const params = this.getRequestParams(this.page, this.pageSize);
-
-    this._productService.getAllWithPagination(params)
-      .subscribe(
-
-        response => {
-
-
-          this.products = response.content;
-          this.count = response.totalElements;
-          this.totalPages = response.totalPages;
-
-        },
-        error => {
-        });
-  }
-
   handlePageChange(event: number): void {
     this.page = event;
     this.loadPageWithProducts();
@@ -149,8 +130,7 @@ export class AllProductComponent implements OnInit {
   handlePageSizeChange(event: any): void {
     this.pageSize = event;
     this.page = 1;
-    this.retrieveProducts();
-
+    this.loadPageWithProducts();
   }
 
   loadPageWithProducts() {
@@ -176,11 +156,9 @@ export class AllProductComponent implements OnInit {
               }
             });
           }
-
         }
-
       )
-      .unsubscribe()
+      .unsubscribe();
   }
 
 }
