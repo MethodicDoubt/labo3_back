@@ -29,9 +29,11 @@
 
           <ng-template #templateRef>
 
-              <input nbInput type="number" [(ngModel)]="quantity" min="1" max="{{p.quantity}}">
+            <input nbInput type="number" [(ngModel)]="quantity" min="1" max="{{p.quantity}}">
 
-              <button nbButton size="small" (click)="addToBasket(p)" status="success"> <nb-icon icon="checkmark-outline"></nb-icon> </button>
+            <button nbButton size="small" (click)="addToBasket(p)" status="success">
+              <nb-icon icon="checkmark-outline"></nb-icon>
+            </button>
 
           </ng-template>
 
@@ -78,7 +80,7 @@
 
     Items per Page:
 
-  
+
     <nb-select (selectedChange)="handlePageSizeChange($event)" ngModel="{{pageSize}}">
 
       <nb-option *ngFor="let size of pageSizes" value="{{size}}">

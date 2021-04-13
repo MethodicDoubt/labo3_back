@@ -2,10 +2,16 @@
   <nb-card-header style="display: flex;justify-content: space-between;">
     <h3>{{product.name}}</h3>
     <div *ngIf="this.isConnected">
-      <button nbButton type="button" status="primary" (click)="addToBasket(product)">
+      <button nbButton type="button" status="primary" [nbPopover]="templateRef">
         <nb-icon icon="plus-outline"></nb-icon>
         <nb-icon icon="shopping-bag-outline"></nb-icon>
       </button>
+      <ng-template #templateRef>
+        <input nbInput type="number" [(ngModel)]="quantity" min="1" max="{{product.quantity}}">
+        <button nbButton size="small" (click)="addToBasket(product)" status="success">
+          <nb-icon icon="checkmark-outline"></nb-icon>
+        </button>
+      </ng-template>
     </div>
 
   </nb-card-header>
