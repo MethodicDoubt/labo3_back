@@ -17,7 +17,7 @@ export class BasketComponent implements OnInit {
 
   totalPrice : number = 0;
 
-  quantity: number = 0;
+  quantity: number = 1;
 
   totalPriceStatus : Subscription;
 
@@ -35,7 +35,6 @@ export class BasketComponent implements OnInit {
 
     this.totalPriceStatus = this.productService.totalPriceStatus.subscribe(data => this.totalPrice = data);
 
-    console.log(this.mapProductQuantity);
 
   }
 
@@ -43,9 +42,6 @@ export class BasketComponent implements OnInit {
 
     this.productService.basket.delete(p);
     this.uniqueProduct = Array.from(this.mapProductQuantity.keys());
-
-    console.log(this.productService.basket)
-    console.log(this.uniqueProduct)
 
     this.productService.emitBasketLengthStatus();
 
@@ -73,13 +69,11 @@ export class BasketComponent implements OnInit {
 
   changeQuantity(p: Product, quantity: number) {
 
-    console.log(quantity);
 
     this.productService.basket.set(p, quantity);
 
     this.productService.calculTotalPrice();
 
-    console.log(this.productService.basket)
 
   }
 

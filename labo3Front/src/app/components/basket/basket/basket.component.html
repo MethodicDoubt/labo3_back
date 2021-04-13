@@ -30,7 +30,7 @@
           <input nbInput type="number" min="1" max="{{mapProductQuantity.get(p)}}" [(ngModel)]="quantity"
             (load)="onQuantityLoad(p)">
 
-          <button nbButton size="small" (click)="changeQuantity(p, quantity)">
+          <button nbButton size="small" status="success" (click)="changeQuantity(p, quantity)">
             <nb-icon icon="checkmark-outline"></nb-icon>
           </button>
 

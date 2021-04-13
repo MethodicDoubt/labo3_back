@@ -18,7 +18,6 @@ export class OrderService {
   constructor(private _authService: AuthService, public productService: ProductService, private _httpClient: HttpClient) { }
 
   createNewOrder(order: Order): Observable<boolean> {
-    console.log(order);
     return this._httpClient.post<boolean>(this.BASE_URL, order);
   }
 
