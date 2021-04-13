@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Page } from 'ngx-pagination/dist/pagination-controls.directive';
 import { Observable, Subject } from 'rxjs';
 import { AdvancedSearch } from '../models/advanced-search.model';
 import { Product } from '../models/product.model';

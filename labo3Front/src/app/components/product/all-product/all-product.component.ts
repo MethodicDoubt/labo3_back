@@ -36,7 +36,6 @@ export class AllProductComponent implements OnInit {
     private _activatedRoute: ActivatedRoute,
     public _authService: AuthService) {
     console.log("Constructor");
-    this.pageSize = 4;
     this.handlePageChange(1)
   }
 
@@ -47,9 +46,6 @@ export class AllProductComponent implements OnInit {
         this.isConnected = dataConnexion;
       }
     )
-
-    this.retrieveProducts();
-
   }
 
   redirect(id: number) {
@@ -133,6 +129,7 @@ export class AllProductComponent implements OnInit {
   }
 
   retrieveProducts(): void {
+    console.log("retrieveProducts")
 
     const params = this.getRequestParams(this.page, this.pageSize);
 
@@ -140,6 +137,8 @@ export class AllProductComponent implements OnInit {
       .subscribe(
 
         response => {
+
+          console.log(response)
 
           this.products = response.content;
           this.count = response.totalElements;
@@ -158,6 +157,7 @@ export class AllProductComponent implements OnInit {
   }
 
   handlePageSizeChange(event: any): void {
+    console.log("handlePageSizeChange")
     this.pageSize = event;
     this.page = 1;
     this.retrieveProducts();
