@@ -15,24 +15,25 @@ import { ProductService } from 'src/app/services/product.service';
 export class PaymentComponent implements OnInit {
 
   constructor(
-    public productService : ProductService, 
-    private _OrderService : OrderService, 
-    private _authService : AuthService, 
-    private _router : Router
-    ) { }
+    public productService: ProductService,
+    private _OrderService: OrderService,
+    private _authService: AuthService,
+    private _router: Router
+  ) { }
 
   ngOnInit(): void {
   }
 
-  transformIntoOrder(n : number) {
+  transformIntoOrder(n: number) {
 
-    let newOrder : Order = new Order();
+    let newOrder: Order = new Order();
+    newOrder.products = [];
 
     switch (n) {
       case 1:
 
         newOrder.payementMethod = "PAYPAL"
-        
+
         break;
 
       case 2:
@@ -46,7 +47,7 @@ export class PaymentComponent implements OnInit {
         newOrder.payementMethod = "DEBIT_CARD"
 
         break;
-    
+
       default:
         break;
     }
@@ -56,7 +57,7 @@ export class PaymentComponent implements OnInit {
       for (let index = 0; index < value; index++) {
 
         newOrder.products.push(key);
-        
+
       }
 
     });
@@ -69,67 +70,24 @@ export class PaymentComponent implements OnInit {
 
   }
 
-  isPaid(newOrder : Order) {
+  isPaid(newOrder: Order) {
 
-    this._OrderService.createNewOrder(newOrder).subscribe();
-
-    //---------------------------------------------------------------TEST
-
-    newOrder.products.forEach(p => console.log(p))
-
-    let map = new Map<number, number>();
-
-    let lesId : number[] = [];
-
-    newOrder.products.forEach(p => { lesId.push(p.productId) })
-
-    console.log("Les ids des produits "+ lesId )
-
-    let uniqueId = lesId.filter((x, i, a) => a.indexOf(x) == i);
-
-    console.log("Les ids uniques des produits "+uniqueId)
-
-    let count : number[] = [];
-
-    lesId.forEach(
-      p => { //4
-        let count = 0;
-        newOrder.products.forEach(element => {
-          if (element.productId == p) { // idproduit == 4
-            count++;
+    this._OrderService.createNewOrder(newOrder).subscribe(
+      next => {
+        this.productService.basket.forEach(
+          (value, key) => {
+            let object = {
+              "quantity": key.quantity - value
+            }
+            this.productService.patch(object, key.productId).subscribe(
+              next => {
+                this._OrderService.initBasket();
+                this._router.navigate(['home']).then()
+              }
+            );
           }
-        });
-        map.set(p,count);
+        );
       }
-    )
-
-    console.log(map);
-
-    //----------------------------------------------------------------FIN TEST
-    
-    map.forEach((k,v) => {
-
-      console.log("Nombre d'item = " + k)
-      console.log("L'id de l'item = " + v)
-
-      let product = new Product();
-
-      product = newOrder.products.find(p => p.productId == v);
-
-      console.log(product);
-
-      let object = {
-
-        "quantity": product.quantity - k
-
-      }
-
-      this.productService.patch(object, v).subscribe();
-
-    });
-
-    this._router.navigate(['home']).then;
-
+    );
   }
-
 }

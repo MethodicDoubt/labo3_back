@@ -17,7 +17,7 @@ export class AllProductComponent implements OnInit {
 
   products: Product[];
 
-  quantity : number = 0;
+  quantity : number = 1;
 
   isConnected: boolean;
   statusConnexion: Subscription;
@@ -109,7 +109,7 @@ export class AllProductComponent implements OnInit {
 
   addToBasket(p: Product) {
 
-    console.log(this.quantity);
+    // console.log(this.quantity);
     
     if(this.quantity > 0 && this.quantity <= p.quantity) {
 
@@ -119,7 +119,7 @@ export class AllProductComponent implements OnInit {
   
       this._productService.calculTotalPrice();
 
-      this.quantity = 0;
+      this.quantity = 1;
   
       this.popovers.forEach(pop => {
         pop.hide();

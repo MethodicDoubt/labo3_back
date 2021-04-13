@@ -18,7 +18,7 @@ export class ProductByIdComponent implements OnInit {
   product: Product;
   isConnected: boolean;
   statusConnexion: Subscription;
-  quantity = 0;
+  quantity = 1;
 
   constructor(private _productService: ProductService,
     private _activatedRoute: ActivatedRoute,
@@ -51,7 +51,7 @@ export class ProductByIdComponent implements OnInit {
 
       this._productService.calculTotalPrice();
 
-      this.quantity = 0;
+      this.quantity = 1;
 
       this.popovers.forEach(pop => {
         pop.hide();

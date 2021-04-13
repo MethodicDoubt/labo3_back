@@ -1,81 +1,85 @@
 <div class="row">
 
-    <nb-card *ngFor="let p of uniqueProduct; let i = index" size="small" class="card col-4">
+  <nb-card *ngFor="let p of uniqueProduct; let i = index" size="small" class="card col-4">
 
-        <nb-card-header style="display: flex; justify-content: space-between;">
-    
-            <div>
+    <nb-card-header style="display: flex; justify-content: space-between;">
 
-                <h3> {{p.name}} </h3>
+      <div>
 
-            </div>
+        <h3> {{p.name}} </h3>
+        <p>Quantity : {{productService.basket.get(p)}}</p>
 
-            <div>
+      </div>
 
-                <button nbButton type="button" status="danger" (click)="removeFromBasket(p)">
+      <div>
 
-                    <nb-icon icon="minus-outline"></nb-icon>
+        <button nbButton type="button" status="danger" (click)="removeFromBasket(p)">
 
-                </button>
+          <nb-icon icon="minus-outline"></nb-icon>
 
-                <button nbButton type="button" [nbPopover]="templateRef">
+        </button>
 
-                    Change Quantity
+        <button nbButton type="button" [nbPopover]="templateRef">
 
-                </button>
+          Change Quantity
 
-                <ng-template #templateRef>
+        </button>
 
-                    <input nbInput type="number" min="1" max="{{mapProductQuantity.get(p)}}" [(ngModel)]="quantity" (load)="onQuantityLoad(p)">
-      
-                    <button nbButton size="small" (click)="changeQuantity(p, quantity)"> <nb-icon icon="checkmark-outline"></nb-icon> </button>
-      
-                </ng-template>
+        <ng-template #templateRef>
 
-            </div>
-    
-        </nb-card-header>
-        <nb-card-body class="row" (click)="redirect(p.productId)">
-    
-            <div class="col-4">
+          <input nbInput type="number" min="1" max="{{mapProductQuantity.get(p)}}" [(ngModel)]="quantity"
+            (load)="onQuantityLoad(p)">
 
-                <nb-list>
-    
-                    <nb-list-item>{{p.description}}</nb-list-item>
-                    <nb-list-item *ngFor="let c of p.categoriesDto">{{c.type}}</nb-list-item>
-                    <nb-list-item *ngIf="p.expirationDate != null">{{p.expirationDate}}</nb-list-item>
-                    <nb-list-item>{{p.purchasePrice | currency:'EUR': 'symbol' :'0.2-2' : 'fr'}}</nb-list-item>
-                    
-        
-                </nb-list>
+          <button nbButton size="small" (click)="changeQuantity(p, quantity)">
+            <nb-icon icon="checkmark-outline"></nb-icon>
+          </button>
 
-            </div>
+        </ng-template>
 
-            <div class="col-8">
+      </div>
 
-                <img src={{p.productImage}} id="img-selectAll">
+    </nb-card-header>
+    <nb-card-body class="row" (click)="redirect(p.productId)">
 
-            </div>
-    
-        </nb-card-body>
-    
-    </nb-card>
-    
+      <div class="col-4">
+
+        <nb-list>
+
+          <nb-list-item>{{p.description}}</nb-list-item>
+          <nb-list-item *ngFor="let c of p.categoriesDto">{{c.type}}</nb-list-item>
+          <nb-list-item *ngIf="p.expirationDate != null">{{p.expirationDate}}</nb-list-item>
+          <nb-list-item>{{p.purchasePrice | currency:'EUR': 'symbol' :'0.2-2' : 'fr'}}</nb-list-item>
+
+
+        </nb-list>
+
+      </div>
+
+      <div class="col-8">
+
+        <img src={{p.productImage}} id="img-selectAll">
+
+      </div>
+
+    </nb-card-body>
+
+  </nb-card>
+
 </div>
 
 <div style="display: flex; background-color: #13132b; padding: 1%; justify-content: flex-end;">
 
-    <div>
+  <div>
 
-        <h3 style="border: 2px white solid; border-radius: 10px; margin: 0;">Total price : {{productService.totalPrice | currency:'EUR': 'symbol' :'0.2-2' : 'fr'}}</h3>
+    <h3 style="border: 2px white solid; border-radius: 10px; margin: 0;">Total price :
+      {{productService.totalPrice | currency:'EUR': 'symbol' :'0.2-2' : 'fr'}}</h3>
 
-    </div>
+  </div>
 
-    <div style="margin-left: 2%;">
+  <div style="margin-left: 2%;">
 
-        <button nbButton type="button" size="large" status="info" (click)="redirectToPayment()"> Proceed </button>
+    <button nbButton type="button" size="large" status="info" (click)="redirectToPayment()"> Proceed </button>
 
-    </div>
+  </div>
 
 </div>
-

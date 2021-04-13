@@ -67,9 +67,9 @@ export class ProductService {
     return this._httpClient.post<boolean>(this.BASE_URL, { product: product, user: this.authService.currentUser });
   }
 
-  patch(productToPatch: Object, id: number): Observable<boolean> {
+  patch(productToPatch: Object, productId: number): Observable<boolean> {
     // console.log(productToPatch)
-    return this._httpClient.patch<boolean>(this.BASE_URL + "/" + id, productToPatch);
+    return this._httpClient.patch<boolean>(this.BASE_URL + "/" + productId, productToPatch);
 
   }
 
@@ -83,7 +83,7 @@ export class ProductService {
 
     let elementNumber: number;
 
-    if(this.basket.size > 0) {
+    if (this.basket.size > 0) {
 
       elementNumber = Array.from(this.basket.values()).reduce((x, y) => x + y)
 
@@ -93,7 +93,7 @@ export class ProductService {
 
     }
 
-    console.log(elementNumber)
+    // console.log(elementNumber)
 
     this.basketStatus.next(
 
@@ -117,7 +117,7 @@ export class ProductService {
 
     }
 
-    if(this.basket.size > 0) {
+    if (this.basket.size > 0) {
 
       this.basket.forEach((value, key) => {
 
