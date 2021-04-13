@@ -21,7 +21,7 @@ import { EditsupplierComponent } from './components/admin-panel/admin-panel/admi
 import { EditProductComponent } from './components/admin-panel/admin-panel/admin-products/edit-product/edit-product.component';
 
 const routes: Routes = [
-  { path: '', component: AllProductComponent },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: AllProductComponent },
   { path: 'product/:id', resolve: { resultat: ProductResolverService }, component: ProductByIdComponent },
   { path: 'basket', canActivate: [ConnectGuard], component: BasketComponent },
@@ -53,7 +53,7 @@ const routes: Routes = [
       {
         path: 'users', component: AdminUsersComponent
       }
-      
+
     ]
   },
   { path: 'my-account', canActivate: [ConnectGuard], component: MyAccountComponent },

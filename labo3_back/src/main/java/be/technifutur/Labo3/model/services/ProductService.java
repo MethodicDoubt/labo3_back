@@ -156,12 +156,17 @@ public class ProductService implements Crudable<Product, ProductDto, Integer> {
         return false;
     }
 
-    public List<ProductDto> findByNameOrCategoryOrSupplier(String string) {
-        return this.productRepository.findDistinctByCategoriesTypeContainingIgnoreCaseOrSupplierCompanyNameContainingIgnoreCaseOrNameContainingIgnoreCase(string, string, string)
+    public Page<ProductDto> findByNameOrCategoryOrSupplier(String string, int page, int size) {
+
+        List<ProductDto> result = this.productRepository.findDistinctByCategoriesTypeContainingIgnoreCaseOrSupplierCompanyNameContainingIgnoreCaseOrNameContainingIgnoreCase(string, string, string, PageRequest.of(page, size))
                 .stream()
                 .map(this.mapper::toProductDto)
-                .collect(Collectors.toList())
-                ;
+                .collect(Collectors.toList());
+
+        int nbEntry = this.productRepository.findDistinctByCategoriesTypeContainingIgnoreCaseOrSupplierCompanyNameContainingIgnoreCaseOrNameContainingIgnoreCase(string, string, string)
+                .size();
+
+        return new PageImpl<>(result, PageRequest.of(page, size), nbEntry);
     }
 
     public Page<ProductDto> search(AdvancedSearchDto advancedSearchDto, int page, int size) {

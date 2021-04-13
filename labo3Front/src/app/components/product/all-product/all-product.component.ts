@@ -35,8 +35,9 @@ export class AllProductComponent implements OnInit {
     private _router: Router,
     private _activatedRoute: ActivatedRoute,
     public _authService: AuthService) {
-    // console.log("Constructor");
-    this.loadPageWithProducts();
+    console.log("Constructor");
+    this.pageSize = 4;
+    this.handlePageChange(1)
   }
 
   ngOnInit(): void {
@@ -55,8 +56,7 @@ export class AllProductComponent implements OnInit {
     this._router.navigate(['product', id]).then();
   }
 
-  initTab() {
-    const params = this.getRequestParams(this.page, this.pageSize);
+  initTab(params: any) {
     this._productService.getAllWithPagination(params).subscribe(
       response => {
         console.log(response)
@@ -67,18 +67,22 @@ export class AllProductComponent implements OnInit {
     )
   }
 
-  sortProducts(searchByString: String) {
+  sortProducts(searchByString: String, params: any) {
     if (searchByString == "") {
       this._productService.getAll().subscribe(
         data => { this.products = data }
       )
     } else {
-      this._productService.searchByString(searchByString).subscribe(
+      this._productService.searchByString(searchByString, params).subscribe(
         data => {
-          if (data.length == 0) {
-            this.initTab();
+          console.log(data);
+          if (data.content.length == 0) {
+            this.initTab(params);
           } else {
-            this.products = data
+            this.products = data.content;
+            this.count = data.totalElements;
+            this.totalPages = data.totalPages;
+            console.log(this.products)
           }
         }
       );
@@ -148,15 +152,12 @@ export class AllProductComponent implements OnInit {
   }
 
   handlePageChange(event: number): void {
-
+    console.log("handlePageChange")
     this.page = event;
-
     this.loadPageWithProducts();
-
   }
 
   handlePageSizeChange(event: any): void {
-
     this.pageSize = event;
     this.page = 1;
     this.retrieveProducts();
@@ -164,25 +165,30 @@ export class AllProductComponent implements OnInit {
   }
 
   loadPageWithProducts() {
+    console.log("loadPageWithProducts")
+    const params = this.getRequestParams(this.page, this.pageSize);
     this._activatedRoute.queryParamMap.subscribe(
-
       data => {
         if (data.get('searchByString') == undefined && data.get('searchObject') == undefined || data.get('searchByString') == "") {
-          this.initTab()
+          console.log('all product')
+          this.initTab(params)
         } else if (data.get('searchByString') != "" && data.get('searchObject') == undefined) {
-          this.sortProducts(data.get('searchByString'))
+          console.log('search by string')
+          this.sortProducts(data.get('searchByString'), params)
         } else {
-          const params = this.getRequestParams(this.page, this.pageSize);
+          console.log('advance search')
           this._productService.search(this._productService.searchObject, params).subscribe(data => {
-            // console.log(data.content)
+            console.log(data)
+            console.log(data.content.length)
             if (data.content.length == 0) {
               alert("Your advance search get nothing !");
-              this.initTab();
+              this.initTab(params);
             } else {
-              // console.log(data)
+              console.log(data.content.length)
               this.products = data.content;
               this.count = data.totalElements;
               this.totalPages = data.totalPages;
+              console.log(this.products)
             }
           });
         }
