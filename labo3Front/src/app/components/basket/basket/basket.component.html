@@ -1,6 +1,6 @@
 <div class="row">
 
-    <nb-card *ngFor="let p of products; let i = index" size="small" class="card col-4">
+    <nb-card *ngFor="let p of uniqueProduct; let i = index" size="small" class="card col-4">
 
         <nb-card-header style="display: flex; justify-content: space-between;">
     
@@ -12,11 +12,25 @@
 
             <div>
 
-                <button nbButton type="button" status="danger" (click)="removeFromBasket(i, p)">
+                <button nbButton type="button" status="danger" (click)="removeFromBasket(p)">
 
                     <nb-icon icon="minus-outline"></nb-icon>
 
                 </button>
+
+                <button nbButton type="button" [nbPopover]="templateRef">
+
+                    Change Quantity
+
+                </button>
+
+                <ng-template #templateRef>
+
+                    <input nbInput type="number" min="1" max="{{mapProductQuantity.get(p)}}" [(ngModel)]="quantity" (load)="onQuantityLoad(p)">
+      
+                    <button nbButton size="small" (click)="changeQuantity(p, quantity)"> <nb-icon icon="checkmark-outline"></nb-icon> </button>
+      
+                </ng-template>
 
             </div>
     
@@ -29,7 +43,7 @@
     
                     <nb-list-item>{{p.description}}</nb-list-item>
                     <nb-list-item *ngFor="let c of p.categoriesDto">{{c.type}}</nb-list-item>
-                    <nb-list-item *ngIf="p.experiationDate != null">{{p.experiationDate}}</nb-list-item>
+                    <nb-list-item *ngIf="p.expirationDate != null">{{p.expirationDate}}</nb-list-item>
                     <nb-list-item>{{p.purchasePrice | currency:'EUR': 'symbol' :'0.2-2' : 'fr'}}</nb-list-item>
                     
         

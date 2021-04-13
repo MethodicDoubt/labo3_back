@@ -20,7 +20,7 @@ export class OrderService {
   createNewOrder(order: Order): Observable<boolean> {
 
     console.log(order);
-    this.productService.basket = [];
+    this.productService.basket = new Map<Product, number>();
     this.productService.totalPrice = 0;
     this.productService.emitBasketLengthStatus();
     this.productService.emitTotalPriceStatus();

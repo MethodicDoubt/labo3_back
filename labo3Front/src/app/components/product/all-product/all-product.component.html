@@ -20,12 +20,20 @@
 
         <div *ngIf="this.isConnected">
 
-          <button nbButton type="button" status="primary" (click)="addToBasket(p)">
+          <button nbButton type="button" status="primary" [nbPopover]="templateRef">
 
             <nb-icon icon="plus-outline"></nb-icon>
             <nb-icon icon="shopping-bag-outline"></nb-icon>
 
           </button>
+
+          <ng-template #templateRef>
+
+              <input nbInput type="number" [(ngModel)]="quantity" min="1" max="{{p.quantity}}">
+
+              <button nbButton size="small" (click)="addToBasket(p)" status="success"> <nb-icon icon="checkmark-outline"></nb-icon> </button>
+
+          </ng-template>
 
         </div>
 
@@ -70,6 +78,7 @@
 
     Items per Page:
 
+  
     <nb-select (selectedChange)="handlePageSizeChange($event)" ngModel="{{pageSize}}">
 
       <nb-option *ngFor="let size of pageSizes" value="{{size}}">

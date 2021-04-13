@@ -17,7 +17,9 @@ export class ProductService {
 
   public searchObject: AdvancedSearch
 
-  public basket: Product[] = [];
+  public basket: Map<Product, number> = new Map<Product, number>()
+
+  public totalProduct: number;
 
   public totalPrice: number = 0;
 
@@ -79,7 +81,25 @@ export class ProductService {
 
   emitBasketLengthStatus() {
 
-    this.basketStatus.next(this.basket.length);
+    let elementNumber: number;
+
+    if(this.basket.size > 0) {
+
+      elementNumber = Array.from(this.basket.values()).reduce((x, y) => x + y)
+
+    } else {
+
+      elementNumber = 0;
+
+    }
+
+    console.log(elementNumber)
+
+    this.basketStatus.next(
+
+      elementNumber
+
+    );
 
   }
 
@@ -89,12 +109,30 @@ export class ProductService {
 
   }
 
-  calculTotalPrice(n: number) {
+  calculTotalPrice() {
 
-    this.totalPrice += n;
+    if (this.totalPrice > 0) {
+
+      this.totalPrice = 0;
+
+    }
+
+    if(this.basket.size > 0) {
+
+      this.basket.forEach((value, key) => {
+
+        this.totalPrice += key.purchasePrice * value;
+
+      })
+
+      this.emitTotalPriceStatus();
+
+    } else {
+
+      this.totalPrice = 0;
+
+    }
 
   }
-
-
 
 }

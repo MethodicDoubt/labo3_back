@@ -51,8 +51,18 @@ export class PaymentComponent implements OnInit {
         break;
     }
 
-    newOrder.products = this.productService.basket;
+    this.productService.basket.forEach((value, key) => {
+
+      for (let index = 0; index < value; index++) {
+
+        newOrder.products.push(key);
+        
+      }
+
+    });
+
     newOrder.isPaid = true;
+
     newOrder.user = this._authService.currentUser;
 
     this.isPaid(newOrder);
