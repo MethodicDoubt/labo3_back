@@ -48,4 +48,8 @@ export class LoginComponent implements OnInit {
     alert("Why you forgot your surname ? Are you stupid ?");
   }
 
+  cancel() {
+    this._nbDiagRef.close();
+  }
+
 }

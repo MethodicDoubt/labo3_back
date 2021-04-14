@@ -9,15 +9,14 @@
         <label for="password">Password </label>
         <input type="password" nbInput formControlName="password" id="password">
       </p>
-      <p class="text-center" (click)="forgotPassword()">
-        <a class="click-help">password forgot ?</a>
+      <p class="text-center">
+        <a class="click-help mr-2" (click)="forgotPassword()">password forgot ?</a>
+        <a class="click-help" (click)="forgotSurname()">surname forgot ?</a>
       </p>
-      <p class="text-center" (click)="forgotSurname()">
-        <a class="click-help">surname forgot ?</a>
-      </p>
-      <p class="fr">
-        <button nbButton type="submit" status="primary">Login</button>
-      </p>
+      <div class="fr">
+        <button nbButton class="mr-2" type="submit" status="primary" [disabled]="fgLogin.invalid">Login</button>
+        <button status="primary" type="button" nbButton (click)="cancel()">Cancel</button>
+      </div>
     </form>
   </nb-card-body>
 </nb-card>

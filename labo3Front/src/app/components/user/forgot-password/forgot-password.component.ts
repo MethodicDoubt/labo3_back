@@ -26,4 +26,8 @@ export class ForgotPasswordComponent implements OnInit {
     })
   }
 
+  cancel() {
+    this._nbDiagRef.close();
+  }
+
 }

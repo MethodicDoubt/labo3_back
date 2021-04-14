@@ -29,7 +29,7 @@ import { PipeAddressPipe } from './utils/pipe-address.pipe';
 import { PaymentComponent } from './components/basket/payment/payment.component';
 import { LOCALE_ID } from '@angular/core';
 import localeFr from '@angular/common/locales/fr';
-import { registerLocaleData } from '@angular/common';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import { AllProductWithPaginationComponent } from './components/product/all-product-with-pagination/all-product-with-pagination.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AdminUsersComponent } from './components/admin-panel/admin-panel/admin-users/admin-users.component';
@@ -80,6 +80,7 @@ registerLocaleData(localeFr, 'fr');
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    CommonModule,
     NbThemeModule.forRoot({ name: 'cosmic' }),
     NbLayoutModule,
     NbEvaIconsModule,
