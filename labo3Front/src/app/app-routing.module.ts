@@ -19,6 +19,7 @@ import { AllProductWithPaginationComponent } from './components/product/all-prod
 import { EditCategoryComponent } from './components/admin-panel/admin-panel/admin-categories/edit-category/edit-category.component';
 import { EditsupplierComponent } from './components/admin-panel/admin-panel/admin-suppliers/editsupplier/editsupplier.component';
 import { EditProductComponent } from './components/admin-panel/admin-panel/admin-products/edit-product/edit-product.component';
+import { EditProfilComponent } from './components/user/edit-profil/edit-profil.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -57,6 +58,7 @@ const routes: Routes = [
     ]
   },
   { path: 'my-account', canActivate: [ConnectGuard], component: MyAccountComponent },
+  { path: 'edit-profil', canActivate: [ConnectGuard], component: EditProfilComponent },
   { path: '404', component: PageNotFoundComponent },
   { path: '**', redirectTo: '/404' }
 ];

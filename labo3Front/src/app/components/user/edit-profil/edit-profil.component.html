@@ -1,0 +1,50 @@
+<nb-card class="col-6 mx-auto">
+
+  <nb-card-header class="text-center">
+    <h3>Edit your profil</h3>
+  </nb-card-header>
+
+  <nb-card-body>
+
+    <form [formGroup]="formEditProfil" (submit)="onSubmit()">
+      <p class="form-build">
+        <label for="lastName">Lastname : </label>
+        <input nbInput type="text" id="lastName" formControlName="lastName">
+      </p>
+      <p class="form-build">
+        <label for="firstName">Firstname : </label>
+        <input nbInput type="text" id="firstName" formControlName="firstName">
+      </p>
+      <p class="form-build">
+        <label for="surname">Surname : </label>
+        <input nbInput type="text" id="surname" formControlName="surname">
+      </p>
+      <p class="form-build">
+        <label for="street">Street : </label>
+        <input nbInput type="text" id="street" formControlName="street">
+      </p>
+      <p class="form-build">
+        <label for="number">Number : </label>
+        <input nbInput type="number" id="number" formControlName="number">
+      </p>
+      <p class="form-build">
+        <label for="zip">Zip : </label>
+        <input nbInput type="text" id="zip" formControlName="zip">
+      </p>
+      <p class="form-build">
+        <label for="city">City : </label>
+        <input nbInput type="text" id="city" formControlName="city">
+      </p>
+      <p class="form-build">
+        <label for="country">Country : </label>
+        <input nbInput type="text" id="country" formControlName="country">
+      </p>
+    </form>
+    <div class="fr">
+      <button class="mr-2" status="primary" type="submit" nbButton [disabled]="formEditProfil.invalid">Edit</button>
+      <button status="primary" type="button" nbButton routerLink='/home'>Cancel</button>
+    </div>
+
+  </nb-card-body>
+
+</nb-card>

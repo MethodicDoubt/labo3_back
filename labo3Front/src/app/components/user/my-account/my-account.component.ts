@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -8,13 +10,17 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class MyAccountComponent implements OnInit {
 
-  constructor(public authService: AuthService) { }
+  currentUser: User = new User();
+
+  constructor(public authService: AuthService,
+    private _router: Router) { }
 
   ngOnInit(): void {
+    this.currentUser = this.authService.currentUser;
   }
 
   editProfil() {
-    alert("We are preparing this feature ! Stay tuned !");
+    this._router.navigate(['edit-profil']).then();
   }
 
 }
