@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NbDialogRef } from '@nebular/theme';
+import { Router } from '@angular/router';
+import { NbDialogRef, NbDialogService } from '@nebular/theme';
 import { AuthService } from 'src/app/services/auth.service';
+import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +17,9 @@ export class LoginComponent implements OnInit {
 
   constructor(private _formBuilder: FormBuilder,
     private _authService: AuthService,
-    private _nbDiagRef: NbDialogRef<LoginComponent>) { }
+    private _dialogBox: NbDialogService,
+    private _nbDiagRef: NbDialogRef<LoginComponent>,
+    private _router: Router) { }
 
   ngOnInit(): void {
     this.initFgLogin();
@@ -31,6 +35,17 @@ export class LoginComponent implements OnInit {
   login() {
     this._authService.login(this.fgLogin.value['surname'], this.fgLogin.value['password']);
     this._nbDiagRef.close();
+  }
+
+  forgotPassword() {
+    let ref = this._dialogBox.open(ForgotPasswordComponent, {
+      closeOnBackdropClick: false
+    })
+    ref.onClose.subscribe();
+  }
+
+  forgotSurname() {
+    alert("Why you forgot your surname ? Are you stupid ?");
   }
 
 }

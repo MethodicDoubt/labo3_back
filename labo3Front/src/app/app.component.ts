@@ -30,7 +30,7 @@ export class AppComponent {
     this.statusConnexion = this._authService.statusBehaviorConnexion.subscribe(
       dataConnexion => this.isConnected = dataConnexion
     )
-    
+
   }
 
   advancedSearch() {

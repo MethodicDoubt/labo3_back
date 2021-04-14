@@ -40,6 +40,7 @@ import { EditsupplierComponent } from './components/admin-panel/admin-panel/admi
 import { EditProductComponent } from './components/admin-panel/admin-panel/admin-products/edit-product/edit-product.component';
 import { AuthInterceptor } from './utils/auth.interceptor';
 import { EditProfilComponent } from './components/user/edit-profil/edit-profil.component';
+import { ForgotPasswordComponent } from './components/user/forgot-password/forgot-password.component';
 registerLocaleData(localeFr, 'fr');
 
 @NgModule({
@@ -72,7 +73,8 @@ registerLocaleData(localeFr, 'fr');
     EditCategoryComponent,
     EditsupplierComponent,
     EditProductComponent,
-    EditProfilComponent
+    EditProfilComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,

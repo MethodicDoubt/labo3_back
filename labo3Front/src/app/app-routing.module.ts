@@ -20,6 +20,7 @@ import { EditCategoryComponent } from './components/admin-panel/admin-panel/admi
 import { EditsupplierComponent } from './components/admin-panel/admin-panel/admin-suppliers/editsupplier/editsupplier.component';
 import { EditProductComponent } from './components/admin-panel/admin-panel/admin-products/edit-product/edit-product.component';
 import { EditProfilComponent } from './components/user/edit-profil/edit-profil.component';
+import { ForgotPasswordComponent } from './components/user/forgot-password/forgot-password.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -54,7 +55,6 @@ const routes: Routes = [
       {
         path: 'users', component: AdminUsersComponent
       }
-
     ]
   },
   { path: 'my-account', canActivate: [ConnectGuard], component: MyAccountComponent },
