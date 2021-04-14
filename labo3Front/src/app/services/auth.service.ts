@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { User } from '../models/user.model';
 
 @Injectable({
@@ -33,7 +33,7 @@ export class AuthService {
     };
     this._httpClient.post(this.BASE_URL + 'login', userInfo, { observe: 'response' }).subscribe(
       data => {
-        if (data.headers) {          
+        if (data.headers) {
           // get token and put in the localStorage
           let token = data.headers.get('Authorization');
           token = token.replace('Bearer ', '');
@@ -56,6 +56,10 @@ export class AuthService {
 
       }
     );
+  }
+
+  reloadCurrentUser(surname: string): Observable<User> {
+    return this._httpClient.get<User>(this.BASE_URL + 'users/' + surname);
   }
 
   logout() {
