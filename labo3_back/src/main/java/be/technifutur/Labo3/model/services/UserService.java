@@ -61,16 +61,21 @@ public class UserService implements Crudable<User, UserDto, Integer>, UserDetail
     }
 
     @Override
-    public boolean update(User user, Integer integer) {
-        User old = this.userRepository.getOne(integer);
-        User toTest = new User(
-                old.getUserId(), old.getLastName(), old.getFirstName(), old.getAccessLevel(), old.getSurname()
-                , old.getPassword(), old.getAddress(), old.getOrders(), old.getAvatar(), old.isAccountNonExpired()
-                , old.isAccountNonLocked(), old.isCredentialsNonExpired(), old.isEnabled()
-        );
-        user.setUserId(integer);
+    public boolean update(User user, Integer userId) {
+        User oldUser = this.userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException("User with id " + userId + "not found"));
+        user.setUserId(userId);
+        user.setPassword(oldUser.getPassword());
+        user.setAccessLevel(oldUser.getAccessLevel());
+        user.setEnabled(oldUser.isEnabled());
+        user.setAccountNonLocked(oldUser.isAccountNonLocked());
+        user.setAccountNonExpired(oldUser.isAccountNonExpired());
+        user.setCredentialsNonExpired(oldUser.isCredentialsNonExpired());
+        user.setSurname(oldUser.getSurname());
+        user.setOrders(oldUser.getOrders());
+
         this.userRepository.save(user);
-        return !toTest.equals(this.userRepository.getOne(integer));
+
+        return !oldUser.equals(user);
     }
 
     @Override

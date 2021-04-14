@@ -41,8 +41,11 @@ public class UserController implements RestControllable<User, UserDto, Integer> 
     }
 
     @Override
-    public ResponseEntity<Boolean> update(User user, Integer integer) {
-        return null;
+    @PutMapping(path = "/{id}")
+    public ResponseEntity<Boolean> update(@RequestBody User user, @PathVariable Integer id) {
+        System.out.println(user.toString());
+        System.out.println(id);
+        return ResponseEntity.ok(this.userService.update(user, id));
     }
 
     @Override

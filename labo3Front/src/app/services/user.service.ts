@@ -21,8 +21,8 @@ export class UserService {
     return this._httpClient.post<boolean>(this.BASE_URL, newUser);
   }
 
-  updateProfil(editedUser: User, userId: number) {
-    throw new Error('Method not implemented.');
+  updateProfil(editedUser: User, userId: number): Observable<boolean> {
+    return this._httpClient.put<boolean>(this.BASE_URL + '/' + userId, editedUser);
   }
 
 }

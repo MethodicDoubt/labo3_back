@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Subject, Subscription } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
@@ -17,7 +18,8 @@ export class EditProfilComponent implements OnInit {
 
   constructor(private _authService: AuthService,
     private _formBuilder: FormBuilder,
-    private _userService: UserService) { }
+    private _userService: UserService,
+    private _router: Router) { }
 
   ngOnInit(): void {
     this.currentUser = this._authService.currentUser;
@@ -39,7 +41,16 @@ export class EditProfilComponent implements OnInit {
   onSubmit() {
     let editedUser = new User();
     editedUser = this.transformingFormToUser();
-    this._userService.updateProfil(editedUser,this.currentUser.userId);
+    this._userService.updateProfil(editedUser, this.currentUser.userId).subscribe(
+      next => {
+        this._authService.reloadCurrentUser(this.currentUser.surname).subscribe(
+          next => {
+            this._authService.currentUser = next;
+            this._router.navigate(['my-account']);
+          }
+        );
+      }
+    );
   }
 
   transformingFormToUser(): User {
