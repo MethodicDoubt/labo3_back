@@ -16,10 +16,6 @@
         <input nbInput type="text" id="firstName" formControlName="firstName">
       </p>
       <p class="form-build">
-        <label for="surname">Surname : </label>
-        <input nbInput type="text" id="surname" formControlName="surname">
-      </p>
-      <p class="form-build">
         <label for="street">Street : </label>
         <input nbInput type="text" id="street" formControlName="street">
       </p>
@@ -39,12 +35,11 @@
         <label for="country">Country : </label>
         <input nbInput type="text" id="country" formControlName="country">
       </p>
+      <div class="fr">
+        <button class="mr-2" status="primary" type="submit" nbButton [disabled]="formEditProfil.invalid">Edit</button>
+        <button status="primary" type="button" nbButton routerLink='/home'>Cancel</button>
+      </div>
     </form>
-    <div class="fr">
-      <button class="mr-2" status="primary" type="submit" nbButton [disabled]="formEditProfil.invalid">Edit</button>
-      <button status="primary" type="button" nbButton routerLink='/home'>Cancel</button>
-    </div>
-
   </nb-card-body>
 
 </nb-card>

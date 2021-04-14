@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-edit-profil',
@@ -15,7 +16,8 @@ export class EditProfilComponent implements OnInit {
   formEditProfil: FormGroup;
 
   constructor(private _authService: AuthService,
-    private _formBuilder: FormBuilder) { }
+    private _formBuilder: FormBuilder,
+    private _userService: UserService) { }
 
   ngOnInit(): void {
     this.currentUser = this._authService.currentUser;
@@ -26,7 +28,6 @@ export class EditProfilComponent implements OnInit {
     this.formEditProfil = this._formBuilder.group({
       lastName: [this.currentUser.firstName, [Validators.required]],
       firstName: [this.currentUser.lastName, [Validators.required]],
-      surname: [this.currentUser.surname, [Validators.required]],
       street: [this.currentUser.address.street, [Validators.required]],
       number: [this.currentUser.address.number, [Validators.required]],
       zip: [this.currentUser.address.zip, [Validators.required]],
@@ -36,7 +37,24 @@ export class EditProfilComponent implements OnInit {
   }
 
   onSubmit() {
-    
+    let editedUser = new User();
+    editedUser = this.transformingFormToUser();
+    this._userService.updateProfil(editedUser,this.currentUser.userId);
+  }
+
+  transformingFormToUser(): User {
+    let editedUser = new User();
+    console.log(this.formEditProfil.value);
+    editedUser.firstName = this.formEditProfil.value['firstName'];
+    editedUser.lastName = this.formEditProfil.value['lastName'];
+    editedUser.address = {
+      city: this.formEditProfil.value['city'],
+      country: this.formEditProfil.value['country'],
+      number: this.formEditProfil.value['number'],
+      street: this.formEditProfil.value['street'],
+      zip: this.formEditProfil.value['zip'],
+    }
+    return editedUser;
   }
 
 }

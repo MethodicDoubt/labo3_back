@@ -8,6 +8,7 @@ import { User } from '../models/user.model';
 })
 export class UserService {
 
+
   private BASE_URL: string = "http://localhost:8080/users";
 
   constructor(private _httpClient: HttpClient) { }
@@ -20,8 +21,8 @@ export class UserService {
     return this._httpClient.post<boolean>(this.BASE_URL, newUser);
   }
 
-  userToPatch(userToPatch: Object, userId: number): Observable<boolean> {
-    return this._httpClient.patch<boolean>(this.BASE_URL + '/' + userId, userToPatch);
+  updateProfil(editedUser: User, userId: number) {
+    throw new Error('Method not implemented.');
   }
 
 }
