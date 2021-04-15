@@ -70,7 +70,12 @@ public class UserController implements RestControllable<User, UserDto, Integer> 
     }
 
     @PostMapping(path = "/changePassword")
-    public ResponseEntity<Boolean> patch(@RequestBody User userToChangePassword) throws PasswordNotChangedException {
+    public ResponseEntity<Boolean> changePassword(@RequestBody User userToChangePassword) throws PasswordNotChangedException {
         return ResponseEntity.ok(this.userService.changePassword(userToChangePassword));
+    }
+
+    @PostMapping(path = "/verifyPassword")
+    public ResponseEntity<Boolean> verifyPassword(@RequestBody User userToVerifyPassword) throws PasswordNotChangedException {
+        return ResponseEntity.ok(this.userService.verifyPassword(userToVerifyPassword));
     }
 }

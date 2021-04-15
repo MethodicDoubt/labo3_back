@@ -37,7 +37,7 @@ export class AppComponent {
     let ref = this._dialogBox.open(AdvSearchComponent, {
       closeOnBackdropClick: true
     })
-    ref.onClose.subscribe()
+    ref.onClose.subscribe();
 
 
   }

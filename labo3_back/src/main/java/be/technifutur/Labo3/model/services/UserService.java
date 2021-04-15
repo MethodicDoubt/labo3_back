@@ -119,6 +119,23 @@ public class UserService implements Crudable<User, UserDto, Integer>, UserDetail
         return this.userRepository.findBySurnameEquals(s);
     }
 
+    public boolean verifyPassword(User userToVerifyPassword) throws PasswordNotChangedException {
+        boolean retVal = false;
+        try {
+            User oldUser = this.userRepository.findBySurnameEquals(userToVerifyPassword.getSurname());
+            if (!passwordEncoder.matches(userToVerifyPassword.getPassword(), oldUser.getPassword())) {
+                throw new PasswordNotChangedException("The password is incorrect");
+            } else {
+                retVal = true;
+            }
+        } catch (UserNotFoundException | PasswordNotChangedException e) {
+            if (e instanceof PasswordNotChangedException)
+                throw new PasswordNotChangedException(e.getMessage());
+            throw new UserNotFoundException("User with surname \"" + userToVerifyPassword.getSurname() + "\" not found !");
+        }
+        return retVal;
+    }
+
     public boolean changePassword(User userToChangePassword) throws PasswordNotChangedException {
         boolean retVal = false;
         try {

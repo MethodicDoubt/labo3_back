@@ -62,6 +62,10 @@ export class AuthService {
     return this._httpClient.get<User>(this.BASE_URL + 'users/' + surname);
   }
 
+  verifyPassword(user: User): Observable<any> {
+    return this._httpClient.post<any>(this.BASE_URL + 'users/verifyPassword', user);
+  }
+
   logout() {
     // console.log("logout")
     this.currentUser = null;
