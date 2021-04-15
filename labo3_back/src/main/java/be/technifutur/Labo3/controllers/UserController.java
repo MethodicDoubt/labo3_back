@@ -3,6 +3,7 @@ package be.technifutur.Labo3.controllers;
 import be.technifutur.Labo3.mapper.Mapper;
 import be.technifutur.Labo3.model.dtos.UserDto;
 import be.technifutur.Labo3.model.entities.User;
+import be.technifutur.Labo3.model.exceptionHandler.PasswordNotChangedException;
 import be.technifutur.Labo3.model.services.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -66,6 +67,10 @@ public class UserController implements RestControllable<User, UserDto, Integer> 
     @PatchMapping(path = "/{id}")
     public ResponseEntity<Boolean> patch(@RequestBody Map<String, Object> userToPatch, @PathVariable Integer id) throws IllegalAccessException {
         return ResponseEntity.ok(this.userService.partialUpdate(userToPatch, id));
+    }
 
+    @PostMapping(path = "/changePassword")
+    public ResponseEntity<Boolean> patch(@RequestBody User userToChangePassword) throws PasswordNotChangedException {
+        return ResponseEntity.ok(this.userService.changePassword(userToChangePassword));
     }
 }

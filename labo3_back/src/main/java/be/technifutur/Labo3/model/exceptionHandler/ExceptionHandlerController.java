@@ -11,6 +11,12 @@ public class ExceptionHandlerController {
     @ExceptionHandler(Throwable.class)
     public ResponseEntity<ErrorDTO> handle(Throwable e) {
 
+        if (e instanceof PasswordNotChangedException) {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(new ErrorDTO(e.getMessage()));
+        }
+
         if (e instanceof LogNotFoundException) {
 
             return ResponseEntity

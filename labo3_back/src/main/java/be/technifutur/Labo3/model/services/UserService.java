@@ -3,6 +3,7 @@ package be.technifutur.Labo3.model.services;
 import be.technifutur.Labo3.mapper.Mapper;
 import be.technifutur.Labo3.model.dtos.UserDto;
 import be.technifutur.Labo3.model.entities.User;
+import be.technifutur.Labo3.model.exceptionHandler.PasswordNotChangedException;
 import be.technifutur.Labo3.model.exceptionHandler.UserNotFoundException;
 import be.technifutur.Labo3.model.repositories.UserRepository;
 import be.technifutur.Labo3.model.types.AccessLevel;
@@ -104,6 +105,7 @@ public class UserService implements Crudable<User, UserDto, Integer>, UserDetail
                     .orElseThrow(() -> new NoSuchElementException("Property not found"));
 
             field.setAccessible(true);
+            System.out.println(field);
             field.set(userToPatch, entry.getValue());
         }
 
@@ -115,5 +117,31 @@ public class UserService implements Crudable<User, UserDto, Integer>, UserDetail
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         return this.userRepository.findBySurnameEquals(s);
+    }
+
+    public boolean changePassword(User userToChangePassword) throws PasswordNotChangedException {
+        boolean retVal = false;
+        User oldUser = this.userRepository.findBySurnameEquals(userToChangePassword.getSurname());
+        if (passwordEncoder.matches(userToChangePassword.getPassword(), oldUser.getPassword())) {
+            throw new PasswordNotChangedException("The new password is equals to the old one");
+        } else {
+            User userWithNewPassword = User.builder()
+                    .userId(oldUser.getUserId())
+                    .lastName(oldUser.getLastName())
+                    .firstName(oldUser.getFirstName())
+                    .address(oldUser.getAddress())
+                    .accessLevel(oldUser.getAccessLevel())
+                    .surname(oldUser.getSurname())
+                    .isAccountNonExpired(oldUser.isAccountNonExpired())
+                    .isAccountNonLocked(oldUser.isAccountNonLocked())
+                    .isEnabled(oldUser.isEnabled())
+                    .isCredentialsNonExpired(oldUser.isCredentialsNonExpired())
+                    .orders(oldUser.getOrders())
+                    .password(passwordEncoder.encode(userToChangePassword.getPassword()))
+                    .build();
+            this.userRepository.save(userWithNewPassword);
+            retVal = !oldUser.getPassword().equals(this.userRepository.getOne(userWithNewPassword.getUserId()));
+        }
+        return retVal;
     }
 }

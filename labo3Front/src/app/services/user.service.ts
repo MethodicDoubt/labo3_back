@@ -25,4 +25,8 @@ export class UserService {
     return this._httpClient.put<boolean>(this.BASE_URL + '/' + userId, editedUser);
   }
 
+  changePassword(user: User): Observable<boolean> {
+    return this._httpClient.post<boolean>(this.BASE_URL + '/changePassword', user);
+  }
+
 }
