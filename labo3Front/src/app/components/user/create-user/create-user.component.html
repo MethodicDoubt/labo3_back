@@ -24,8 +24,8 @@
           <input nbInput [type]="getInputVerifyType()" id="verifyPassword" formControlName="verifyPassword" [ngClass]="{'invalide-password-box':fgCreateUser.value['password'] != fgCreateUser.value['verifyPassword'] &&
         !fgCreateUser.get('verifyPassword').pristine}">
           <button nbSuffix type="button" nbButton ghost (click)="toggleShowVerifyPassword()">
-            <nb-icon [icon]="showPassword ? 'eye-outline' : 'eye-off-2-outline'" pack="eva"
-              [attr.aria-label]="showPassword ? 'hide password' : 'show password'">
+            <nb-icon [icon]="showVerifyPassword ? 'eye-outline' : 'eye-off-2-outline'" pack="eva"
+              [attr.aria-label]="showVerifyPassword ? 'hide password' : 'show password'">
             </nb-icon>
           </button>
         </nb-form-field>
