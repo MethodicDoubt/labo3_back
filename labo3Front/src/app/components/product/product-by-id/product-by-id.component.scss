@@ -1,31 +1,39 @@
-.divv{
-    margin: 0 auto;
+.divv {
+  margin: 0 auto;
 }
 
-.no-style{
-    list-style: none;
-}
-.no-style li{
-    margin: 20px 0;
-    font-size: 20px;
-}
-.no-style li span{
-    margin: 20px 0;
-    padding: 20px 15px;
-    font-size: 22px;
+.no-style {
+  list-style: none;
 }
 
-.bold{
-    font-weight: bold;
+.no-style li {
+  margin: 20px 0;
+  font-size: 20px;
 }
 
-.flex{
-    display: flex;
+.no-style li span {
+  margin: 20px 0;
+  padding: 20px 15px;
+  font-size: 22px;
 }
 
-.row-left{
-    width: 50%;
+.bold {
+  font-weight: bold;
 }
-.row-right{
-    width: 50%;
+
+.flex {
+  display: flex;
+}
+
+.row-left {
+  width: 50%;
+}
+
+.row-right {
+  width: 50%;
+}
+
+.left-side {
+  width: 40%;
+  padding-left: 0px;
 }

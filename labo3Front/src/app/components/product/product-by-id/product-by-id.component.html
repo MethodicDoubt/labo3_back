@@ -21,7 +21,14 @@
     </div>
     <div class="row-right">
       <ul class="no-style">
-        <li><span class="bold">Description : </span>{{product.description}}</li>
+        <li>
+          <table>
+            <tr>
+              <td class="left-side"><span class="bold">Description :</span></td>
+              <td>{{product.description}}</td>
+            </tr>
+          </table>
+        </li>
         <li> <span class="bold">Category : </span>
           <span *ngFor="let c of product.categoriesDto">{{c.type}} </span>
         </li>
