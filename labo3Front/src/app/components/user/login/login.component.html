@@ -7,7 +7,15 @@
       </p>
       <p class=" form-build">
         <label for="password">Password </label>
-        <input type="password" nbInput formControlName="password" id="password">
+        <nb-form-field>
+          <input [type]="getInputType()" nbInput formControlName="password" id="password">
+          <button nbSuffix type="button" nbButton ghost (click)="toggleShowPassword()">
+            <nb-icon [icon]="showPassword ? 'eye-outline' : 'eye-off-2-outline'" pack="eva"
+              [attr.aria-label]="showPassword ? 'hide password' : 'show password'">
+            </nb-icon>
+          </button>
+        </nb-form-field>
+
       </p>
       <p class="text-center">
         <a class="click-help mr-2" (click)="forgotPassword()">forgot password ?</a>

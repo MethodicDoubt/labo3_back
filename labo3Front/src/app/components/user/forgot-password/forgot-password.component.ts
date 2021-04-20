@@ -12,6 +12,9 @@ import { UserService } from 'src/app/services/user.service';
 export class ForgotPasswordComponent implements OnInit {
 
   formChangePassword: FormGroup;
+  
+  showPassword: boolean = false;
+  showVerifyPassword: boolean = false;
 
   constructor(private _formBuilder: FormBuilder,
     private _nbDiagRef: NbDialogRef<ForgotPasswordComponent>,
@@ -48,6 +51,28 @@ export class ForgotPasswordComponent implements OnInit {
         this._nbDiagRef.close();
       }
     );
+  }
+
+  getInputTypePassword() {
+    if (this.showPassword) {
+      return 'text';
+    }
+    return 'password';
+  }
+
+  toggleShowPassword() {
+    this.showPassword = !this.showPassword;
+  }
+
+  getInputTypeVerifyPassword() {
+    if (this.showVerifyPassword) {
+      return 'text';
+    }
+    return 'password';
+  }
+
+  toggleShowVerifyPassword() {
+    this.showVerifyPassword = !this.showVerifyPassword;
   }
 
 }

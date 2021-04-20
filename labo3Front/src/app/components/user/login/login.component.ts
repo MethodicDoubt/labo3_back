@@ -13,6 +13,7 @@ import { ForgotPasswordComponent } from '../forgot-password/forgot-password.comp
 export class LoginComponent implements OnInit {
 
   fgLogin: FormGroup;
+  showPassword: boolean = false;
 
 
   constructor(private _formBuilder: FormBuilder,
@@ -50,6 +51,17 @@ export class LoginComponent implements OnInit {
 
   cancel() {
     this._nbDiagRef.close();
+  }
+
+  getInputType() {
+    if (this.showPassword) {
+      return 'text';
+    }
+    return 'password';
+  }
+
+  toggleShowPassword() {
+    this.showPassword = !this.showPassword;
   }
 
 }

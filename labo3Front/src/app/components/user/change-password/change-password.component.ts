@@ -16,6 +16,10 @@ export class ChangePasswordComponent implements OnInit {
 
   formChangePassword: FormGroup;
 
+  showOldPassword: boolean = false;
+  showPassword: boolean = false;
+  showVerifyPassword: boolean = false;
+
   constructor(private _formBuilder: FormBuilder,
     private _nbDiagRef: NbDialogRef<ForgotPasswordComponent>,
     private _userService: UserService,
@@ -67,6 +71,39 @@ export class ChangePasswordComponent implements OnInit {
 
   cancel() {
     this._nbDiagRef.close();
+  }
+
+  getInputTypePassword() {
+    if (this.showPassword) {
+      return 'text';
+    }
+    return 'password';
+  }
+
+  toggleShowPassword() {
+    this.showPassword = !this.showPassword;
+  }
+
+  getInputTypeVerifyPassword() {
+    if (this.showVerifyPassword) {
+      return 'text';
+    }
+    return 'password';
+  }
+
+  toggleShowVerifyPassword() {
+    this.showVerifyPassword = !this.showVerifyPassword;
+  }
+
+  getInputTypeOldPassword() {
+    if (this.showOldPassword) {
+      return 'text';
+    }
+    return 'password';
+  }
+
+  toggleShowOldPassword() {
+    this.showOldPassword = !this.showOldPassword;
   }
 
 }
