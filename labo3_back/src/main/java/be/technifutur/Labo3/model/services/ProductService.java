@@ -158,12 +158,13 @@ public class ProductService implements Crudable<Product, ProductDto, Integer> {
 
     public Page<ProductDto> findByNameOrCategoryOrSupplier(String string, int page, int size) {
 
-        List<ProductDto> result = this.productRepository.findDistinctByCategoriesTypeContainingIgnoreCaseOrSupplierCompanyNameContainingIgnoreCaseOrNameContainingIgnoreCase(string, string, string, PageRequest.of(page, size))
+        List<ProductDto> result = this.productRepository.findDistinctByCategoriesTypeContainingIgnoreCaseOrSupplierCompanyNameContainingIgnoreCaseOrNameContainingIgnoreCase(string,string,string, PageRequest.of(page, size))
                 .stream()
                 .map(this.mapper::toProductDto)
                 .collect(Collectors.toList());
 
-        int nbEntry = this.productRepository.findDistinctByCategoriesTypeContainingIgnoreCaseOrSupplierCompanyNameContainingIgnoreCaseOrNameContainingIgnoreCase(string, string, string)
+
+        int nbEntry = this.productRepository.findDistinctByCategoriesTypeContainingIgnoreCaseOrSupplierCompanyNameContainingIgnoreCaseOrNameContainingIgnoreCase(string,string,string)
                 .size();
 
         return new PageImpl<>(result, PageRequest.of(page, size), nbEntry);
@@ -254,9 +255,9 @@ public class ProductService implements Crudable<Product, ProductDto, Integer> {
 
     public Page<ProductDto> getAllWithPagination(int page, int size) {
 
-        int nbEntry = this.productRepository.findAll().size();
+        int nbEntry = this.productRepository.findAllByIsActiveAndQuantityGreaterThanOrderByProductId(true, 0).size();
 
-        List<ProductDto> result = this.productRepository.findAll(PageRequest.of(page, size))
+        List<ProductDto> result = this.productRepository.findAllByIsActiveAndQuantityGreaterThanOrderByProductId(true, 0, PageRequest.of(page, size))
                 .stream()
                 .map(p -> mapper.toProductDto(p, true))
                 .collect(Collectors.toList());

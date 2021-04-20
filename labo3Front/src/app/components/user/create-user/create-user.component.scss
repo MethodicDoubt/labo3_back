@@ -13,11 +13,15 @@
 }
 
 .invalid-password {
-  font-size: small;
-  color: red;
+  color: rgb(228, 59, 59);
+  font-size: 1.3em;
+  text-shadow: -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
 }
 
 .invalide-password-box {
-  border: red 3px solid !important;
-  color: red !important;
+  border: rgb(228, 59, 59) 3px solid !important;
+  color: rgb(228, 59, 59) !important;
 }

@@ -9,7 +9,7 @@ import { ProductService } from 'src/app/services/product.service';
 @Component({
   selector: 'app-all-product',
   templateUrl: './all-product.component.html',
-  styleUrls: ['./all-product.component.scss']
+  styleUrls: ['./all-product.component.scss','../../../app.component.scss']
 })
 export class AllProductComponent implements OnInit {
 
