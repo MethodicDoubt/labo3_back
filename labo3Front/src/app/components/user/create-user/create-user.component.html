@@ -11,6 +11,11 @@
         <input nbInput type="password" id="password" formControlName="password">
       </p>
       <p class=" form-build">
+        <label for="verifyPassword">Verify password</label>
+        <input nbInput type="password" id="verifyPassword" formControlName="verifyPassword" [ngClass]="{'invalide-password-box':fgCreateUser.value['password'] != fgCreateUser.value['verifyPassword'] &&
+        !fgCreateUser.get('verifyPassword').pristine}">
+      </p>
+      <p class=" form-build">
         <label for="firstname">Firstname</label>
         <input nbInput type="text" id="firstname" formControlName="firstname">
       </p>
@@ -40,8 +45,12 @@
           <input nbInput type="text" id="country" formControlName="country">
         </p>
       </div>
+      <p class="invalid-password text-right" *ngIf="fgCreateUser.value['password'] != fgCreateUser.value['verifyPassword'] &&
+         !fgCreateUser.get('verifyPassword').pristine">
+        Password are not equals</p>
       <div class="fr">
-        <button status="primary" type="submit" nbButton [disabled]="fgCreateUser.invalid">Create</button>
+        <button status="primary" type="submit" nbButton [disabled]="fgCreateUser.invalid ||
+        fgCreateUser.value['password'] != fgCreateUser.value['verifyPassword']">Create</button>
         <button status="primary" class=" ml-2" type="reset" nbButton>Reset</button>
       </div>
     </form>

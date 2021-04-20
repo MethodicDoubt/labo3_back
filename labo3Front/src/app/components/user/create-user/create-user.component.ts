@@ -28,6 +28,7 @@ export class CreateUserComponent implements OnInit {
       firstname: ['', [Validators.required]],
       surname: ['', [Validators.required]],
       password: ['', [Validators.required]],
+      verifyPassword: ['', [Validators.required]],
       address: this._formBuilder.group({
         street: ['', [Validators.required]],
         zip: ['', [Validators.required]],

@@ -8,6 +8,16 @@
   padding: 0 20px;
 }
 
-.fr{
-    float: right;
+.fr {
+  float: right;
+}
+
+.invalid-password {
+  font-size: small;
+  color: red;
+}
+
+.invalide-password-box {
+  border: red 3px solid !important;
+  color: red !important;
 }
