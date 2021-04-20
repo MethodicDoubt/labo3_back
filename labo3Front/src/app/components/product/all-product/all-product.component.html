@@ -1,14 +1,15 @@
 <div class="row">
 
+
   <ng-container *ngFor="let p of products | paginate : {
-    itemsPerPage: pageSize,
-    currentPage: page,
-    totalItems: count
-  };
+        itemsPerPage: pageSize,
+        currentPage: page,
+        totalItems: count
+      };
+    
+      let i = index" [class.active]="i == currentIndex">
 
-  let i = index" [class.active]="i == currentIndex">
-
-    <nb-card *ngIf="p.isActive" size="small" class="card col-4">
+    <nb-card *ngIf="p.isActive && p.quantity > 0" class="card col-4">
 
       <nb-card-header style="display: flex; justify-content: space-between;">
 

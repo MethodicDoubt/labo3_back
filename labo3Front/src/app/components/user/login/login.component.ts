@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
   }
 
   forgotSurname() {
-    alert("Why you forgot your surname ? Are you stupid ?");
+    alert("Work in progress");
   }
 
   cancel() {

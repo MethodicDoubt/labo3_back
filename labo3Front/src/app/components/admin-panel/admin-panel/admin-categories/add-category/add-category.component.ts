@@ -32,7 +32,7 @@ export class AddCategoryComponent implements OnInit {
     newCategory.type = this.formCategory.get('type').value;
     this._categoryService.insert(newCategory).subscribe(
       next => {
-        next ? alert("Category create") : alert("Problem, try again");
+        next ? alert("Category created") : alert("An error has occured");
         this._nbDiagRef.close();
       }
     )

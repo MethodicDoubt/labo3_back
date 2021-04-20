@@ -1,6 +1,6 @@
 <nb-card class="col-4 mx-auto">
   <nb-card-header style="display: flex; justify-content: space-between; align-items: baseline;">
-    <h3>Welcome to your profil</h3>
+    <h3>Welcome {{currentUser?.surname}}</h3>
     <div>
       <button nbButton status="primary" class="mr-2" (click)="editPassword()" nbPopover="Change Password"
         nbPopoverTrigger="hover">
@@ -14,7 +14,6 @@
   <nb-card-body>
     <p>Lastname : {{currentUser?.lastName}}</p>
     <p>Firstname : {{currentUser?.firstName}}</p>
-    <p>Surname : {{currentUser?.surname}}</p>
     <p>Adress : {{currentUser | pipeAddress}}</p>
     <p>Country : {{currentUser?.address.country}}</p>
   </nb-card-body>

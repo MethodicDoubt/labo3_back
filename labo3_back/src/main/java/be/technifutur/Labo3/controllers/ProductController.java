@@ -61,18 +61,6 @@ public class ProductController implements RestControllable<Product, ProductDto, 
     }
 
 
-    // useless
-
-    @Override
-    public ResponseEntity<Boolean> insert(Product product) {
-        return null;
-    }
-
-    @Override
-    public ResponseEntity<Boolean> update(Product product, Integer integer) {
-        return null;
-    }
-
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMINISTRATOR')")
     public ResponseEntity<Boolean> update(@RequestBody AssociationProductUser productUser, @PathVariable("id") Integer id) throws IOException {
@@ -90,9 +78,18 @@ public class ProductController implements RestControllable<Product, ProductDto, 
     }
 
     @PatchMapping(path = "/{id}")
-    @PreAuthorize("hasAuthority('ADMINISTRATOR')")
     public ResponseEntity<Boolean> patch(@RequestBody Map<String, Object> productToPatch, @PathVariable Integer id) throws IllegalAccessException {
         return ResponseEntity.ok(this.productService.partialUpdate(productToPatch, id));
     }
+// useless
 
+    @Override
+    public ResponseEntity<Boolean> insert(Product product) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<Boolean> update(Product product, Integer integer) {
+        return null;
+    }
 }

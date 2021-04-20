@@ -51,7 +51,7 @@ export class AuthService {
             }
           );
         } else {
-          alert("T NUL ! MAUVE AIS MAUX DE PASSE !")
+          alert("Wrong password")
         }
 
       }

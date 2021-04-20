@@ -1,6 +1,6 @@
 import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NbPopoverDirective } from '@nebular/theme';
+import { NbDialogRef, NbDialogService, NbPopoverDirective } from '@nebular/theme';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { Product } from 'src/app/models/product.model';
 import { AuthService } from 'src/app/services/auth.service';
@@ -82,7 +82,6 @@ export class AllProductComponent implements OnInit {
   }
 
   addToBasket(p: Product) {
-
 
     if (this.quantity > 0 && this.quantity <= p.quantity) {
 

@@ -4,12 +4,14 @@ spring:
   #    static-path-pattern: /static
   datasource:
     url: jdbc:postgresql://localhost:5432/techni_labo_3
+#    url: jdbc:postgresql://ec2-3-234-85-177.compute-1.amazonaws.com:5432/d2ncfd4fag5saq?password=84d2fc9944067449ad636cf4f98b4846f5c67503525178f92963d6b3a0c9b3e1&sslmode=require&user=granjrzeervjgv
     username: postgres
     password: 123456a.
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
       ddl-auto: create-drop
+#      ddl-auto: update
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
 folders:

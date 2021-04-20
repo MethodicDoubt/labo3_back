@@ -41,7 +41,7 @@ export class AddSupplierComponent implements OnInit {
 
     this._supplierService.insert(newSupplier).subscribe(
       next => {
-        next ? alert("Supplier create") : alert("Problem, try again");
+        next ? alert("Supplier created") : alert("An error has occured");
         this._nbDiagRef.close();
       }
     );

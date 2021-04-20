@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { NbDialogService } from '@nebular/theme';
 import { Subscription } from 'rxjs';
@@ -11,7 +11,7 @@ import { ProductService } from './services/product.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnDestroy {
   title = 'labo3Front';
 
   productNumber: number;
@@ -25,7 +25,6 @@ export class AppComponent {
     private _productService: ProductService,
     private _router: Router) {
 
-    this._authService.login("admin", "1234");//TODO --> A REMOVE POUR LA PRODUCTION
     this.basketStatus = this._productService.basketStatus.subscribe(data => this.productNumber = data);
     this.statusConnexion = this._authService.statusBehaviorConnexion.subscribe(
       dataConnexion => this.isConnected = dataConnexion
@@ -33,13 +32,15 @@ export class AppComponent {
 
   }
 
+  ngOnDestroy(): void {
+    this._authService.logout();
+  }
+
   advancedSearch() {
     let ref = this._dialogBox.open(AdvSearchComponent, {
       closeOnBackdropClick: true
     })
     ref.onClose.subscribe();
-
-
   }
 
   redirect() {

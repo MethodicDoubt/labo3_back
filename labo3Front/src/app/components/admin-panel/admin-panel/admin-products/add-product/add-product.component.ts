@@ -51,7 +51,7 @@ export class AddProductComponent implements OnInit {
     let newProduct = this.transformingProduct();
     this._productService.insert(newProduct).subscribe(
       data => {
-        data ? alert("Product create") : alert("Problem, try again");
+        data ? alert("Product created") : alert("An error has occured");
         this._nBDiagRef.close();
       }
     );

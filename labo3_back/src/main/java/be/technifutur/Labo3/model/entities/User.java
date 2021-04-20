@@ -26,10 +26,10 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer userId;
 
-    @Column(nullable = false, length = 50)
+    @Column(length = 50)
     String lastName;
 
-    @Column(nullable = false, length = 50)
+    @Column(length = 50)
     String firstName;
 
     @Column(nullable = false)
@@ -52,13 +52,13 @@ public class User implements UserDetails {
     Byte[] avatar;
 
     //Security
-
+    @Column(nullable = false)
     boolean isAccountNonExpired = true;
-
+    @Column(nullable = false)
     boolean isAccountNonLocked = true;
-
+    @Column(nullable = false)
     boolean isCredentialsNonExpired = true;
-
+    @Column(nullable = false)
     boolean isEnabled = true;
 
     @Override

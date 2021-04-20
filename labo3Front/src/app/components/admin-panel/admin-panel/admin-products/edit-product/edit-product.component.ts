@@ -76,7 +76,7 @@ export class EditProductComponent implements OnInit {
       name: [this.product.name, [Validators.required]],
       description: [this.product.description],
       categories: [idCategories, [Validators.required]],
-      expirationDate: [this.product.expirationDate],
+      expirationDate: [this.product.expirationDate == null ? null : this.product.expirationDate.replace("T00:00:00Z", "")],
       purchasePrice: [this.product.purchasePrice, [Validators.required]],
       quantity: [this.product.quantity, [Validators.required]],
       productImage: [this.product.productImage, [Validators.required]],
@@ -88,7 +88,7 @@ export class EditProductComponent implements OnInit {
     let productToUpdate = this.transformingProduct();
     this._productService.update(productToUpdate, this.product.productId).subscribe(
       next => {
-        this._router.navigate(['admin', 'products'])
+        this._router.navigate(['admin', 'products']);
       }
     );
   }
@@ -109,7 +109,7 @@ export class EditProductComponent implements OnInit {
         )
       )
     });
-    this.fgAddProduct.value['expirationDate'] == "" ? null :
+    this.fgAddProduct.value['expirationDate'] == null || this.fgAddProduct.value['expirationDate'] == "" ? null :
       newProduct.expirationDate = this.transformToInstant(this.fgAddProduct.value['expirationDate']);
     return newProduct;
   }

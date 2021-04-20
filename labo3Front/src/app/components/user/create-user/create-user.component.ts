@@ -47,7 +47,7 @@ export class CreateUserComponent implements OnInit {
 
     this._userService.createNewUser(this.newUser).subscribe(
       data => {
-        data ? alert("Account create") : alert("Account not create, try again");
+        data ? alert("Account created") : alert("An error has occured, account not created");
         this._nBDiagRef.close();
       }
     )

@@ -1,6 +1,6 @@
 <nb-card class="col-6 mx-auto mt-2">
   <nb-card-header style="text-align: center;">
-    <h3>New Supplier</h3>
+    <h3>Edit Supplier</h3>
   </nb-card-header>
   <nb-card-body>
     <form [formGroup]="formSupplier" (submit)="onSubmit()">
@@ -21,7 +21,7 @@
         </nb-select>
       </p>
       <div class="fr">
-        <button class="mr-2" status="primary" type="submit" nbButton [disabled]="formSupplier.invalid">Create</button>
+        <button class="mr-2" status="primary" type="submit" nbButton [disabled]="formSupplier.invalid">Update</button>
         <button status="primary" type="button" nbButton routerLink='..'>Cancel</button>
       </div>
     </form>

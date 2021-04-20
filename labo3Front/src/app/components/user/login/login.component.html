@@ -2,7 +2,7 @@
   <nb-card-body>
     <form [formGroup]="fgLogin" (submit)="login()">
       <p class=" form-build">
-        <label for="surname">Surname </label>
+        <label for="surname">Username </label>
         <input type="text" nbInput formControlName="surname" id="surname">
       </p>
       <p class=" form-build">
@@ -10,8 +10,8 @@
         <input type="password" nbInput formControlName="password" id="password">
       </p>
       <p class="text-center">
-        <a class="click-help mr-2" (click)="forgotPassword()">password forgot ?</a>
-        <a class="click-help" (click)="forgotSurname()">surname forgot ?</a>
+        <a class="click-help mr-2" (click)="forgotPassword()">forgot password ?</a>
+        <a class="click-help" (click)="forgotSurname()">forgot surname ?</a>
       </p>
       <div class="fr">
         <button nbButton class="mr-2" type="submit" status="primary" [disabled]="fgLogin.invalid">Login</button>
