@@ -8,12 +8,28 @@
       </p>
       <p class=" form-build">
         <label for="password">Password</label>
-        <input nbInput type="password" id="password" formControlName="password">
+        <nb-form-field>
+          <input nbInput [type]="getInputType()" id="password" formControlName="password">
+          <button nbSuffix type="button" nbButton ghost (click)="toggleShowPassword()">
+            <nb-icon [icon]="showPassword ? 'eye-outline' : 'eye-off-2-outline'" pack="eva"
+              [attr.aria-label]="showPassword ? 'hide password' : 'show password'">
+            </nb-icon>
+          </button>
+        </nb-form-field>
+
       </p>
       <p class=" form-build">
         <label for="verifyPassword">Verify password</label>
-        <input nbInput type="password" id="verifyPassword" formControlName="verifyPassword" [ngClass]="{'invalide-password-box':fgCreateUser.value['password'] != fgCreateUser.value['verifyPassword'] &&
+        <nb-form-field>
+          <input nbInput [type]="getInputVerifyType()" id="verifyPassword" formControlName="verifyPassword" [ngClass]="{'invalide-password-box':fgCreateUser.value['password'] != fgCreateUser.value['verifyPassword'] &&
         !fgCreateUser.get('verifyPassword').pristine}">
+          <button nbSuffix type="button" nbButton ghost (click)="toggleShowVerifyPassword()">
+            <nb-icon [icon]="showPassword ? 'eye-outline' : 'eye-off-2-outline'" pack="eva"
+              [attr.aria-label]="showPassword ? 'hide password' : 'show password'">
+            </nb-icon>
+          </button>
+        </nb-form-field>
+
       </p>
       <p class=" form-build">
         <label for="firstname">Firstname</label>

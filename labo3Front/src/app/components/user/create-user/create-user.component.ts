@@ -14,6 +14,9 @@ export class CreateUserComponent implements OnInit {
   newUser: User = new User();
   fgCreateUser: FormGroup
 
+  showPassword: boolean = false;
+  showVerifyPassword: boolean = false;
+
   constructor(private _formBuilder: FormBuilder,
     private _userService: UserService,
     private _nBDiagRef: NbDialogRef<CreateUserComponent>) { }
@@ -54,6 +57,26 @@ export class CreateUserComponent implements OnInit {
     )
   }
 
+  getInputType() {
+    if (this.showPassword) {
+      return 'text';
+    }
+    return 'password';
+  }
 
+  toggleShowPassword() {
+    this.showPassword = !this.showPassword;
+  }
+
+  getInputVerifyType() {
+    if (this.showVerifyPassword) {
+      return 'text';
+    }
+    return 'password';
+  }
+
+  toggleShowVerifyPassword() {
+    this.showVerifyPassword = !this.showVerifyPassword;
+  }
 
 }
